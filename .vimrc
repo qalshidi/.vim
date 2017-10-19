@@ -41,6 +41,7 @@ let python_highlight_all=1
 call vundle#end()            " required
 filetype plugin indent on    " required
 set background=dark
+set termguicolors
 colorscheme solarized
 highlight Normal ctermfg=grey ctermbg=black
 
