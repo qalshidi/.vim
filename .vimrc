@@ -16,14 +16,9 @@ syntax enable
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 " autocomplete
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -37,11 +32,18 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
 let python_highlight_all=1
+
+" surround command
+Plugin 'tpope/vim-surround'
+
+" Fuzzy file find
+Plugin 'kien/ctrlp.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+" misc options
 filetype plugin indent on    " required
 set background=dark
-set termguicolors
 colorscheme solarized
 highlight Normal ctermfg=grey ctermbg=black
-
+set number relativenumber
