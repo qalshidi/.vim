@@ -28,6 +28,9 @@ let g:ycm_server_keep_logfiles = 1
 " color schemes
 Plugin 'altercation/vim-colors-solarized'
 
+" LaTeX plugin
+Plugin 'lervag/vimtex'
+
 " syntax highlighting
 Plugin 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
