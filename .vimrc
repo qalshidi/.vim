@@ -1,9 +1,10 @@
 set nocompatible              " required
 filetype off                  " required
 
+set termguicolors
 syntax enable
 set background=dark
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 colorscheme solarized
 
 " PEP 8
