@@ -2,6 +2,8 @@ set nocompatible              " required
 filetype off                  " required
 
 syntax enable
+set background=dark
+colorscheme solarized
 
 " PEP 8
 "au BufNewFile,BufRead *.py
@@ -54,7 +56,5 @@ Plugin 'kien/ctrlp.vim'
 call vundle#end()            " required
 " misc options
 filetype plugin indent on    " required
-set background=dark
-colorscheme solarized
 highlight Normal ctermfg=grey ctermbg=black
 set number relativenumber
