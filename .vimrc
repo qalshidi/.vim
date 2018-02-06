@@ -1,11 +1,11 @@
 set nocompatible              " required
 filetype off                  " required
 
-set termguicolors
 syntax enable
 set background=dark
-" let g:solarized_termcolors=256
+let g:solarized_termcolors=256
 colorscheme solarized
+"set termguicolors
 
 " PEP 8
 "au BufNewFile,BufRead *.py
@@ -58,5 +58,5 @@ Plugin 'kien/ctrlp.vim'
 call vundle#end()            " required
 " misc options
 filetype plugin indent on    " required
-highlight Normal ctermfg=grey ctermbg=black
+" highlight Normal ctermfg=grey ctermbg=black
 set number relativenumber
