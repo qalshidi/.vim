@@ -3,9 +3,9 @@ filetype off                  " required
 
 syntax enable
 set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
-"set termguicolors
+"let g:solarized_termcolors=256
+colorscheme NeoSolarized
+set termguicolors
 
 " PEP 8
 "au BufNewFile,BufRead *.py
@@ -30,7 +30,7 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_server_keep_logfiles = 1
 
 " color schemes
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'iCyMind/NeoSolarized'
 
 " LaTeX plugin
 Plugin 'lervag/vimtex'
