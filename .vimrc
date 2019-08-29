@@ -21,7 +21,7 @@ set termguicolors
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " autocomplete
 Plugin 'Valloric/YouCompleteMe'
