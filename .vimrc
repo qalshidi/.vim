@@ -31,6 +31,7 @@ let g:ycm_server_keep_logfiles = 1
 
 " color schemes
 Plugin 'iCyMind/NeoSolarized'
+Plugin 'lifepillar/vim-solarized8'
 
 " LaTeX plugin
 Plugin 'lervag/vimtex'
@@ -45,9 +46,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" Python
 Plugin 'nvie/vim-flake8'
 let python_highlight_all=1
-
+let g:python3_host_prog = '/home/qusai/anaconda3/bin/python3'
 " surround command
 Plugin 'tpope/vim-surround'
 
