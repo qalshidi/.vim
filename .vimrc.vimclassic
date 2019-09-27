@@ -4,7 +4,7 @@ filetype off                  " required
 syntax enable
 set background=dark
 "let g:solarized_termcolors=256
-colorscheme NeoSolarized
+colorscheme solarized
 set termguicolors
 
 " PEP 8
@@ -30,7 +30,6 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_server_keep_logfiles = 1
 
 " color schemes
-Plugin 'iCyMind/NeoSolarized'
 Plugin 'lifepillar/vim-solarized8'
 
 " LaTeX plugin

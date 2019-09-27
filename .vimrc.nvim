@@ -31,7 +31,6 @@ let g:ycm_server_keep_logfiles = 1
 
 " color schemes
 Plugin 'iCyMind/NeoSolarized'
-Plugin 'lifepillar/vim-solarized8'
 
 " LaTeX plugin
 Plugin 'lervag/vimtex'
