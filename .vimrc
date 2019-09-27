@@ -53,6 +53,9 @@ let g:python3_host_prog = '/home/qusai/anaconda3/bin/python3'
 " surround command
 Plugin 'tpope/vim-surround'
 
+" commentary command
+Plugin 'tpope/vim-commentary'
+
 " Fuzzy file find
 Plugin 'kien/ctrlp.vim'
 
