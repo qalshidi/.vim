@@ -48,7 +48,6 @@ let g:syntastic_check_on_wq = 0
 " Python
 Plugin 'nvie/vim-flake8'
 let python_highlight_all=1
-let g:python3_host_prog = '/home/qusai/anaconda3/bin/python3'
 " surround command
 Plugin 'tpope/vim-surround'
 
