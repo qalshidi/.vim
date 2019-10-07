@@ -11,11 +11,11 @@ syntax enable
 " dark background is always best
 set background=dark
 " solarized colorscheme is beautiful
-if has('nvim')
+if (v:version > 7041577) || has('nvim')
 	colorscheme NeoSolarized
 	set termguicolors
 else
-	colorscheme solarized
+	colorscheme solarized8
 endif
 " reqiured options
 filetype plugin indent on    " required
