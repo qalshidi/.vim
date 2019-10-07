@@ -1,25 +1,25 @@
-" DEFAULT VIM OPTIONS
+" ========== DEFAULT VIM OPTIONS =============
 "
-" use modern vim
+"" use modern vim
 set nocompatible              " required
-" for compatibility
+"" for compatibility
 filetype off                  " required
-" include files recursively
+"" include files recursively
 set path+=**
-" enable syntax highlighting
+"" enable syntax highlighting
 syntax enable
-" dark background is always best
+"" dark background is always best
 set background=dark
-" solarized colorscheme is beautiful
+"" solarized colorscheme is beautiful
 if (v:version > 7041577) || has('nvim')
 	colorscheme NeoSolarized
 	set termguicolors
 else
 	colorscheme solarized8
 endif
-" reqiured options
+"" reqiured options
 filetype plugin indent on    " required
-" show relative line numbers on the side
+"" show relative line numbers on the side
 set number relativenumber
 
 " PEP 8
@@ -32,29 +32,32 @@ set number relativenumber
 "    \ set autoindent
 "    \ set fileformat=unix
 
-" PLUGINS
-" set the runtime path to include Vundle and initialize
+" ================= PLUGINS =============================
+"" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" let Vundle manage Vundle, required
+"" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-" autocomplete
+
+"" AUTOCOMPLETE
 if (v:version > 7041577) || has('nvim')
 	Plugin 'Valloric/YouCompleteMe'
 	let g:ycm_autoclose_preview_window_after_completion=1
 	map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 	let g:ycm_server_keep_logfiles = 1
 endif
-" color schemes
+
+" COSMETICS
+"" color schemes
 Plugin 'iCyMind/NeoSolarized'
 Plugin 'lifepillar/vim-solarized8'
 
-" LANGUAGE SPECIFIC
+"" LANGUAGE SPECIFIC
 "
-" LaTeX plugin
+"" LaTeX plugin
 Plugin 'lervag/vimtex'
 "
-" syntax highlighting
+"" syntax highlighting
 Plugin 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -64,21 +67,24 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "
-" python linter
+"" python linter
 Plugin 'nvie/vim-flake8'
 let python_highlight_all=1
 
 " THE GREAT TPOPE
 "
-" surround command
+"" sensible vim settings
+Plugin 'tpope/vim-sensible'
+" 
+"" surround command
 Plugin 'tpope/vim-surround'
 "
-" commentary command
+"" commentary command
 Plugin 'tpope/vim-commentary'
 
 " FILE STUFF
 "
-" Fuzzy file find
+"" Fuzzy file find
 Plugin 'kien/ctrlp.vim'
 
-call vundle#end()            " required
+call vundle#end()
