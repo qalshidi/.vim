@@ -81,6 +81,9 @@ Plugin 'tpope/vim-surround'
 "
 "" commentary command
 Plugin 'tpope/vim-commentary'
+"
+"" git functionality
+Plugin 'tpope/vim-fugitive'
 
 " FILE STUFF
 "
@@ -88,3 +91,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
+
+" ======== MAPPINGS =================
+" Make the tags
+command MakeTags !ctags -R .
