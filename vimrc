@@ -8,15 +8,6 @@ filetype off                  " required
 set path+=**
 "" enable syntax highlighting
 syntax enable
-"" dark background is always best
-set background=dark
-"" solarized colorscheme is beautiful
-if (v:version > 7041577) || has('nvim')
-	colorscheme NeoSolarized
-	set termguicolors
-else
-	colorscheme solarized8
-endif
 "" reqiured options
 filetype plugin indent on    " required
 "" show relative line numbers on the side
@@ -91,6 +82,17 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
+
+"" =========== THEME ================
+"" dark background is always best
+set background=dark
+"" solarized colorscheme is beautiful
+if (v:version > 7041577) || has('nvim')
+	colorscheme NeoSolarized
+	set termguicolors
+else
+	colorscheme solarized8
+endif
 
 " ======== MAPPINGS =================
 " Make the tags
