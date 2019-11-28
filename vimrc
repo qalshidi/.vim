@@ -96,4 +96,4 @@ endif
 
 " ======== MAPPINGS =================
 " Make the tags
-command MakeTagsCpp !ctags -R *cpp
+command MakeTagsCpp !ctags -R *cpp *hpp ./*/*hpp ./*/*cpp
