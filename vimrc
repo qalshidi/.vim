@@ -87,7 +87,7 @@ call vundle#end()
 "" dark background is always best
 set background=dark
 "" solarized colorscheme is beautiful
-if (v:version > 7041577) || has('nvim')
+if (v:version >= 7041577) || has('nvim')
 	colorscheme NeoSolarized
 	set termguicolors
 else
@@ -96,4 +96,4 @@ endif
 
 " ======== MAPPINGS =================
 " Make the tags
-command MakeTags !ctags -R .
+command MakeTagsCpp !ctags -R *cpp
