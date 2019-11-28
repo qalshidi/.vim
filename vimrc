@@ -41,7 +41,7 @@ endif
 " COSMETICS
 "" color schemes
 Plugin 'iCyMind/NeoSolarized'
-Plugin 'lifepillar/vim-solarized8'
+Plugin 'altercation/vim-colors-solarized'
 
 "" LANGUAGE SPECIFIC
 "
@@ -91,7 +91,7 @@ if (v:version >= 7041577) || has('nvim')
 	colorscheme NeoSolarized
 	set termguicolors
 else
-	colorscheme solarized8
+	colorscheme solarized
 endif
 
 " ======== MAPPINGS =================
