@@ -109,6 +109,7 @@ endif
 " ======== MAPPINGS =================
 " Make the tags
 command MakeTags !ctags -R .
+command MakeTagsCpp !ctags -R *cpp *hpp ./*/*hpp ./*/*cpp
 
 " =========== OTHER =======
 "" Make sure modeline is enabled
