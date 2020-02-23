@@ -36,6 +36,8 @@ if (v:version > 7041577) || has('nvim')
 	let g:ycm_autoclose_preview_window_after_completion=1
 	map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 	let g:ycm_server_keep_logfiles = 1
+	let g:ycm_confirm_extra_conf = 0
+	Plugin 'rdnetto/YCM-Generator'
 endif
 
 " COSMETICS
