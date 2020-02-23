@@ -40,6 +40,18 @@ if (v:version > 7041577) || has('nvim')
 	Plugin 'rdnetto/YCM-Generator'
 endif
 
+" SNIPPETS
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 " COSMETICS
 "" color schemes
 Plugin 'iCyMind/NeoSolarized'
@@ -89,7 +101,7 @@ call vundle#end()
 "" dark background is always best
 set background=dark
 "" solarized colorscheme is beautiful
-if (v:version >= 7041577) || has('nvim')
+if (v:version > 7041577) || has('nvim')
 	colorscheme NeoSolarized
 	set termguicolors
 else
@@ -98,4 +110,10 @@ endif
 
 " ======== MAPPINGS =================
 " Make the tags
-command MakeTagsCpp !ctags -R *cpp
+command MakeTags !ctags -R .
+command MakeTagsCpp !ctags -R *cpp *hpp ./*/*hpp ./*/*cpp
+
+" =========== OTHER =======
+"" Make sure modeline is enabled
+set modeline
+set makeprg=make\ -j
