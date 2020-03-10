@@ -12,7 +12,8 @@ syntax enable
 filetype plugin indent on    " required
 "" show relative line numbers on the side
 set number relativenumber
-
+"" map escape to capslock
+au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 " PEP 8
 "au BufNewFile,BufRead *.py
 "    \ set tabstop=4
@@ -69,7 +70,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-"
+
 "" python linter
 Plugin 'nvie/vim-flake8'
 let python_highlight_all=1
