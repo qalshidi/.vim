@@ -13,7 +13,7 @@ filetype plugin indent on    " required
 "" show relative line numbers on the side
 set number relativenumber
 "" map escape to capslock
-au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 " PEP 8
 "au BufNewFile,BufRead *.py
 "    \ set tabstop=4
