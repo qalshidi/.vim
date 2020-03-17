@@ -20,6 +20,7 @@ au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 "    \ set softtabstop=4
 "    \ set shiftwidth=4
 "    \ set textwidth=79
+       set colorcolumn=80
 "    \ set expandtab
 "    \ set autoindent
 "    \ set fileformat=unix
@@ -103,9 +104,10 @@ call vundle#end()
 set background=dark
 "" solarized colorscheme is beautiful
 if (v:version > 7041577) || has('nvim')
-	colorscheme NeoSolarized
 	set termguicolors
+	colorscheme NeoSolarized
 else
+	"set termguicolors
 	colorscheme solarized8
 endif
 
