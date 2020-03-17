@@ -107,6 +107,11 @@ else
 	colorscheme solarized8
 endif
 
+" ======== SNIPPETS =================
+nnoremap ,pyfile :-1read /home/qusai/.vim/snippets/.skeleton.py<CR>jA
+nnoremap ,pydef :-1read /home/qusai/.vim/snippets/.def.py<CR>wi
+nnoremap ,pyclass :-1read /home/qusai/.vim/snippets/.class.py<CR>wi
+
 " ======== MAPPINGS =================
 " Make the tags
 command MakeTags !ctags -R .
