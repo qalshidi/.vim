@@ -1,4 +1,5 @@
-" ========== DEFAULT VIM OPTIONS =============
+" SUCKLESS
+" ========
 "
 "" use modern vim
 set nocompatible              " required
@@ -14,25 +15,28 @@ filetype plugin indent on    " required
 set number relativenumber
 "" map escape to capslock
 au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+""
 " PEP 8
-"au BufNewFile,BufRead *.py
-"    \ set tabstop=4
-"    \ set softtabstop=4
-"    \ set shiftwidth=4
-"    \ set textwidth=79
-       set colorcolumn=80
-"    \ set expandtab
-"    \ set autoindent
-"    \ set fileformat=unix
+au BufNewFile,BufRead *.py set tabstop=4
+au BufNewFile,BufRead *.py set softtabstop=4
+au BufNewFile,BufRead *.py set shiftwidth=4
+au BufNewFile,BufRead *.py set textwidth=79
+au BufNewFile,BufRead *.py set expandtab
+au BufNewFile,BufRead *.py set autoindent
+au BufNewFile,BufRead *.py set fileformat=unix
+au BufNewFile,BufRead *.py set colorcolumn=80
 
-" ================= PLUGINS =============================
+" PLUGINS
+" =======
+"
 "" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 "" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-"" AUTOCOMPLETE
+" AUTOCOMPLETE
+" ------------
 if (v:version > 7041577) || has('nvim')
 	Plugin 'Valloric/YouCompleteMe'
 	let g:ycm_autoclose_preview_window_after_completion=1
@@ -41,12 +45,6 @@ if (v:version > 7041577) || has('nvim')
 	let g:ycm_confirm_extra_conf = 0
 	Plugin 'rdnetto/YCM-Generator'
 endif
-
-" SNIPPETS
-" Track the engine.
-Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -55,16 +53,16 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 " COSMETICS
+" ---------
 "" color schemes
 Plugin 'iCyMind/NeoSolarized'
 Plugin 'lifepillar/vim-solarized8'
 
-"" LANGUAGE SPECIFIC
-"
-"" LaTeX plugin
+" LANGUAGE SPECIFIC
+" -----------------
+" LaTeX plugin
 Plugin 'lervag/vimtex'
-"
-"" syntax highlighting
+" syntax highlighting
 Plugin 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -73,36 +71,34 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-"" python linter
+" python linter
 Plugin 'nvie/vim-flake8'
 let python_highlight_all=1
 
 " THE GREAT TPOPE
-"
+" ---------------
 "" sensible vim settings
 Plugin 'tpope/vim-sensible'
-" 
 "" surround command
 Plugin 'tpope/vim-surround'
-"
 "" commentary command
 Plugin 'tpope/vim-commentary'
-"
 "" git functionality
 Plugin 'tpope/vim-fugitive'
 
 " FILE STUFF
-"
+" ----------
 "" Fuzzy file find
 Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 
-"" =========== THEME ================
-"" dark background is always best
+" THEME
+" =====
+"
+" dark background is always best
 set background=dark
-"" solarized colorscheme is beautiful
+" solarized colorscheme is beautiful
 if (v:version > 7041577) || has('nvim')
 	set termguicolors
 	colorscheme NeoSolarized
@@ -111,12 +107,15 @@ else
 	colorscheme solarized8
 endif
 
-" ======== MAPPINGS =================
-" Make the tags
-command MakeTags !ctags -R .
-command MakeTagsCpp !ctags -R *cpp *hpp ./*/*hpp ./*/*cpp
+" SNIPPETS
+" ========
+"
+nnoremap ,pyfile :-1read /home/qusai/.vim/snippets/.skeleton.py<CR>jA
+nnoremap ,pydef :-1read /home/qusai/.vim/snippets/.def.py<CR>wi
+nnoremap ,pyclass :-1read /home/qusai/.vim/snippets/.class.py<CR>wi
 
-" =========== OTHER =======
-"" Make sure modeline is enabled
+" MISC
+" ====
+"
 set modeline
 set makeprg=make\ -j
