@@ -42,6 +42,8 @@ if (v:version > 7041577) || has('nvim')
 	let g:ycm_autoclose_preview_window_after_completion=1
 	map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 	let g:ycm_server_keep_logfiles = 1
+	let g:ycm_confirm_extra_conf = 0
+	Plugin 'rdnetto/YCM-Generator'
 endif
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -98,9 +100,10 @@ call vundle#end()
 set background=dark
 " solarized colorscheme is beautiful
 if (v:version > 7041577) || has('nvim')
-	colorscheme NeoSolarized
 	set termguicolors
+	colorscheme NeoSolarized
 else
+	"set termguicolors
 	colorscheme solarized8
 endif
 
