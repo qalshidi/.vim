@@ -15,7 +15,8 @@ filetype plugin indent on    " required
 set number relativenumber
 "" map escape to capslock
 au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-""
+"" browser window stuff
+let g:netrw_altv=1
 " PEP 8
 au BufNewFile,BufRead *.py set tabstop=4
 au BufNewFile,BufRead *.py set softtabstop=4
