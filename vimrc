@@ -26,6 +26,7 @@ au BufNewFile,BufRead *.py set expandtab
 au BufNewFile,BufRead *.py set autoindent
 au BufNewFile,BufRead *.py set fileformat=unix
 au BufNewFile,BufRead *.py set colorcolumn=80
+au BufNewFile,BufRead *.py set makeprg=python\ %
 
 " PLUGINS
 " =======
