@@ -13,8 +13,9 @@ syntax enable
 filetype plugin indent on    " required
 "" show relative line numbers on the side
 set number relativenumber
-"" map escape to capslock
+"" map escape to capslock and jj
 au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+inoremap jj <ESC>
 "" browser window stuff
 let g:netrw_altv=1
 " PEP 8
@@ -28,7 +29,6 @@ au BufNewFile,BufRead *.py set fileformat=unix
 au BufNewFile,BufRead *.py set colorcolumn=80
 au BufNewFile,BufRead *.py set makeprg=python\ %
 
-inoremap jj <ESC>
 
 " PLUGINS
 " =======
