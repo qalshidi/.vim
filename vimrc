@@ -28,6 +28,8 @@ au BufNewFile,BufRead *.py set fileformat=unix
 au BufNewFile,BufRead *.py set colorcolumn=80
 au BufNewFile,BufRead *.py set makeprg=python\ %
 
+inoremap jj <ESC>
+
 " PLUGINS
 " =======
 "
