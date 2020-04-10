@@ -16,8 +16,11 @@ set number relativenumber
 "" map escape to capslock and jj
 au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 inoremap jj <ESC>
-"" browser window stuff
+"" browser window vert splits right
 let g:netrw_altv=1
+"" write with sudo
+cmap w!! w !sudo tee > /dev/null %
+
 " PEP 8
 au BufNewFile,BufRead *.py set tabstop=4
 au BufNewFile,BufRead *.py set softtabstop=4
