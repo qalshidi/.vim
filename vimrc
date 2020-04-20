@@ -3,6 +3,8 @@
 "
 "" use modern vim
 set nocompatible              " required
+"" vim cache
+set viminfo=%,<800,'10,/50,:100,h,f0,n~/.cache/viminfo
 "" for compatibility
 filetype off                  " required
 "" include files recursively
@@ -13,13 +15,12 @@ syntax enable
 filetype plugin indent on    " required
 "" show relative line numbers on the side
 set number relativenumber
-"" map escape to capslock and jj
-au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+"" map escape to jj
 inoremap jj <ESC>
 "" browser window vert splits right
 let g:netrw_altv=1
 "" write with sudo
-cmap w!! w !sudo tee > /dev/null %
+cmap w!! w !sudo -A tee > /dev/null %
 
 " PEP 8
 au BufNewFile,BufRead *.py set tabstop=4
