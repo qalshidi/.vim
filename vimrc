@@ -13,6 +13,10 @@ set path+=**
 syntax enable
 "" reqiured options
 filetype plugin indent on    " required
+"" tab things
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 "" show relative line numbers on the side
 set number relativenumber
 "" map escape to jj
@@ -32,6 +36,14 @@ au BufNewFile,BufRead *.py set autoindent
 au BufNewFile,BufRead *.py set fileformat=unix
 au BufNewFile,BufRead *.py set colorcolumn=80
 au BufNewFile,BufRead *.py set makeprg=python\ %
+
+" HTML, XML
+au BufNewFile,BufRead *.{xml,html,xhtml} set tabstop=2
+au BufNewFile,BufRead *.{xml,html,xhtml} set softtabstop=2
+au BufNewFile,BufRead *.{xml,html,xhtml} set shiftwidth=2
+au BufNewFile,BufRead *.{xml,html,xhtml} set expandtab
+au BufNewFile,BufRead *.{xml,html,xhtml} set autoindent
+au BufNewFile,BufRead *.{xml,html,xhtml} set makeprg=xdg-open\ %
 
 
 " PLUGINS
