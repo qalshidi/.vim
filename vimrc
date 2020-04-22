@@ -18,6 +18,8 @@ set path+=**
 syntax enable
 "" reqiured options
 filetype plugin indent on    " required
+"" windows go the intuitive direction
+set splitbelow splitright
 "" tab things
 set tabstop=4
 set softtabstop=4
@@ -50,6 +52,10 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+noremap <silent> <C-Left> :vertical resize -3<CR>
+noremap <silent> <C-Right> :vertical resize +3<CR>
 "" browser window vert splits right
 let g:netrw_altv=1
 "" write with sudo
@@ -79,7 +85,6 @@ au BufNewFile,BufRead *.{xml,html,xhtml} set makeprg=xdg-open\ %
 " =======
 "
 "" set the runtime path to include Vundle and initialize
-runtime! ~/.vim/autoload/.*vim
 if empty(glob($XDG_DATA_HOME.'/nvim/site/autoload/plug.vim')) && has('nvim')
   silent !curl -fLo $XDG_DATA_HOME/nvim/site/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -91,6 +96,17 @@ elseif empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+
+" THE GREAT TPOPE
+" ---------------
+"" sensible vim settings
+Plug 'tpope/vim-sensible'
+"" surround command
+Plug 'tpope/vim-surround'
+"" commentary command
+Plug 'tpope/vim-commentary'
+"" git functionality
+Plug 'tpope/vim-fugitive'
 
 " AUTOCOMPLETE
 " ------------
@@ -112,8 +128,8 @@ let g:UltiSnipsEditSplit="vertical"
 " COSMETICS
 " ---------
 "" color schemes
-Plug 'iCyMind/NeoSolarized'
 Plug 'lifepillar/vim-solarized8'
+Plug 'iCyMind/NeoSolarized'
 
 " LANGUAGE SPECIFIC
 " -----------------
@@ -132,17 +148,6 @@ let g:syntastic_check_on_wq = 0
 Plug 'nvie/vim-flake8'
 let python_highlight_all=1
 
-" THE GREAT TPOPE
-" ---------------
-"" sensible vim settings
-Plug 'tpope/vim-sensible'
-"" surround command
-Plug 'tpope/vim-surround'
-"" commentary command
-Plug 'tpope/vim-commentary'
-"" git functionality
-Plug 'tpope/vim-fugitive'
-
 " FILE STUFF
 " ----------
 "" Fuzzy file find
@@ -156,12 +161,11 @@ call plug#end()
 " dark background is always best
 set background=dark
 " solarized colorscheme is beautiful
-if (v:version > 704) || has('nvim')
+if has('nvim')
 	set termguicolors
 	colorscheme NeoSolarized
 else
-	"set termguicolors
-	colorscheme solarized8
+	colorscheme NeoSolarized
 endif
 
 " SNIPPETS
