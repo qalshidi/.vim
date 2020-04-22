@@ -4,7 +4,12 @@
 "" use modern vim
 set nocompatible              " required
 "" vim cache
-set viminfo=%,<800,'10,/50,:100,h,f0,n~/.cache/viminfo
+let viminfoparams = "%,<800,'10,/50,:100,h,f0,n"
+if has('nvim')
+	execute "set viminfo=".viminfoparams."~/.cache/nviminfo"
+else
+	execute "set viminfo=".viminfoparams."~/.cache/viminfo"
+endif
 "" for compatibility
 filetype off                  " required
 "" include files recursively
@@ -119,7 +124,7 @@ call vundle#end()
 " dark background is always best
 set background=dark
 " solarized colorscheme is beautiful
-if (v:version > 7041577) || has('nvim')
+if (v:version > 704) || has('nvim')
 	set termguicolors
 	colorscheme NeoSolarized
 else
