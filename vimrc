@@ -27,6 +27,7 @@ set shiftwidth=4
 "" show relative line numbers on the side
 set number relativenumber
 "" mappings
+let mapleader = ","
 inoremap jj <ESC>
 if has('nvim')
 	tnoremap jj <C-\><C-N>
@@ -127,8 +128,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " COSMETICS
 " ---------
-"" color schemes
-Plug 'lifepillar/vim-solarized8'
+"" color scheme
 Plug 'iCyMind/NeoSolarized'
 
 " LANGUAGE SPECIFIC
@@ -161,19 +161,21 @@ call plug#end()
 " dark background is always best
 set background=dark
 " solarized colorscheme is beautiful
-if has('nvim')
-	set termguicolors
-	colorscheme NeoSolarized
-else
-	colorscheme NeoSolarized
+if (v:version > 704) || has('nvim')
+	set termguicolors " Enable true color support.
 endif
+if (&term == 'st-256color')
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+colorscheme NeoSolarized
 
 " SNIPPETS
 " ========
 "
-nnoremap ,pyfile :-1read /home/qusai/.vim/snippets/file.py<CR>GddggjA
-nnoremap ,pydef :-1read /home/qusai/.vim/snippets/def.py<CR>3Wi
-nnoremap ,pyclass :-1read /home/qusai/.vim/snippets/class.py<CR>3Wi
+nnoremap <Leader>pyfile :-1read /home/qusai/.vim/snippets/file.py<CR>GddggjA
+nnoremap <Leader>pydef :-1read /home/qusai/.vim/snippets/def.py<CR>3Wi
+nnoremap <Leader>pyclass :-1read /home/qusai/.vim/snippets/class.py<CR>3Wi
 
 "
 " MISC
