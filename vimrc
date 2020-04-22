@@ -3,6 +3,13 @@
 "
 "" use modern vim
 set nocompatible              " required
+"" vim cache
+let viminfoparams = "%,<800,'10,/50,:100,h,f0,n"
+if has('nvim')
+	execute "set viminfo=".viminfoparams."~/.cache/nviminfo"
+else
+	execute "set viminfo=".viminfoparams."~/.cache/viminfo"
+endif
 "" for compatibility
 filetype off                  " required
 "" include files recursively
@@ -11,13 +18,19 @@ set path+=**
 syntax enable
 "" reqiured options
 filetype plugin indent on    " required
+"" tab things
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 "" show relative line numbers on the side
 set number relativenumber
-"" map escape to capslock and jj
-au VimEnter * silent !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+"" map escape to jj
 inoremap jj <ESC>
-"" browser window stuff
+"" browser window vert splits right
 let g:netrw_altv=1
+"" write with sudo
+cmap w!! w !sudo -A tee > /dev/null %
+
 " PEP 8
 au BufNewFile,BufRead *.py set tabstop=4
 au BufNewFile,BufRead *.py set softtabstop=4
@@ -28,6 +41,14 @@ au BufNewFile,BufRead *.py set autoindent
 au BufNewFile,BufRead *.py set fileformat=unix
 au BufNewFile,BufRead *.py set colorcolumn=80
 au BufNewFile,BufRead *.py set makeprg=python\ %
+
+" HTML, XML
+au BufNewFile,BufRead *.{xml,html,xhtml} set tabstop=2
+au BufNewFile,BufRead *.{xml,html,xhtml} set softtabstop=2
+au BufNewFile,BufRead *.{xml,html,xhtml} set shiftwidth=2
+au BufNewFile,BufRead *.{xml,html,xhtml} set expandtab
+au BufNewFile,BufRead *.{xml,html,xhtml} set autoindent
+au BufNewFile,BufRead *.{xml,html,xhtml} set makeprg=xdg-open\ %
 
 
 " PLUGINS
@@ -103,7 +124,7 @@ call vundle#end()
 " dark background is always best
 set background=dark
 " solarized colorscheme is beautiful
-if (v:version > 7041577) || has('nvim')
+if (v:version > 704) || has('nvim')
 	set termguicolors
 	colorscheme NeoSolarized
 else
@@ -114,10 +135,11 @@ endif
 " SNIPPETS
 " ========
 "
-nnoremap ,pyfile :-1read /home/qusai/.vim/snippets/.skeleton.py<CR>GddggjA
-nnoremap ,pydef :-1read /home/qusai/.vim/snippets/.def.py<CR>jwwi
-nnoremap ,pyclass :-1read /home/qusai/.vim/snippets/.class.py<CR>jwwi
+nnoremap ,pyfile :-1read /home/qusai/.vim/snippets/file.py<CR>GddggjA
+nnoremap ,pydef :-1read /home/qusai/.vim/snippets/def.py<CR>3Wi
+nnoremap ,pyclass :-1read /home/qusai/.vim/snippets/class.py<CR>3Wi
 
+"
 " MISC
 " ====
 "
