@@ -115,8 +115,8 @@ endif
 " ========
 "
 nnoremap ,pyfile :-1read /home/qusai/.vim/snippets/.skeleton.py<CR>GddggjA
-nnoremap ,pydef :-1read /home/qusai/.vim/snippets/.def.py<CR>wi
-nnoremap ,pyclass :-1read /home/qusai/.vim/snippets/.class.py<CR>wi
+nnoremap ,pydef :-1read /home/qusai/.vim/snippets/.def.py<CR>jwwi
+nnoremap ,pyclass :-1read /home/qusai/.vim/snippets/.class.py<CR>jwwi
 
 " MISC
 " ====
