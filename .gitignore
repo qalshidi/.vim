@@ -1,4 +1,5 @@
 # Exclude ~/.vim directories
+plugged/
 bundle
 bundle/*
 colors

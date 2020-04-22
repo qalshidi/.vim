@@ -56,7 +56,7 @@ au BufNewFile,BufRead *.{xml,html,xhtml} set makeprg=xdg-open\ %
 "
 "" set the runtime path to include Vundle and initialize
 runtime! ~/.vim/autoload/.*vim
-if empty(glob('~/.vim/autoload/plug.vim') && has('nvim'))
+if empty(glob($XDG_DATA_HOME.'/nvim/site/autoload/plug.vim')) && has('nvim')
   silent !curl -fLo $XDG_DATA_HOME/nvim/site/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
