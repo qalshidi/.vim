@@ -55,20 +55,28 @@ au BufNewFile,BufRead *.{xml,html,xhtml} set makeprg=xdg-open\ %
 " =======
 "
 "" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-"" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+runtime! ~/.vim/autoload/.*vim
+if empty(glob('~/.vim/autoload/plug.vim') && has('nvim'))
+  silent !curl -fLo $XDG_DATA_HOME/nvim/site/autoload/plug.vim --create-dirs
+	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+elseif empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
 
 " AUTOCOMPLETE
 " ------------
-if (v:version > 7041577) || has('nvim')
-	Plugin 'Valloric/YouCompleteMe'
+if (v:version > 704) || has('nvim')
+	Plug 'Valloric/YouCompleteMe'
 	let g:ycm_autoclose_preview_window_after_completion=1
 	map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 	let g:ycm_server_keep_logfiles = 1
 	let g:ycm_confirm_extra_conf = 0
-	Plugin 'rdnetto/YCM-Generator'
+	Plug 'rdnetto/YCM-Generator'
 endif
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -80,15 +88,15 @@ let g:UltiSnipsEditSplit="vertical"
 " COSMETICS
 " ---------
 "" color schemes
-Plugin 'iCyMind/NeoSolarized'
-Plugin 'lifepillar/vim-solarized8'
+Plug 'iCyMind/NeoSolarized'
+Plug 'lifepillar/vim-solarized8'
 
 " LANGUAGE SPECIFIC
 " -----------------
 " LaTeX plugin
-Plugin 'lervag/vimtex'
+Plug 'lervag/vimtex'
 " syntax highlighting
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -97,26 +105,26 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 " python linter
-Plugin 'nvie/vim-flake8'
+Plug 'nvie/vim-flake8'
 let python_highlight_all=1
 
 " THE GREAT TPOPE
 " ---------------
 "" sensible vim settings
-Plugin 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible'
 "" surround command
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 "" commentary command
-Plugin 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 "" git functionality
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " FILE STUFF
 " ----------
 "" Fuzzy file find
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
-call vundle#end()
+call plug#end()
 
 " THEME
 " =====
