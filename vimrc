@@ -1,5 +1,5 @@
-" SUCKLESS
-" ========
+" MY CONFIG
+" =========
 "
 "" use modern vim
 set nocompatible              " required
@@ -12,6 +12,7 @@ else
 endif
 "" for compatibility
 filetype off                  " required
+set modeline
 "" include files recursively
 set path+=**
 "" enable syntax highlighting
@@ -21,9 +22,7 @@ filetype plugin indent on    " required
 "" windows go the intuitive direction
 set splitbelow splitright
 "" tab things
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 "" show relative line numbers on the side
 set number relativenumber
 "" mappings
@@ -57,11 +56,25 @@ noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
 noremap <silent> <C-Left> :vertical resize -3<CR>
 noremap <silent> <C-Right> :vertical resize +3<CR>
+nnoremap <Leader>mktags :!ctags -R .
+nnoremap <Leader>. :CtrlPTag<CR>
 "" browser window vert splits right
 let g:netrw_altv=1
 "" write with sudo
 cmap w!! w !sudo -A tee > /dev/null %
 
+" SNIPPETS
+" ========
+"
+nnoremap <Leader>pyfile :-1read /home/qusai/.vim/snippets/file.py<CR>GddggjA
+nnoremap <Leader>pydef :-1read /home/qusai/.vim/snippets/def.py<CR>3Wi
+nnoremap <Leader>pyclass :-1read /home/qusai/.vim/snippets/class.py<CR>3Wi
+
+" MISC
+" ====
+"
+set makeprg=make\ -j
+" custom filetype
 " PEP 8
 au BufNewFile,BufRead *.py set tabstop=4
 au BufNewFile,BufRead *.py set softtabstop=4
@@ -72,8 +85,7 @@ au BufNewFile,BufRead *.py set autoindent
 au BufNewFile,BufRead *.py set fileformat=unix
 au BufNewFile,BufRead *.py set colorcolumn=80
 au BufNewFile,BufRead *.py set makeprg=python\ %
-
-" HTML, XML
+" HTML, XML (w3c standard)
 au BufNewFile,BufRead *.{xml,html,xhtml} set tabstop=2
 au BufNewFile,BufRead *.{xml,html,xhtml} set softtabstop=2
 au BufNewFile,BufRead *.{xml,html,xhtml} set shiftwidth=2
@@ -86,8 +98,8 @@ au BufNewFile,BufRead *.{xml,html,xhtml} set makeprg=xdg-open\ %
 " =======
 "
 "" set the runtime path to include Vundle and initialize
-if empty(glob($XDG_DATA_HOME.'/nvim/site/autoload/plug.vim')) && has('nvim')
-  silent !curl -fLo $XDG_DATA_HOME/nvim/site/autoload/plug.vim --create-dirs
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim')) && has('nvim')
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 elseif empty(glob('~/.vim/autoload/plug.vim'))
@@ -169,17 +181,3 @@ if (&term == 'st-256color')
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 colorscheme NeoSolarized
-
-" SNIPPETS
-" ========
-"
-nnoremap <Leader>pyfile :-1read /home/qusai/.vim/snippets/file.py<CR>GddggjA
-nnoremap <Leader>pydef :-1read /home/qusai/.vim/snippets/def.py<CR>3Wi
-nnoremap <Leader>pyclass :-1read /home/qusai/.vim/snippets/class.py<CR>3Wi
-
-"
-" MISC
-" ====
-"
-set modeline
-set makeprg=make\ -j
