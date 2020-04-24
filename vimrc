@@ -26,10 +26,12 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 "" show relative line numbers on the side
 set number relativenumber
 "" mappings
-let mapleader = ","
+let mapleader = "\<Space>"
 inoremap jj <ESC>
+inoremap jk <ESC>
 if has('nvim')
 	tnoremap jj <C-\><C-N>
+	tnoremap jk <C-\><C-N>
 	tnoremap <A-h> <C-\><C-N><C-w>h
 	tnoremap <A-j> <C-\><C-N><C-w>j
 	tnoremap <A-k> <C-\><C-N><C-w>k
@@ -56,8 +58,9 @@ noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
 noremap <silent> <C-Left> :vertical resize -3<CR>
 noremap <silent> <C-Right> :vertical resize +3<CR>
-nnoremap <Leader>mktags :!ctags -R .
-nnoremap <Leader>. :CtrlPTag<CR>
+"" leader commands
+nnoremap <Leader>maket :!ctags -R .
+nnoremap <Leader>p :CtrlPTag<CR>
 "" browser window vert splits right
 let g:netrw_altv=1
 "" write with sudo
