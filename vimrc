@@ -27,10 +27,8 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 set number relativenumber
 "" mappings
 let mapleader = "\<Space>"
-inoremap jj <ESC>
 inoremap jk <ESC>
 if has('nvim')
-	tnoremap jj <C-\><C-N>
 	tnoremap jk <C-\><C-N>
 	tnoremap <A-h> <C-\><C-N><C-w>h
 	tnoremap <A-j> <C-\><C-N><C-w>j
