@@ -53,9 +53,10 @@ nnoremap <Leader>maket :!ctags -R .<CR>
 nnoremap <Leader>p :CtrlPTag<CR>
 "" netrw stuff
 let g:netrw_liststyle=3
-if argv() == []
-    silent edit .
-end
+augroup VimStartup
+    au!
+    au VimEnter * if expand("%") == "" | e . | endif
+augroup END
 let g:netrw_altv=1
 "" write with sudo
 cmap w!! w !sudo -A tee > /dev/null %
