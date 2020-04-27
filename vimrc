@@ -57,9 +57,13 @@ noremap <silent> <C-Down> :resize -3<CR>
 noremap <silent> <C-Left> :vertical resize -3<CR>
 noremap <silent> <C-Right> :vertical resize +3<CR>
 "" leader commands
-nnoremap <Leader>maket :!ctags -R .
+nnoremap <Leader>maket :!ctags -R .<CR>
 nnoremap <Leader>p :CtrlPTag<CR>
-"" browser window vert splits right
+"" netrw stuff
+let g:netrw_liststyle=3
+if argv() == []
+    silent edit .
+end
 let g:netrw_altv=1
 "" write with sudo
 cmap w!! w !sudo -A tee > /dev/null %
