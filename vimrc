@@ -30,28 +30,20 @@ let mapleader = "\<Space>"
 inoremap jk <ESC>
 if has('nvim')
 	tnoremap jk <C-\><C-N>
-	tnoremap <A-h> <C-\><C-N><C-w>h
-	tnoremap <A-j> <C-\><C-N><C-w>j
-	tnoremap <A-k> <C-\><C-N><C-w>k
-	tnoremap <A-l> <C-\><C-N><C-w>l
-	inoremap <A-h> <C-\><C-N><C-w>h
-	inoremap <A-j> <C-\><C-N><C-w>j
-	inoremap <A-k> <C-\><C-N><C-w>k
-	inoremap <A-l> <C-\><C-N><C-w>l
+	tnoremap <Leader>hh <C-\><C-N><C-w>h
+	tnoremap <Leader>jj <C-\><C-N><C-w>j
+	tnoremap <Leader>kk <C-\><C-N><C-w>k
+	tnoremap <Leader>ll <C-\><C-N><C-w>l
 else
-	tnoremap <A-h> <C-w>h
-	tnoremap <A-j> <C-w>j
-	tnoremap <A-k> <C-w>k
-	tnoremap <A-l> <C-w>l
-	inoremap <A-h> <C-w>h
-	inoremap <A-j> <C-w>j
-	inoremap <A-k> <C-w>k
-	inoremap <A-l> <C-w>l
+	tnoremap <Leader>hh <C-w>h
+	tnoremap <Leader>jj <C-w>j
+	tnoremap <Leader>kk <C-w>k
+	tnoremap <Leader>ll <C-w>l
 endif
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nnoremap <Leader>hh <C-w>h
+nnoremap <Leader>jj <C-w>j
+nnoremap <Leader>kk <C-w>k
+nnoremap <Leader>ll <C-w>l
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
 noremap <silent> <C-Left> :vertical resize -3<CR>
