@@ -1,35 +1,52 @@
-" MY CONFIG
-" =========
+" My Vim Configuration
+" ====================
 "
-"" use modern vim
+" use modern vim
 set nocompatible              " required
-"" vim cache
+" vim cache
 let viminfoparams = "%,<800,'10,/50,:100,h,f0,n"
 if has('nvim')
-	execute "set viminfo=".viminfoparams."~/.cache/nviminfo"
+	execute 'set viminfo='.viminfoparams.'~/.cache/nviminfo'
 else
-	execute "set viminfo=".viminfoparams."~/.cache/viminfo"
+	execute 'set viminfo='.viminfoparams.'~/.cache/viminfo'
 endif
-"" for compatibility
-filetype off                  " required
+" for compatibility
 set modeline
-"" include files recursively
+" include files recursively
 set path+=**
-"" enable syntax highlighting
+" enable syntax highlighting
 syntax enable
-"" reqiured options
-filetype plugin indent on    " required
-"" windows go the intuitive direction
+" reqiured options
+filetype plugin indent on
+" windows go the intuitive direction
 set splitbelow splitright
-"" tab things
+" tab things
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
-"" show relative line numbers on the side
+" show relative line numbers on the side
 set number relativenumber
-"" mappings
-let mapleader = "\<Space>"
-inoremap jk <ESC>
+
+" Mappings
+" ========
+"
+nnoremap Y y$
+inoremap jk <Esc>
 if has('nvim')
 	tnoremap jk <C-\><C-N>
+endif
+" resize with ctrl
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+noremap <silent> <C-Left> :vertical resize -3<CR>
+noremap <silent> <C-Right> :vertical resize +3<CR>
+" write with sudo
+cmap w!! w !sudo -A tee > /dev/null %
+
+" Leader Mappings
+" ---------------
+"
+let mapleader = "\<Space>"
+" easily navigate windows
+if has('nvim')
 	tnoremap <Leader>hh <C-\><C-N><C-w>h
 	tnoremap <Leader>jj <C-\><C-N><C-w>j
 	tnoremap <Leader>kk <C-\><C-N><C-w>k
@@ -44,35 +61,33 @@ nnoremap <Leader>hh <C-w>h
 nnoremap <Leader>jj <C-w>j
 nnoremap <Leader>kk <C-w>k
 nnoremap <Leader>ll <C-w>l
-noremap <silent> <C-Up> :resize +3<CR>
-noremap <silent> <C-Down> :resize -3<CR>
-noremap <silent> <C-Left> :vertical resize -3<CR>
-noremap <silent> <C-Right> :vertical resize +3<CR>
-"" leader commands
-nnoremap <Leader>maket :!ctags -R .<CR>
+" misc
+nnoremap <Leader>mktags :!ctags -R .<CR>
 nnoremap <Leader>p :CtrlPTag<CR>
-"" netrw stuff
+nnoremap <Leader>h :noh<CR>
+
+" Snippets
+" --------
+"
+nnoremap <Leader>spyfile :-1read /home/qusai/.vim/snippets/file.py<CR>GddggjA
+nnoremap <Leader>spydef :-1read /home/qusai/.vim/snippets/def.py<CR>wi
+nnoremap <Leader>spyclass :-1read /home/qusai/.vim/snippets/class.py<CR>wi
+nnoremap <Leader>sshebang O#!/usr/bin/env bash<CR># 
+
+" File Explorer
+" =============
+"
 let g:netrw_liststyle=3
+let g:netrw_list_hide=netrw_gitignore#Hide()
 augroup VimStartup
     au!
-    au VimEnter * if expand("%") == "" | e . | endif
+    au VimEnter * if expand('%') == '' | e . | endif
 augroup END
 let g:netrw_altv=1
-"" write with sudo
-cmap w!! w !sudo -A tee > /dev/null %
 
-" SNIPPETS
+" Filetype
 " ========
 "
-nnoremap <Leader>pyfile :-1read /home/qusai/.vim/snippets/file.py<CR>GddggjA
-nnoremap <Leader>pydef :-1read /home/qusai/.vim/snippets/def.py<CR>3Wi
-nnoremap <Leader>pyclass :-1read /home/qusai/.vim/snippets/class.py<CR>3Wi
-
-" MISC
-" ====
-"
-set makeprg=make\ -j
-" custom filetype
 " PEP 8
 au BufNewFile,BufRead *.py set tabstop=4
 au BufNewFile,BufRead *.py set softtabstop=4
@@ -92,10 +107,10 @@ au BufNewFile,BufRead *.{xml,html,xhtml} set autoindent
 au BufNewFile,BufRead *.{xml,html,xhtml} set makeprg=xdg-open\ %
 
 
-" PLUGINS
+" Plugins
 " =======
 "
-"" set the runtime path to include Vundle and initialize
+" set the runtime path to include Vundle and initialize
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim')) && has('nvim')
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -105,29 +120,30 @@ elseif empty(glob('~/.vim/autoload/plug.vim'))
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
 call plug#begin('~/.vim/plugged')
 
-" THE GREAT TPOPE
-" ---------------
-"" sensible vim settings
+" tpope Basics
+" ------------
+"
+" sensible vim settings
 Plug 'tpope/vim-sensible'
-"" surround command
+" surround command
 Plug 'tpope/vim-surround'
-"" commentary command
+" commentary command
 Plug 'tpope/vim-commentary'
-"" git functionality
+" git functionality
 Plug 'tpope/vim-fugitive'
 
-" AUTOCOMPLETE
+" Autocomplete
 " ------------
+"
 if (v:version > 704) || has('nvim')
 	Plug 'Valloric/YouCompleteMe'
 	let g:ycm_autoclose_preview_window_after_completion=1
-	map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+	map <Leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 	let g:ycm_server_keep_logfiles = 1
 	let g:ycm_confirm_extra_conf = 0
-	Plug 'rdnetto/YCM-Generator'
+	Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 endif
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -136,15 +152,20 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" COSMETICS
+" Cosmetics
 " ---------
-"" color scheme
+"
+" color scheme
 Plug 'iCyMind/NeoSolarized'
 
-" LANGUAGE SPECIFIC
+" Language Specific
 " -----------------
+"
 " LaTeX plugin
 Plug 'lervag/vimtex'
+" python linter
+Plug 'nvie/vim-flake8'
+let python_highlight_all=1
 " syntax highlighting
 Plug 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
@@ -154,18 +175,25 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-" python linter
-Plug 'nvie/vim-flake8'
-let python_highlight_all=1
 
-" FILE STUFF
+" File Stuff
 " ----------
-"" Fuzzy file find
+"
+" Fuzzy file find
 Plug 'kien/ctrlp.vim'
+
+" Powerline
+" ---------
+"
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" testing rounded separators (extra-powerline-symbols):
+let g:airline_left_sep = "\uE0B4"
+let g:airline_right_sep = "\uE0BA"
 
 call plug#end()
 
-" THEME
+" Theme
 " =====
 "
 " dark background is always best
@@ -174,8 +202,5 @@ set background=dark
 if (v:version > 704) || has('nvim')
 	set termguicolors " Enable true color support.
 endif
-if (&term == 'st-256color')
-	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
 colorscheme NeoSolarized
+let g:airline_theme='solarized_flood'
