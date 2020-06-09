@@ -44,23 +44,18 @@ cmap w!! w !sudo -A tee > /dev/null %
 " Leader Mappings
 " ---------------
 "
-let mapleader = "\<Space>"
+let mapleader = ","
 " easily navigate windows
 if has('nvim')
-	tnoremap <Leader>hh <C-\><C-N><C-w>h
-	tnoremap <Leader>jj <C-\><C-N><C-w>j
-	tnoremap <Leader>kk <C-\><C-N><C-w>k
-	tnoremap <Leader>ll <C-\><C-N><C-w>l
-else
-	tnoremap <Leader>hh <C-w>h
-	tnoremap <Leader>jj <C-w>j
-	tnoremap <Leader>kk <C-w>k
-	tnoremap <Leader>ll <C-w>l
+	tnoremap <Leader>wh <C-\><C-N><C-w>h
+	tnoremap <Leader>wj <C-\><C-N><C-w>j
+	tnoremap <Leader>wk <C-\><C-N><C-w>k
+	tnoremap <Leader>wl <C-\><C-N><C-w>l
 endif
-nnoremap <Leader>hh <C-w>h
-nnoremap <Leader>jj <C-w>j
-nnoremap <Leader>kk <C-w>k
-nnoremap <Leader>ll <C-w>l
+nnoremap <Leader>wh <C-w>h
+nnoremap <Leader>wj <C-w>j
+nnoremap <Leader>wk <C-w>k
+nnoremap <Leader>wl <C-w>l
 " misc
 nnoremap <Leader>mktags :!ctags -R .<CR>
 nnoremap <Leader>p :CtrlPTag<CR>
@@ -187,9 +182,6 @@ Plug 'kien/ctrlp.vim'
 "
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" testing rounded separators (extra-powerline-symbols):
-let g:airline_left_sep = "\uE0B4"
-let g:airline_right_sep = "\uE0BA"
 
 call plug#end()
 
@@ -204,3 +196,6 @@ if (v:version > 704) || has('nvim')
 endif
 colorscheme NeoSolarized
 let g:airline_theme='solarized_flood'
+let g:airline_left_sep = "\uE0B4"
+let g:airline_right_sep = "\uE0BA"
+let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
