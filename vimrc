@@ -84,7 +84,7 @@ let g:netrw_altv=1
 " Filetype
 " ========
 "
-" PEP 8
+" Python
 au BufNewFile,BufRead *.py set tabstop=4
 au BufNewFile,BufRead *.py set softtabstop=4
 au BufNewFile,BufRead *.py set shiftwidth=4
@@ -95,6 +95,7 @@ au BufNewFile,BufRead *.py set fileformat=unix
 au BufNewFile,BufRead *.py set colorcolumn=80
 au BufNewFile,BufRead *.py set makeprg=python\ %
 au BufNewFile,BufRead *.py set encoding=utf-8
+let python_highlight_all=1
 " HTML, XML (w3c standard)
 au BufNewFile,BufRead *.{xml,html,xhtml} set tabstop=2
 au BufNewFile,BufRead *.{xml,html,xhtml} set softtabstop=2
@@ -140,6 +141,7 @@ if ((v:version > 704) || has('nvim')) && has('python3')
 	map <Leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 	let g:ycm_server_keep_logfiles = 1
 	let g:ycm_confirm_extra_conf = 0
+    let g:ycm_python_binary_path = 'python3'
 	Plug 'rdnetto/YCM-Generator', {'branch': 'stable'}
 endif
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -160,9 +162,6 @@ Plug 'iCyMind/NeoSolarized'
 "
 " LaTeX plugin
 Plug 'lervag/vimtex'
-" python
-Plug 'nvie/vim-flake8'
-let python_highlight_all=1
 Plug 'vim-scripts/indentpython.vim'
 " syntax highlighting
 Plug 'scrooloose/syntastic'
@@ -173,6 +172,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['pylint', 'flake8', 'python']
 
 " File Stuff
 " ----------
