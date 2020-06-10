@@ -24,6 +24,8 @@ set splitbelow splitright
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 " show relative line numbers on the side
 set number relativenumber
+" copy to system clipboard
+set clipboard=unnamedplus
 
 " Mappings
 " ========
@@ -57,8 +59,7 @@ nnoremap <Leader>wj <C-w>j
 nnoremap <Leader>wk <C-w>k
 nnoremap <Leader>wl <C-w>l
 " misc
-nnoremap <Leader>mktags :!ctags -R .<CR>
-nnoremap <Leader>p :CtrlPTag<CR>
+nnoremap <Leader>mktags :!ctags -R<CR>
 nnoremap <Leader>h :noh<CR>
 
 " Snippets
@@ -93,6 +94,7 @@ au BufNewFile,BufRead *.py set autoindent
 au BufNewFile,BufRead *.py set fileformat=unix
 au BufNewFile,BufRead *.py set colorcolumn=80
 au BufNewFile,BufRead *.py set makeprg=python\ %
+au BufNewFile,BufRead *.py set encoding=utf-8
 " HTML, XML (w3c standard)
 au BufNewFile,BufRead *.{xml,html,xhtml} set tabstop=2
 au BufNewFile,BufRead *.{xml,html,xhtml} set softtabstop=2
@@ -132,7 +134,7 @@ Plug 'tpope/vim-fugitive'
 " Autocomplete
 " ------------
 "
-if (v:version > 704) || has('nvim')
+if ((v:version > 704) || has('nvim')) && has('python3')
 	Plug 'Valloric/YouCompleteMe'
 	let g:ycm_autoclose_preview_window_after_completion=1
 	map <Leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -158,9 +160,10 @@ Plug 'iCyMind/NeoSolarized'
 "
 " LaTeX plugin
 Plug 'lervag/vimtex'
-" python linter
+" python
 Plug 'nvie/vim-flake8'
 let python_highlight_all=1
+Plug 'vim-scripts/indentpython.vim'
 " syntax highlighting
 Plug 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
