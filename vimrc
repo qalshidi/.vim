@@ -137,7 +137,7 @@ Plug 'tpope/vim-fugitive'
 " Autocomplete
 " ------------
 "
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': [':CocInstall coc-marketplace', ':CocInstall coc-vimlsp', ':CocInstall coc-python', ':CocInstall coc-sh', ':CocInstall coc-json', ':CocInstall coc-git', ':CocInstall coc-css', ':CocInstall coc-ccls', ':CocInstall coc-html']}
 " TextEdit might fail if hidden is not set.
 set hidden
 " Some servers have issues with backup files, see #649.
@@ -272,21 +272,21 @@ Plug 'iCyMind/NeoSolarized'
 
 " Language Specific
 " -----------------
-"
+
 " LaTeX plugin
 Plug 'lervag/vimtex'
 Plug 'vim-scripts/indentpython.vim'
 
-" syntax checking
-Plug 'scrooloose/syntastic'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['flake8', 'pylint', 'python']
+" " syntax checking
+" Plug 'scrooloose/syntastic'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_python_checkers = ['flake8', 'pylint', 'python']
 
 " Haskell
 au BufEnter *.hs compiler ghc
@@ -328,6 +328,10 @@ set background=dark
 if (v:version > 704) || has('nvim')
 	set termguicolors " Enable true color support.
 endif
+let g:neosolarized_italic = 1
+"tmux stuff
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
 colorscheme NeoSolarized
 let g:airline_theme='solarized_flood'
 let g:airline_left_sep = "\uE0B4"
