@@ -137,7 +137,9 @@ Plug 'tpope/vim-fugitive'
 " Autocomplete
 " ------------
 "
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': [':CocInstall coc-marketplace', ':CocInstall coc-vimlsp', ':CocInstall coc-python', ':CocInstall coc-sh', ':CocInstall coc-json', ':CocInstall coc-git', ':CocInstall coc-css', ':CocInstall coc-ccls', ':CocInstall coc-html']}
+Plug 'neoclide/coc.nvim', {'branch': 'release',
+                          \ 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-sh coc-html coc-json'
+                          \}
 " TextEdit might fail if hidden is not set.
 set hidden
 " Some servers have issues with backup files, see #649.
@@ -275,7 +277,11 @@ Plug 'iCyMind/NeoSolarized'
 
 " LaTeX plugin
 Plug 'lervag/vimtex'
+let g:tex_flavor = 'latex'
 Plug 'vim-scripts/indentpython.vim'
+
+" Ledger
+Plug 'ledger/vim-ledger'
 
 " " syntax checking
 " Plug 'scrooloose/syntastic'
@@ -334,6 +340,4 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 colorscheme NeoSolarized
 let g:airline_theme='solarized_flood'
-let g:airline_left_sep = "\uE0B4"
-let g:airline_right_sep = "\uE0BA"
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
