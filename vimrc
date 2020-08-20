@@ -282,6 +282,7 @@ Plug 'vim-scripts/indentpython.vim'
 
 " Ledger
 Plug 'ledger/vim-ledger'
+au BufNewFile,BufRead *.journal set filetype=journal
 
 " " syntax checking
 " Plug 'scrooloose/syntastic'
