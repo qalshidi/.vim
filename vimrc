@@ -65,9 +65,9 @@ nnoremap <Leader>h :noh<CR>
 " Snippets
 " --------
 "
-nnoremap <Leader>spyfile :-1read /home/qusai/.vim/snippets/file.py<CR>GddggjA
-nnoremap <Leader>spydef :-1read /home/qusai/.vim/snippets/def.py<CR>wi
-nnoremap <Leader>spyclass :-1read /home/qusai/.vim/snippets/class.py<CR>wi
+nnoremap <Leader>spyfile :-1read ~/.vim/snippets/file.py<CR>GddggjA
+nnoremap <Leader>spydef :-1read ~/.vim/snippets/def.py<CR>wi
+nnoremap <Leader>spyclass :-1read ~/.vim/snippets/class.py<CR>wi
 nnoremap <Leader>sshebang O#!/usr/bin/env bash<CR># 
 
 " File Explorer
