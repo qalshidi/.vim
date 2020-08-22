@@ -26,6 +26,8 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 set number relativenumber
 " copy to system clipboard
 set clipboard=unnamedplus
+" use ripgrep
+set grepprg=rg\ --vimgrep
 
 " Mappings
 " ========
@@ -42,6 +44,11 @@ noremap <silent> <C-Left> :vertical resize -3<CR>
 noremap <silent> <C-Right> :vertical resize +3<CR>
 " write with sudo
 cmap w!! w !sudo -A tee > /dev/null %
+" QuickFix mappings that really shoulf exist
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprevious<CR>
+nnoremap ]Q :clast<CR>
+nnoremap [Q :cfirst<CR>
 
 " Leader Mappings
 " ---------------
