@@ -25,7 +25,7 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 " show relative line numbers on the side
 set number relativenumber
 " copy to system clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed,unnamedplus
 " use ripgrep
 set grepprg=rg\ --vimgrep
 
@@ -44,11 +44,6 @@ noremap <silent> <C-Left> :vertical resize -3<CR>
 noremap <silent> <C-Right> :vertical resize +3<CR>
 " write with sudo
 cmap w!! w !sudo -A tee > /dev/null %
-" QuickFix mappings that really shoulf exist
-nnoremap ]q :cnext<CR>
-nnoremap [q :cprevious<CR>
-nnoremap ]Q :clast<CR>
-nnoremap [Q :cfirst<CR>
 
 " Leader Mappings
 " ---------------
@@ -140,6 +135,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 " git functionality
 Plug 'tpope/vim-fugitive'
+" better date functionality
+"
+Plug 'tpope/vim-speeddating'
+" have . work on plugins
+Plug 'tpope/vim-repeat'
+" more mappings with ] and [
+Plug 'tpope/vim-unimpaired'
 
 " Autocomplete
 " ------------
@@ -330,6 +332,11 @@ Plug 'kien/ctrlp.vim'
 "
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" Clipboard
+" ---------
+"
+Plug 'svermeulen/vim-easyclip'
 
 call plug#end()
 
