@@ -24,8 +24,6 @@ set splitbelow splitright
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 " show relative line numbers on the side
 set number relativenumber
-" copy to system clipboard
-set clipboard=unnamed,unnamedplus
 " use ripgrep
 set grepprg=rg\ --vimgrep
 
@@ -336,7 +334,29 @@ Plug 'vim-airline/vim-airline-themes'
 " Clipboard
 " ---------
 "
-Plug 'svermeulen/vim-easyclip'
+Plug 'svermeulen/vim-yoink'
+Plug 'svermeulen/vim-subversive'
+Plug 'svermeulen/vim-cutlass'
+set clipboard=unnamed,unnamedplus
+nmap <C-n> <plug>(YoinkPostPasteSwapBack)
+nmap <C-p> <plug>(YoinkPostPasteSwapForward)
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
+nmap [y <plug>(YoinkRotateBack)
+nmap ]y <plug>(YoinkRotateForward)
+nmap y <plug>(YoinkYankPreserveCursorPosition)
+xmap y <plug>(YoinkYankPreserveCursorPosition)
+let g:yoinkIncludeDeleteOperations=1
+" s for substitute
+nmap s <plug>(SubversiveSubstitute)
+nmap ss <plug>(SubversiveSubstituteLine)
+nmap S <plug>(SubversiveSubstituteToEndOfLine)
+nmap <Leader>S <plug>(SubversiveSubstituteWordRange)
+" x is now cut
+nnoremap x d
+xnoremap x d
+nnoremap xx dd
+nnoremap X D
 
 call plug#end()
 
