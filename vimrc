@@ -120,6 +120,11 @@ elseif empty(glob('~/.vim/autoload/plug.vim'))
 	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+"install node
+if ! (!empty(glob('~/.local/bin/npm')) || !empty(glob('/usr/bin/npm')) || !empty(glob('/usr/local/bin/npm')))
+    silent !curl -sL install-node.now.sh/lts | PREFIX=~/.local bash /dev/stdin --yes
+end
+
 call plug#begin('~/.vim/plugged')
 
 " tpope Basics
