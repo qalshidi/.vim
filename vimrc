@@ -49,15 +49,15 @@ cmap w!! w !sudo -A tee > /dev/null %
 let mapleader = ","
 " easily navigate windows
 if has('nvim')
-	tnoremap <Leader>wh <C-\><C-N><C-w>h
-	tnoremap <Leader>wj <C-\><C-N><C-w>j
-	tnoremap <Leader>wk <C-\><C-N><C-w>k
-	tnoremap <Leader>wl <C-\><C-N><C-w>l
+	tnoremap <C-h> <C-\><C-N><C-w>h
+	tnoremap <C-j> <C-\><C-N><C-w>j
+	tnoremap <C-k> <C-\><C-N><C-w>k
+	tnoremap <C-l> <C-\><C-N><C-w>l
 endif
-nnoremap <Leader>wh <C-w>h
-nnoremap <Leader>wj <C-w>j
-nnoremap <Leader>wk <C-w>k
-nnoremap <Leader>wl <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 " misc
 nnoremap <Leader>mktags :!ctags -R<CR>
 nnoremap <Leader>h :noh<CR>
@@ -149,9 +149,7 @@ Plug 'tpope/vim-unimpaired'
 " Autocomplete
 " ------------
 "
-Plug 'neoclide/coc.nvim', {'branch': 'release',
-                          \ 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-sh coc-html coc-json'
-                          \}
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-sh coc-html coc-json' }
 " TextEdit might fail if hidden is not set.
 set hidden
 " Some servers have issues with backup files, see #649.
