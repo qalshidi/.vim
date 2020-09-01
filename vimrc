@@ -149,7 +149,7 @@ Plug 'tpope/vim-unimpaired'
 " Autocomplete
 " ------------
 "
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-sh coc-html coc-json' }
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json' }
 " TextEdit might fail if hidden is not set.
 set hidden
 " Some servers have issues with backup files, see #649.
@@ -341,6 +341,8 @@ Plug 'svermeulen/vim-yoink'
 Plug 'svermeulen/vim-subversive'
 Plug 'svermeulen/vim-cutlass'
 set clipboard=unnamed,unnamedplus
+let g:yoinkSyncSystemClipboardOnFocus=0
+let g:yoinkIncludeDeleteOperations=1
 nmap <C-n> <plug>(YoinkPostPasteSwapBack)
 nmap <C-p> <plug>(YoinkPostPasteSwapForward)
 nmap p <plug>(YoinkPaste_p)
