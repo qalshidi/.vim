@@ -13,7 +13,7 @@ endif
 " for compatibility
 set modeline
 " include files recursively
-set path+=**
+set path=.,,**
 " enable syntax highlighting
 syntax enable
 " reqiured options
@@ -26,6 +26,14 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 set number relativenumber
 " use ripgrep
 set grepprg=rg\ --vimgrep
+" swap files are annoying
+set noswapfile
+
+" Env variables
+" =============
+
+let $RTP = split(&runtimepath, ',')[0]
+let $RC = "$HOME/.vim/vimrc"
 
 " Mappings
 " ========
@@ -86,18 +94,6 @@ let g:netrw_altv=1
 " Filetype
 " ========
 "
-" Python
-au BufNewFile,BufRead *.py set tabstop=4
-au BufNewFile,BufRead *.py set softtabstop=4
-au BufNewFile,BufRead *.py set shiftwidth=4
-au BufNewFile,BufRead *.py set textwidth=79
-au BufNewFile,BufRead *.py set expandtab
-au BufNewFile,BufRead *.py set autoindent
-au BufNewFile,BufRead *.py set fileformat=unix
-au BufNewFile,BufRead *.py set colorcolumn=80
-au BufNewFile,BufRead *.py set makeprg=python\ %
-au BufNewFile,BufRead *.py set encoding=utf-8
-let python_highlight_all=1
 " HTML, XML (w3c standard)
 au BufNewFile,BufRead *.{xml,html,xhtml} set tabstop=2
 au BufNewFile,BufRead *.{xml,html,xhtml} set softtabstop=2
