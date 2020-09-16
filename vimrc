@@ -307,12 +307,6 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 " Fish
 Plug 'dag/vim-fish'
 
-" File Stuff
-" ----------
-
-" Fuzzy file find
-Plug 'kien/ctrlp.vim'
-
 " Powerline
 " ---------
 "
