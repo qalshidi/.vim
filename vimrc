@@ -39,9 +39,9 @@ let $RC = "$HOME/.vim/vimrc"
 " ========
 "
 nnoremap Y y$
-inoremap jk <Esc>
+inoremap <nowait> jk <Esc>
 if has('nvim')
-	tnoremap jk <C-\><C-N>
+	tnoremap <nowait> jk <C-\><C-N>
 endif
 " resize with ctrl
 noremap <silent> <C-Up> :resize +3<CR>
@@ -67,8 +67,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " misc
-nnoremap <Leader>mktags :!ctags -R<CR>
-nnoremap <Leader>h :noh<CR>
+nnoremap <Leader>gt :!ctags -R<CR>
+nnoremap <silent> <Leader>h :noh<CR>
 
 " Snippets
 " --------
@@ -181,7 +181,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <C-Space> coc#refresh()
 " Use <CR> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 " <CR> could be remapped by other vim plugin, try `:verbose imap <CR>`.
@@ -195,10 +195,10 @@ endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <Leader>gd <Plug>(coc-definition)
+nmap <silent> <Leader>gy <Plug>(coc-type-definition)
+nmap <silent> <Leader>gi <Plug>(coc-implementation)
+nmap <silent> <Leader>gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -211,10 +211,10 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <Leader>rn <Plug>(coc-rename)
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <Leader>f  <Plug>(coc-format-selected)
+nmap <Leader>f  <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -223,13 +223,13 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 " Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" Example: `<Leader>aap` for current paragraph
+xmap <Leader>a  <Plug>(coc-codeaction-selected)
+nmap <Leader>a  <Plug>(coc-codeaction-selected)
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <Leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <Leader>qf  <Plug>(coc-fix-current)
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
@@ -256,21 +256,21 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
+nnoremap <silent><nowait> <Space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<CR>
+nnoremap <silent><nowait> <Space>e  :<C-u>CocList extensions<CR>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<CR>
+nnoremap <silent><nowait> <Space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<CR>
+nnoremap <silent><nowait> <Space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<CR>
+nnoremap <silent><nowait> <Space>s  :<C-u>CocList -I symbols<CR>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <Space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <Space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <Space>p  :<C-u>CocListResume<CR>
 
 " Cosmetics
 " ---------
@@ -289,17 +289,6 @@ Plug 'vim-scripts/indentpython.vim'
 " Ledger
 Plug 'ledger/vim-ledger'
 au BufNewFile,BufRead *.journal set filetype=journal
-
-" " syntax checking
-" Plug 'scrooloose/syntastic'
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_python_checkers = ['flake8', 'pylint', 'python']
 
 " Haskell
 au BufEnter *.hs compiler ghc
@@ -339,20 +328,20 @@ Plug 'svermeulen/vim-cutlass'
 set clipboard=unnamed,unnamedplus
 let g:yoinkSyncSystemClipboardOnFocus=0
 let g:yoinkIncludeDeleteOperations=1
-nmap <C-n> <plug>(YoinkPostPasteSwapBack)
-nmap <C-p> <plug>(YoinkPostPasteSwapForward)
-nmap p <plug>(YoinkPaste_p)
-nmap P <plug>(YoinkPaste_P)
-nmap [y <plug>(YoinkRotateBack)
-nmap ]y <plug>(YoinkRotateForward)
-nmap y <plug>(YoinkYankPreserveCursorPosition)
-xmap y <plug>(YoinkYankPreserveCursorPosition)
+nmap <C-n> <Plug>(YoinkPostPasteSwapBack)
+nmap <C-p> <Plug>(YoinkPostPasteSwapForward)
+nmap p <Plug>(YoinkPaste_p)
+nmap P <Plug>(YoinkPaste_P)
+nmap [y <Plug>(YoinkRotateBack)
+nmap ]y <Plug>(YoinkRotateForward)
+nmap y <Plug>(YoinkYankPreserveCursorPosition)
+xmap y <Plug>(YoinkYankPreserveCursorPosition)
 let g:yoinkIncludeDeleteOperations=1
 " s for substitute
-nmap s <plug>(SubversiveSubstitute)
-nmap ss <plug>(SubversiveSubstituteLine)
-nmap S <plug>(SubversiveSubstituteToEndOfLine)
-nmap <Leader>S <plug>(SubversiveSubstituteWordRange)
+nmap s <Plug>(SubversiveSubstitute)
+nmap ss <Plug>(SubversiveSubstituteLine)
+nmap S <Plug>(SubversiveSubstituteToEndOfLine)
+nmap <Leader>S <Plug>(SubversiveSubstituteWordRange)
 " x is now cut
 nnoremap x d
 xnoremap x d
