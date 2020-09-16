@@ -135,12 +135,13 @@ Plug 'tpope/vim-commentary'
 " git functionality
 Plug 'tpope/vim-fugitive'
 " better date functionality
-"
 Plug 'tpope/vim-speeddating'
 " have . work on plugins
 Plug 'tpope/vim-repeat'
 " more mappings with ] and [
 Plug 'tpope/vim-unimpaired'
+" path for C/C++, python, sh, xdg, scheme and others
+Plug 'tpope/vim-apathy'
 
 " Autocomplete
 " ------------
@@ -290,22 +291,9 @@ Plug 'vim-scripts/indentpython.vim'
 
 " Ledger
 Plug 'ledger/vim-ledger'
-au BufNewFile,BufRead *.journal set filetype=journal
 
 " Haskell
-au BufEnter *.hs compiler ghc
 Plug 'neovimhaskell/haskell-vim'
-Plug 'lukerandall/haskellmode-vim'
-let g:haddock_browser = "/usr/bin/firefox"
-let g:haddock_browser_callformat = '%s "%s"'
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
-
 " Fish
 Plug 'dag/vim-fish'
 
