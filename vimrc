@@ -1,8 +1,21 @@
 " My Vim Configuration
 " ====================
-"
+
 " use modern vim
-set nocompatible              " required
+set nocompatible                            " required
+set modeline                                " I want some modelines
+set path=.,,**                              " include files recursively and not have defaults
+syntax enable
+filetype plugin indent on
+set splitbelow splitright                   " windows split in the intuitive direction
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab things
+set number relativenumber                   " show relative numbers on the side
+set grepprg=rg\ --vimgrep                   " ripgrep is faster
+set noswapfile                              " swapfiles are annoying
+set dictionary+=/usr/share/dict/words       " add this dictionary
+set formatoptions-=cro                      " stop newline continuation of comments
+set nowrap                                  " wrapping can be annoying
+
 " vim cache
 let viminfoparams = "%,<800,'10,/50,:100,h,f0,n"
 if has('nvim')
@@ -10,38 +23,23 @@ if has('nvim')
 else
 	execute 'set viminfo='.viminfoparams.'~/.cache/viminfo'
 endif
-" for compatibility
-set modeline
-" include files recursively
-set path=.,,**
-" enable syntax highlighting
-syntax enable
-" reqiured options
-filetype plugin indent on
-" windows go the intuitive direction
-set splitbelow splitright
-" tab things
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
-" show relative line numbers on the side
-set number relativenumber
-" use ripgrep
-set grepprg=rg\ --vimgrep
-" swap files are annoying
-set noswapfile
 
 " Env variables
 " =============
 
 let $RTP = split(&runtimepath, ',')[0]
 let $RC = "$HOME/.vim/vimrc"
+au! BufWritePost $RC source %          " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 
 " Mappings
 " ========
-"
+
 nnoremap Y y$
 inoremap <nowait> jk <Esc>
+inoremap <nowait> kj <Esc>
 if has('nvim')
 	tnoremap <nowait> jk <C-\><C-N>
+	tnoremap <nowait> kj <C-\><C-N>
 endif
 " resize with ctrl
 noremap <silent> <C-Up> :resize +3<CR>
@@ -50,6 +48,10 @@ noremap <silent> <C-Left> :vertical resize -3<CR>
 noremap <silent> <C-Right> :vertical resize +3<CR>
 " write with sudo
 cmap w!! w !sudo -A tee > /dev/null %
+" TAB in general mode will move to text buffer
+nnoremap <Tab> :bnext<CR>
+" SHIFT-TAB will go back
+nnoremap <S-Tab> :bprevious<CR>
 
 " Leader Mappings
 " ---------------
@@ -77,19 +79,6 @@ nnoremap <Leader>spyfile :-1read ~/.vim/snippets/file.py<CR>GddggjA
 nnoremap <Leader>spydef :-1read ~/.vim/snippets/def.py<CR>wi
 nnoremap <Leader>spyclass :-1read ~/.vim/snippets/class.py<CR>wi
 nnoremap <Leader>sshebang O#!/usr/bin/env bash<CR># 
-
-" File Explorer
-" =============
-"
-let g:netrw_liststyle=3
-if exists("*netrw_gitignore#Hide")
-    let g:netrw_list_hide=netrw_gitignore#Hide()
-end
-augroup VimStartup
-    au!
-    au VimEnter * if expand('%') == '' | e . | endif
-augroup END
-let g:netrw_altv=1
 
 " Filetype
 " ========
@@ -146,7 +135,7 @@ Plug 'tpope/vim-apathy'
 " Autocomplete
 " ------------
 "
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json' }
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
 " TextEdit might fail if hidden is not set.
 set hidden
 " Some servers have issues with backup files, see #649.
@@ -331,6 +320,42 @@ nnoremap x d
 xnoremap x d
 nnoremap xx dd
 nnoremap X D
+
+" File Explorer
+" =============
+
+" Fine netrw does suck
+Plug 'preservim/nerdtree'
+autocmd VimEnter * NERDTree 
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+
+" Fuzzy File Finder
+" =================
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+nmap <silent> <C-p> :Files<CR>
+" Mapping selecting mappings
+nmap <Leader><Tab> <Plug>(fzf-maps-n)
+xmap <Leader><Tab> <Plug>(fzf-maps-x)
+omap <Leader><Tab> <Plug>(fzf-maps-o)
+" Insert mode completion
+imap <C-x><C-k> <Plug>(fzf-complete-word)
+imap <C-x><C-f> <Plug>(fzf-complete-path)
+imap <C-x><C-j> <Plug>(fzf-complete-file-ag)
+imap <C-x><C-l> <Plug>(fzf-complete-line)
+let g:fzf_preview_window = 'right:30%'
+
+" Helper
+" ======
+
+Plug 'liuchengxu/vim-which-key'
+nnoremap <silent> <Leader> :WhichKey '<Leader>'<CR>
+set timeoutlen=500
 
 call plug#end()
 
