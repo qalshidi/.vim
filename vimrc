@@ -326,12 +326,14 @@ nnoremap X D
 
 " Fine netrw does suck
 Plug 'preservim/nerdtree'
-autocmd VimEnter * NERDTree 
+autocmd VimEnter * NERDTreeVCS | wincmd l
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+let NERDTreeRespectWildIgnore = 1
+let NERDTreeChDirMode = 1
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
