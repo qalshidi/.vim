@@ -329,6 +329,9 @@ Plug 'preservim/nerdtree'
 autocmd VimEnter * NERDTree 
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
@@ -375,3 +378,4 @@ set t_8b=[48;2;%lu;%lu;%lum
 colorscheme NeoSolarized
 let g:airline_theme='solarized_flood'
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
+let g:airline#extensions#tabline#enabled = 1
