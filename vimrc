@@ -15,6 +15,21 @@ set noswapfile                              " swapfiles are annoying
 set dictionary+=/usr/share/dict/words       " add this dictionary
 set formatoptions-=cro                      " stop newline continuation of comments
 set nowrap                                  " wrapping can be annoying
+set hidden                                  " TextEdit might fail if hidden is not set.
+set nobackup                                " Some servers have issues with backup files, see coc.nvim#649.
+set nowritebackup
+set cmdheight=2                             " Give more space for displaying messages.
+set updatetime=300                          " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+                                            " delays and poor user experience.
+set shortmess+=c
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 " vim cache
 let viminfoparams = "%,<800,'10,/50,:100,h,f0,n"
@@ -136,26 +151,7 @@ Plug 'tpope/vim-apathy'
 " ------------
 "
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
-" TextEdit might fail if hidden is not set.
-set hidden
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-" Give more space for displaying messages.
-set cmdheight=2
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+let g:coc_config_home = "$HOME/.vim"
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
