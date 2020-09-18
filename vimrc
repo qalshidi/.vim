@@ -72,6 +72,7 @@ nnoremap <S-Tab> :bprevious<CR>
 " ---------------
 "
 let mapleader = ","
+let maplocalleader = ","
 " easily navigate windows
 if has('nvim')
 	tnoremap <C-h> <C-\><C-N><C-w>h
@@ -272,6 +273,9 @@ Plug 'skammer/vim-css-color'
 " LaTeX plugin
 Plug 'lervag/vimtex'
 let g:tex_flavor = 'latex'
+if has('nvim')
+    g:vimtex_compiler_progname = 'nvr'
+end
 Plug 'vim-scripts/indentpython.vim'
 
 " Ledger
@@ -354,8 +358,9 @@ let g:fzf_preview_window = 'right:30%'
 " Helper
 " ======
 
-Plug 'liuchengxu/vim-which-key'
-nnoremap <silent> <Leader> :WhichKey '<Leader>'<CR>
+" Plug 'liuchengxu/vim-which-key'
+" nnoremap <silent> <Leader> :WhichKey '<Leader>'<CR>
+
 set timeoutlen=500
 
 call plug#end()
