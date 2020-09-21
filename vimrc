@@ -2,15 +2,13 @@
 " ====================
 
 " use modern vim
-set nocompatible                            " required
 set modeline                                " I want some modelines
 set path=.,,**                              " include files recursively and not have defaults
 syntax enable
 filetype plugin indent on
 set splitbelow splitright                   " windows split in the intuitive direction
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab things
+set tabstop=8 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab things
 set number relativenumber                   " show relative numbers on the side
-set grepprg=rg\ --vimgrep                   " ripgrep is faster
 set noswapfile                              " swapfiles are annoying
 set dictionary+=/usr/share/dict/words       " add this dictionary
 set formatoptions-=cro                      " stop newline continuation of comments
@@ -20,8 +18,9 @@ set nobackup                                " Some servers have issues with back
 set nowritebackup
 set cmdheight=2                             " Give more space for displaying messages.
 set updatetime=300                          " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-                                            " delays and poor user experience.
+runtime macros/matchit.vim
 set shortmess+=c
+set tags=./tags;,tags;
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
@@ -30,6 +29,29 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+" grep
+if executable('rg')
+    set grepprg=rg\ --vimgrep
+elseif executable('ag')
+    set grepprg=ag\ --vimgrep
+endif
+
+function! Grep(...)
+	return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+endfunction
+
+command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
+
+cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() ==# 'grep')  ? 'Grep'  : 'grep'
+cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'lgrep') ? 'LGrep' : 'lgrep'
+
+augroup quickfix
+	autocmd!
+	autocmd QuickFixCmdPost cgetexpr cwindow
+	autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
 
 " vim cache
 let viminfoparams = "%,<800,'10,/50,:100,h,f0,n"
@@ -110,21 +132,11 @@ au BufNewFile,BufRead *.{xml,html,xhtml} set makeprg=xdg-open\ %
 
 " Plugins
 " =======
-"
-" set the runtime path to include Vundle and initialize
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim')) && has('nvim')
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-elseif empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+
 "install node
-if ! (!empty(glob('~/.local/bin/npm')) || !empty(glob('/usr/bin/npm')) || !empty(glob('/usr/local/bin/npm')))
+if !executable('npm')
     silent !curl -sL install-node.now.sh/lts | PREFIX=~/.local bash /dev/stdin --yes
-end
+endif
 
 call plug#begin('~/.vim/plugged')
 
@@ -307,9 +319,6 @@ nmap p <Plug>(YoinkPaste_p)
 nmap P <Plug>(YoinkPaste_P)
 nmap [y <Plug>(YoinkRotateBack)
 nmap ]y <Plug>(YoinkRotateForward)
-nmap y <Plug>(YoinkYankPreserveCursorPosition)
-xmap y <Plug>(YoinkYankPreserveCursorPosition)
-let g:yoinkIncludeDeleteOperations=1
 " s for substitute
 nmap s <Plug>(SubversiveSubstitute)
 nmap ss <Plug>(SubversiveSubstituteLine)
@@ -326,9 +335,13 @@ nnoremap X D
 
 " Fine netrw does suck
 Plug 'preservim/nerdtree'
-autocmd VimEnter * NERDTreeVCS | wincmd l
+augroup NerdTreeCustom
+    autocmd!
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if !exists("s:std_in") | NERDTreeVCS | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
