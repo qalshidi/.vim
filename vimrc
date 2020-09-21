@@ -1,7 +1,8 @@
 " My Vim Configuration
 " ====================
 
-" use modern vim
+" vim settings
+" {{{
 set modeline                                " I want some modelines
 set path=.,,**                              " include files recursively and not have defaults
 syntax enable
@@ -11,7 +12,6 @@ set tabstop=8 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab thi
 set number relativenumber                   " show relative numbers on the side
 set noswapfile                              " swapfiles are annoying
 set dictionary+=/usr/share/dict/words       " add this dictionary
-set formatoptions-=cro                      " stop newline continuation of comments
 set nowrap                                  " wrapping can be annoying
 set hidden                                  " TextEdit might fail if hidden is not set.
 set nobackup                                " Some servers have issues with backup files, see coc.nvim#649.
@@ -31,8 +31,14 @@ else
 endif
 set encoding=utf-8
 set fileencoding=utf-8
+set clipboard=unnamed,unnamedplus
+set timeoutlen=500
+set formatoptions-=cro                      " stop newline continuation of comments
+" }}}
 
 " grep
+" {{{
+
 if executable('rg')
     set grepprg=rg\ --vimgrep
 elseif executable('ag')
@@ -55,27 +61,30 @@ augroup quickfix
 	autocmd QuickFixCmdPost lgetexpr lwindow
 augroup END
 
+" }}}
+
 " vim cache
+" {{{
 let viminfoparams = "%,<800,'10,/50,:100,h,f0,n"
 if has('nvim')
 	execute 'set viminfo='.viminfoparams.'~/.cache/nviminfo'
 else
 	execute 'set viminfo='.viminfoparams.'~/.cache/viminfo'
 endif
+" }}}
 
 " Env variables
 " =============
 
+" {{{
 let $RTP = split(&runtimepath, ',')[0]
 let $RC = "$HOME/.vim/vimrc"
-augroup VimRCCustom
-    autocmd!
-    autocmd BufWritePost $HOME/.vim/vimrc source %          " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-augroup END
+" }}}
 
 " Mappings
 " ========
 
+" {{{
 nnoremap Y y$
 inoremap <nowait> jk <Esc>
 inoremap <nowait> kj <Esc>
@@ -97,9 +106,10 @@ nnoremap <S-Tab> :bprevious<CR>
 
 " Leader Mappings
 " ---------------
-"
+
+" {{{
 let mapleader = ","
-let maplocalleader = ","
+let maplocalleader = "<Space>"
 " easily navigate windows
 if has('nvim')
 	tnoremap <C-h> <C-\><C-N><C-w>h
@@ -115,25 +125,19 @@ nnoremap <C-l> <C-w>l
 nnoremap <Leader>gt :!ctags -R<CR>
 nnoremap <silent> <Leader>h :noh<CR>
 
+" }}}
+
 " Snippets
 " --------
-"
+
+" {{{
 nnoremap <Leader>spyfile :-1read ~/.vim/snippets/file.py<CR>GddggjA
 nnoremap <Leader>spydef :-1read ~/.vim/snippets/def.py<CR>wi
 nnoremap <Leader>spyclass :-1read ~/.vim/snippets/class.py<CR>wi
 nnoremap <Leader>sshebang O#!/usr/bin/env bash<CR># 
+" }}}
 
-" Filetype
-" ========
-"
-" HTML, XML (w3c standard)
-au BufNewFile,BufRead *.{xml,html,xhtml} set tabstop=2
-au BufNewFile,BufRead *.{xml,html,xhtml} set softtabstop=2
-au BufNewFile,BufRead *.{xml,html,xhtml} set shiftwidth=2
-au BufNewFile,BufRead *.{xml,html,xhtml} set expandtab
-au BufNewFile,BufRead *.{xml,html,xhtml} set autoindent
-au BufNewFile,BufRead *.{xml,html,xhtml} set makeprg=xdg-open\ %
-
+" }}}
 
 " Plugins
 " =======
@@ -148,22 +152,14 @@ call plug#begin('~/.vim/plugged')
 " tpope Basics
 " ------------
 "
-" sensible vim settings
-Plug 'tpope/vim-sensible'
-" surround command
-Plug 'tpope/vim-surround'
-" commentary command
-Plug 'tpope/vim-commentary'
-" git functionality
-Plug 'tpope/vim-fugitive'
-" better date functionality
-Plug 'tpope/vim-speeddating'
-" have . work on plugins
-Plug 'tpope/vim-repeat'
-" more mappings with ] and [
-Plug 'tpope/vim-unimpaired'
-" path for C/C++, python, sh, xdg, scheme and others
-Plug 'tpope/vim-apathy'
+Plug 'tpope/vim-sensible' " sensible vim settings
+Plug 'tpope/vim-surround' " surround command
+Plug 'tpope/vim-commentary' " commentary command
+Plug 'tpope/vim-fugitive' " git functionality
+Plug 'tpope/vim-speeddating' " better date functionality
+Plug 'tpope/vim-repeat' " have . work on plugins
+Plug 'tpope/vim-unimpaired' " more mappings with ] and [
+Plug 'tpope/vim-apathy' " path for C/C++, python, sh, xdg, scheme and others
 
 " Autocomplete
 " ------------
@@ -291,21 +287,17 @@ Plug 'skammer/vim-css-color'
 Plug 'lervag/vimtex'
 let g:tex_flavor = 'latex'
 if has('nvim')
-    g:vimtex_compiler_progname = 'nvr'
+    let g:vimtex_compiler_progname = 'nvr'
 end
+
 Plug 'vim-scripts/indentpython.vim'
-
-" Ledger
-Plug 'ledger/vim-ledger'
-
-" Haskell
-Plug 'neovimhaskell/haskell-vim'
-" Fish
-Plug 'dag/vim-fish'
+Plug 'ledger/vim-ledger' " Ledger
+Plug 'neovimhaskell/haskell-vim' " Haskell
+Plug 'dag/vim-fish' " Fish
 
 " Powerline
 " ---------
-"
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -315,7 +307,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'svermeulen/vim-yoink'
 Plug 'svermeulen/vim-subversive'
 Plug 'svermeulen/vim-cutlass'
-set clipboard=unnamed,unnamedplus
 let g:yoinkSyncSystemClipboardOnFocus=0
 let g:yoinkIncludeDeleteOperations=1
 nmap <C-n> <Plug>(YoinkPostPasteSwapBack)
@@ -343,7 +334,7 @@ Plug 'preservim/nerdtree'
 augroup NerdTreeCustom
     autocmd!
     autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if !exists("s:std_in") | NERDTreeVCS | wincmd l | endif
+    autocmd VimEnter * if !exists("s:std_in") | NERDTreeVCS | wincmd w | endif
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 map <C-n> :NERDTreeToggle<CR>
@@ -379,8 +370,6 @@ let g:fzf_preview_window = 'right:30%'
 " Plug 'liuchengxu/vim-which-key'
 " nnoremap <silent> <Leader> :WhichKey '<Leader>'<CR>
 
-set timeoutlen=500
-
 call plug#end()
 
 " Theme
@@ -400,3 +389,5 @@ colorscheme NeoSolarized
 let g:airline_theme='solarized_flood'
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
 let g:airline#extensions#tabline#enabled = 1
+
+" vim: foldmethod=marker
