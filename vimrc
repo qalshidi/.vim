@@ -29,6 +29,8 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+set encoding=utf-8
+set fileencoding=utf-8
 
 " grep
 if executable('rg')
@@ -68,7 +70,7 @@ let $RTP = split(&runtimepath, ',')[0]
 let $RC = "$HOME/.vim/vimrc"
 augroup VimRCCustom
     autocmd!
-    autocmd BufWritePost $RC source %          " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+    autocmd BufWritePost $HOME/.vim/vimrc source %          " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 augroup END
 
 " Mappings
@@ -341,7 +343,7 @@ Plug 'preservim/nerdtree'
 augroup NerdTreeCustom
     autocmd!
     autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if !exists("s:std_in") | NERDTreeVCS | endif
+    autocmd VimEnter * if !exists("s:std_in") | NERDTreeVCS | wincmd l | endif
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
 map <C-n> :NERDTreeToggle<CR>
