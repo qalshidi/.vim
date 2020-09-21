@@ -66,7 +66,10 @@ endif
 
 let $RTP = split(&runtimepath, ',')[0]
 let $RC = "$HOME/.vim/vimrc"
-au! BufWritePost $RC source %          " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+augroup VimRCCustom
+    autocmd!
+    autocmd BufWritePost $RC source %          " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+augroup END
 
 " Mappings
 " ========
