@@ -1,8 +1,7 @@
 " My Vim Configuration
 " ====================
 
-" vim settings
-" {{{
+" vim settings {{{
 set modeline                                " I want some modelines
 set path=.,,**                              " include files recursively and not have defaults
 syntax enable
@@ -36,35 +35,7 @@ set timeoutlen=500
 set formatoptions-=cro                      " stop newline continuation of comments
 " }}}
 
-" grep
-" {{{
-
-if executable('rg')
-    set grepprg=rg\ --vimgrep
-elseif executable('ag')
-    set grepprg=ag\ --vimgrep
-endif
-
-function! Grep(...)
-	return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
-endfunction
-
-command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
-command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
-
-cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() ==# 'grep')  ? 'Grep'  : 'grep'
-cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'lgrep') ? 'LGrep' : 'lgrep'
-
-augroup quickfix
-	autocmd!
-	autocmd QuickFixCmdPost cgetexpr cwindow
-	autocmd QuickFixCmdPost lgetexpr lwindow
-augroup END
-
-" }}}
-
-" vim cache
-" {{{
+" vim cache {{{
 let viminfoparams = "%,<800,'10,/50,:100,h,f0,n"
 if has('nvim')
 	execute 'set viminfo='.viminfoparams.'~/.cache/nviminfo'
@@ -73,18 +44,13 @@ else
 endif
 " }}}
 
-" Env variables
-" =============
-
-" {{{
+" Env variables {{{
 let $RTP = split(&runtimepath, ',')[0]
 let $RC = "$HOME/.vim/vimrc"
 " }}}
 
-" Mappings
-" ========
+" Mappings {{{
 
-" {{{
 nnoremap Y y$
 inoremap <nowait> jk <Esc>
 inoremap <nowait> kj <Esc>
@@ -99,15 +65,21 @@ noremap <silent> <C-Left> :vertical resize -3<CR>
 noremap <silent> <C-Right> :vertical resize +3<CR>
 " write with sudo
 cmap w!! w !sudo -A tee > /dev/null %
-" TAB in general mode will move to text buffer
+" TAB in normal mode will move to text buffer
 nnoremap <Tab> :bnext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-Tab> :bprevious<CR>
+" jumps
+nnoremap ]j <C-i>
+nnoremap [j <C-o>
+" keyword jump
+nnoremap ]i ]<C-i>
+nnoremap [i [<C-i>
+" definition jump
+nnoremap ]d ]<C-d>
+nnoremap [d [<C-d>
 
-" Leader Mappings
-" ---------------
-
-" {{{
+" Leader Mappings {{{
 let mapleader = ","
 let maplocalleader = "<Space>"
 " easily navigate windows
@@ -127,10 +99,7 @@ nnoremap <silent> <Leader>h :noh<CR>
 
 " }}}
 
-" Snippets
-" --------
-
-" {{{
+" Snippets {{{
 nnoremap <Leader>spyfile :-1read ~/.vim/snippets/file.py<CR>GddggjA
 nnoremap <Leader>spydef :-1read ~/.vim/snippets/def.py<CR>wi
 nnoremap <Leader>spyclass :-1read ~/.vim/snippets/class.py<CR>wi
@@ -139,8 +108,7 @@ nnoremap <Leader>sshebang O#!/usr/bin/env bash<CR>#
 
 " }}}
 
-" Plugins
-" =======
+" Plugins {{{
 
 "install node
 if !executable('npm')
@@ -149,9 +117,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" tpope Basics
-" ------------
-"
+" tpope Basics {{{
 Plug 'tpope/vim-sensible' " sensible vim settings
 Plug 'tpope/vim-surround' " surround command
 Plug 'tpope/vim-commentary' " commentary command
@@ -160,10 +126,9 @@ Plug 'tpope/vim-speeddating' " better date functionality
 Plug 'tpope/vim-repeat' " have . work on plugins
 Plug 'tpope/vim-unimpaired' " more mappings with ] and [
 Plug 'tpope/vim-apathy' " path for C/C++, python, sh, xdg, scheme and others
+" }}}
 
-" Autocomplete
-" ------------
-"
+" Autocomplete {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
 let g:coc_config_home = "$HOME/.vim"
 " Use tab for trigger completion with characters ahead and navigate.
@@ -270,18 +235,14 @@ nnoremap <silent><nowait> <Space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <Space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <Space>p  :<C-u>CocListResume<CR>
+" }}}
 
-" Cosmetics
-" ---------
+" Cosmetics {{{
+Plug 'iCyMind/NeoSolarized' " color scheme
+Plug 'skammer/vim-css-color' " css colorscheme
+" }}}
 
-" color scheme
-Plug 'iCyMind/NeoSolarized'
-
-" css colorscheme
-Plug 'skammer/vim-css-color'
-
-" Language Specific
-" -----------------
+" Language Specific {{{
 
 " LaTeX plugin
 Plug 'lervag/vimtex'
@@ -295,15 +256,14 @@ Plug 'ledger/vim-ledger' " Ledger
 Plug 'neovimhaskell/haskell-vim' " Haskell
 Plug 'dag/vim-fish' " Fish
 
-" Powerline
-" ---------
+"}}}
 
+" Powerline {{{
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" }}}
 
-" Clipboard
-" ---------
-"
+" Clipboard {{{
 Plug 'svermeulen/vim-yoink'
 Plug 'svermeulen/vim-subversive'
 Plug 'svermeulen/vim-cutlass'
@@ -325,17 +285,17 @@ nnoremap x d
 xnoremap x d
 nnoremap xx dd
 nnoremap X D
+" }}}
 
-" File Explorer
-" =============
-
+" File Explorer {{{
 " Fine netrw does suck
 Plug 'preservim/nerdtree'
 augroup NerdTreeCustom
     autocmd!
     autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if !exists("s:std_in") | NERDTreeVCS | wincmd w | endif
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeVCS | endif
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 augroup END
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeAutoDeleteBuffer = 1
@@ -343,13 +303,13 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeRespectWildIgnore = 1
 let NERDTreeChDirMode = 1
+let g:plug_window = 'noautocmd vertical topleft new'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
+" }}}
 
-" Fuzzy File Finder
-" =================
-
+" Fuzzy File Finder {{{
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 nmap <silent> <C-p> :Files<CR>
@@ -363,18 +323,12 @@ imap <C-x><C-f> <Plug>(fzf-complete-path)
 imap <C-x><C-j> <Plug>(fzf-complete-file-ag)
 imap <C-x><C-l> <Plug>(fzf-complete-line)
 let g:fzf_preview_window = 'right:30%'
-
-" Helper
-" ======
-
-" Plug 'liuchengxu/vim-which-key'
-" nnoremap <silent> <Leader> :WhichKey '<Leader>'<CR>
+" }}}
 
 call plug#end()
+" }}}
 
-" Theme
-" =====
-"
+" Theme {{{
 " dark background is always best
 set background=dark
 " solarized colorscheme is beautiful
@@ -386,8 +340,10 @@ let g:neosolarized_italic = 1
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 colorscheme NeoSolarized
+" powerline
 let g:airline_theme='solarized_flood'
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
 let g:airline#extensions#tabline#enabled = 1
+" }}}
 
 " vim: foldmethod=marker
