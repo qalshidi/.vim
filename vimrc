@@ -70,14 +70,14 @@ nnoremap <Tab> :bnext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-Tab> :bprevious<CR>
 " jumps
-nnoremap ]j <C-i>
-nnoremap [j <C-o>
+nnoremap ]j <C-I>
+nnoremap [j <C-O>
 " keyword jump
-nnoremap ]i ]<C-i>
-nnoremap [i [<C-i>
+nnoremap ]i ]<C-I>
+nnoremap [i [<C-I>
 " definition jump
-nnoremap ]d ]<C-d>
-nnoremap [d [<C-d>
+nnoremap ]d ]<C-D>
+nnoremap [d [<C-D>
 
 " Leader Mappings {{{
 let mapleader = ","
