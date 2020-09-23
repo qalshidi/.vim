@@ -54,7 +54,6 @@ if !executable('npm')
 endif
 
 call plug#begin('~/.vim/plugged')
-
 " tpope Basics {{{
 Plug 'tpope/vim-sensible' " sensible vim settings
 Plug 'tpope/vim-surround' " surround command
@@ -65,7 +64,6 @@ Plug 'tpope/vim-repeat' " have . work on plugins
 Plug 'tpope/vim-unimpaired' " more mappings with ] and [
 Plug 'tpope/vim-apathy' " path for C/C++, python, sh, xdg, scheme and others
 " }}}
-
 " Autocomplete {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
 let g:coc_config_home = "$HOME/.vim"
@@ -174,33 +172,25 @@ nnoremap <silent><nowait> <Space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <Space>p  :<C-u>CocListResume<CR>
 " }}}
-
 " Cosmetics {{{
 Plug 'iCyMind/NeoSolarized' " color scheme
 Plug 'skammer/vim-css-color' " css colorscheme
 " }}}
-
 " Language Specific {{{
 
 " LaTeX plugin
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for': 'latex' }
 let g:tex_flavor = 'latex'
 if has('nvim')
     let g:vimtex_compiler_progname = 'nvr'
 end
 
-Plug 'vim-scripts/indentpython.vim'
-Plug 'ledger/vim-ledger' " Ledger
-Plug 'neovimhaskell/haskell-vim' " Haskell
-Plug 'dag/vim-fish' " Fish
+Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
+Plug 'ledger/vim-ledger', { 'for': 'ledger' } " Ledger
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' } " Haskell
+Plug 'dag/vim-fish', { 'for': 'fish' } " Fish
 
 "}}}
-
-" Powerline {{{
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" }}}
-
 " Clipboard {{{
 Plug 'svermeulen/vim-yoink'
 Plug 'svermeulen/vim-subversive'
@@ -224,10 +214,12 @@ xnoremap x d
 nnoremap xx dd
 nnoremap X D
 " }}}
-
 " File Explorer {{{
 " Fine netrw does suck
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeVCS', 'NERDTreeToggle', 'NERDTree'] }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': ['NERDTreeVCS', 'NERDTreeToggle', 'NERDTree'] }
+Plug 'ryanoasis/vim-devicons'
 augroup NerdTreeCustom
     autocmd!
     autocmd StdinReadPre * let s:std_in=1
@@ -235,19 +227,16 @@ augroup NerdTreeCustom
     autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 augroup END
-map <C-n> :NERDTreeToggle<CR>
+map <C-N> :NERDTreeToggle<CR>
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeRespectWildIgnore = 1
 let NERDTreeChDirMode = 1
 let g:plug_window = 'noautocmd vertical topleft new'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
 " }}}
-
 " Fuzzy File Finder {{{
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 nmap <silent> <C-p> :Files<CR>
@@ -261,11 +250,16 @@ imap <C-x><C-f> <Plug>(fzf-complete-path)
 imap <C-x><C-j> <Plug>(fzf-complete-file-ag)
 imap <C-x><C-l> <Plug>(fzf-complete-line)
 let g:fzf_preview_window = 'right:30%'
-" }}}
 
+" }}}
+" Powerline {{{
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" }}}
 call plug#end()
 " }}}
 " Theme {{{
+
 " dark background is always best
 set background=dark
 " solarized colorscheme is beautiful
@@ -281,6 +275,7 @@ colorscheme NeoSolarized
 let g:airline_theme='solarized_flood'
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
 let g:airline#extensions#tabline#enabled = 1
+
 " }}}
 
 " vim: foldmethod=marker
