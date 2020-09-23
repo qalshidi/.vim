@@ -14,6 +14,7 @@ if has('nvim')
 	tnoremap <C-j> <C-\><C-N><C-w>j
 	tnoremap <C-k> <C-\><C-N><C-w>k
 	tnoremap <C-l> <C-\><C-N><C-w>l
+        tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 endif
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
