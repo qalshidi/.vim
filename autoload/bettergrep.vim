@@ -27,6 +27,8 @@ if exists("*jobstart")
   \ 'on_stderr': function('s:OnError'),
   \ }
 
+" TODO: Refactor the functions
+
   function! bettergrep#Grep(...)
     let s:callbacks.on_stdout = function('s:OnOut_c')
     let s:grepCmd = split(&grepprg) + split(expandcmd(join(a:000, ' ')))

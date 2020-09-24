@@ -1,5 +1,6 @@
 if has('autocmd')
   augroup MyAutocmds
+    autocmd!
 
     if exists('##TextYankPost') && has('nvim-0.5')
       au TextYankPost * silent! lua vim.highlight.on_yank {timeout=200, on_visual=false}
