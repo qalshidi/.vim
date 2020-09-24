@@ -64,6 +64,12 @@ Plug 'tpope/vim-repeat' " have . work on plugins
 Plug 'tpope/vim-unimpaired' " more mappings with ] and [
 Plug 'tpope/vim-apathy' " path for C/C++, python, sh, xdg, scheme and others
 " }}}
+" Highlight copying/yanks
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = 500
+if !exists('##TextYankPost')
+  map y <Plug>(highlightedyank)
+endif
 " Autocomplete {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
 let g:coc_config_home = "$HOME/.vim"
