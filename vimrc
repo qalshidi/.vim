@@ -33,6 +33,9 @@ set fileencoding=utf-8
 set clipboard=unnamed,unnamedplus
 set timeoutlen=500
 set formatoptions-=cro                      " stop newline continuation of comments
+let mapleader = ","
+let maplocalleader = "<Space>"
+
 " }}}
 " vim cache {{{
 let viminfoparams = "<800,'10,/50,:100,h,f0,n"
@@ -50,19 +53,19 @@ let $RC = "$HOME/.vim/vimrc"
 
 "install node
 if !executable('npm')
-    silent !curl -sL install-node.now.sh/lts \| PREFIX=~/.local bash /dev/stdin --yes
+  silent !curl -sL install-node.now.sh/lts \| PREFIX=~/.local bash /dev/stdin --yes
 endif
 
 call plug#begin('~/.vim/plugged')
 " tpope Basics {{{
-Plug 'tpope/vim-sensible' " sensible vim settings
-Plug 'tpope/vim-surround' " surround command
-Plug 'tpope/vim-commentary' " commentary command
-Plug 'tpope/vim-fugitive' " git functionality
-Plug 'tpope/vim-speeddating' " better date functionality
-Plug 'tpope/vim-repeat' " have . work on plugins
-Plug 'tpope/vim-unimpaired' " more mappings with ] and [
-Plug 'tpope/vim-apathy' " path for C/C++, python, sh, xdg, scheme and others
+Plug 'tpope/vim-sensible'         " sensible vim settings
+Plug 'tpope/vim-surround'         " surround command
+Plug 'tpope/vim-commentary'       " commentary command
+Plug 'tpope/vim-fugitive'         " git functionality
+Plug 'tpope/vim-speeddating'      " better date functionality
+Plug 'tpope/vim-repeat'           " have . work on plugins
+Plug 'tpope/vim-unimpaired'       " more mappings with ] and [
+Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and others
 " }}}
 " Firefox neovim {{{
 if has('nvim')
@@ -72,16 +75,16 @@ if exists('g:started_by_firenvim')
   set laststatus=0
 let g:dont_write = v:false
 function! My_Write(timer) abort
-        let g:dont_write = v:false
-        write
+      let g:dont_write = v:false
+      write
 endfunction
 
 function! Delay_My_Write() abort
-        if g:dont_write
-                return
-        end
-        let g:dont_write = v:true
-        call timer_start(1000, 'My_Write')
+      if g:dont_write
+              return
+      end
+      let g:dont_write = v:true
+      call timer_start(1000, 'My_Write')
 endfunction
 
 augroup firenvim
@@ -104,22 +107,20 @@ if !has("nvim-0.5")
   endif
 endif
 " }}}
-" Autocomplete {{{
+" LanguageServer {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
 let g:coc_config_home = "$HOME/.vim"
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
 inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<Tab>" :
+  \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <C-Space> coc#refresh()
 " Use <CR> to confirm completion, `<C-g>u` means break undo chain at current
@@ -144,7 +145,7 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
-  else
+    else
     call CocAction('doHover')
   endif
 endfunction
@@ -222,7 +223,7 @@ Plug 'skammer/vim-css-color' " css colorscheme
 Plug 'lervag/vimtex', { 'for': 'latex' }
 let g:tex_flavor = 'latex'
 if has('nvim')
-    let g:vimtex_compiler_progname = 'nvr'
+  let g:vimtex_compiler_progname = 'nvr'
 end
 
 Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
@@ -235,9 +236,11 @@ Plug 'dag/vim-fish', { 'for': 'fish' } " Fish
 Plug 'svermeulen/vim-yoink'
 Plug 'svermeulen/vim-subversive'
 Plug 'svermeulen/vim-cutlass'
-let g:yoinkSyncSystemClipboardOnFocus=0
-let g:yoinkIncludeDeleteOperations=1
-let g:ctrlp_map=''
+let g:yoinkSyncNumberedRegisters = 1
+let g:yoinkSwapClampAtEnds = 1
+let g:yoinkSyncSystemClipboardOnFocus = 0
+let g:yoinkIncludeDeleteOperations = 1
+let g:ctrlp_map = ''
 nmap <expr> p yoink#canSwap() ? '<plug>(YoinkPostPasteSwapBack)' : '<plug>(YoinkPaste_p)'
 nmap <expr> P yoink#canSwap() ? '<plug>(YoinkPostPasteSwapForward)' : '<plug>(YoinkPaste_P)'
 nmap [y <Plug>(YoinkRotateBack)
@@ -261,11 +264,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeVCS', 'NERDTreeToggle', 'N
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': ['NERDTreeVCS', 'NERDTreeToggle', 'NERDTree'] }
 Plug 'ryanoasis/vim-devicons'
   augroup NerdTreeCustom
-      autocmd!
-      autocmd StdinReadPre * let s:std_in=1
-      autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeVCS | endif
-      autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-      autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+    autocmd!
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeVCS | endif
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
   augroup END
   map <C-N> :NERDTreeToggle<CR>
   let NERDTreeAutoDeleteBuffer = 1

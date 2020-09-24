@@ -1,20 +1,26 @@
 " Mappings
+if exists('g:LoadedCustomMappings')
+  finish
+endif
+let g:LoadedCustomMappings = 1
 
+" More torelable defaults
 nnoremap Y y$
+" Escape key is inconvenient
 inoremap <nowait> jk <Esc>
 inoremap <nowait> kj <Esc>
 if has('nvim')
-	tnoremap <nowait> jk <C-\><C-N>
-	tnoremap <nowait> kj <C-\><C-N>
+  tnoremap <nowait> jk <C-\><C-N>
+  tnoremap <nowait> kj <C-\><C-N>
 endif
 
 " easily navigate windows
 if has('nvim')
-	tnoremap <C-h> <C-\><C-N><C-w>h
-	tnoremap <C-j> <C-\><C-N><C-w>j
-	tnoremap <C-k> <C-\><C-N><C-w>k
-	tnoremap <C-l> <C-\><C-N><C-w>l
-        tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+  tnoremap <C-h> <C-\><C-N><C-w>h
+  tnoremap <C-j> <C-\><C-N><C-w>j
+  tnoremap <C-k> <C-\><C-N><C-w>k
+  tnoremap <C-l> <C-\><C-N><C-w>l
+  tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 endif
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -44,10 +50,6 @@ nnoremap [i [<C-I>
 " definition jump
 nnoremap ]d ]<C-D>
 nnoremap [d [<C-D>
-
-" Leader Mappings
-let mapleader = ","
-let maplocalleader = "<Space>"
 
 " misc
 nnoremap <Leader>gt :!ctags -R .<CR>
