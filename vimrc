@@ -50,7 +50,7 @@ let $RC = "$HOME/.vim/vimrc"
 
 "install node
 if !executable('npm')
-    silent !curl -sL install-node.now.sh/lts | PREFIX=~/.local bash /dev/stdin --yes
+    silent !curl -sL install-node.now.sh/lts \| PREFIX=~/.local bash /dev/stdin --yes
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -111,7 +111,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
-nmap <Leader>rn <Plug>(coc-rename)
+nnoremap <Leader>rn <Plug>(coc-rename)
 " Formatting selected code.
 xmap <Leader>f  <Plug>(coc-format-selected)
 nmap <Leader>f  <Plug>(coc-format-selected)
