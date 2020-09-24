@@ -31,13 +31,13 @@ if exists("*jobstart")
 
   function! bettergrep#Grep(...)
     let s:callbacks.on_stdout = function('s:OnOut_c')
-    let s:grepCmd = split(&grepprg) + split(expandcmd(join(a:000, ' ')))
+    let s:grepCmd = split(&grepprg) + [expandcmd(join(a:000, ' '))]
     let grepjob = jobstart(s:grepCmd, s:callbacks)
   endfunction
 
   function! bettergrep#LGrep(...)
     let s:callbacks.on_stdout = function('s:OnOut_l')
-    let s:grepCmd = split(&grepprg) + split(expandcmd(join(a:000, ' ')))
+    let s:grepCmd = split(&grepprg) + [expandcmd(join(a:000, ' '))]
     let grepjob = jobstart(s:grepCmd, s:callbacks)
   endfunction
 
