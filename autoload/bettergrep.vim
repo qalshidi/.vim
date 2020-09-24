@@ -10,35 +10,35 @@ endif
 
 if exists("*jobstart")
 
-  function! s:OnOut_c(job_id, data, event) dict
+  function! s:on_out_c(job_id, data, event) dict
     cgetexpr join(a:data, "\n")
   endfunction
 
-  function! s:OnOut_l(job_id, data, event) dict
+  function! s:on_out_l(job_id, data, event) dict
     lgetexpr join(a:data, "\n")
   endfunction
 
-  function! s:OnError(job_id, data, event) dict
+  function! s:on_error(job_id, data, event) dict
     echo join(a:data, "\n")
   endfunction
 
   let s:callbacks = {
   \ 'stdout_buffered': 1,
-  \ 'on_stderr': function('s:OnError'),
+  \ 'on_stderr': function('s:on_error'),
   \ }
 
 " TODO: Refactor the functions
 
   function! bettergrep#Grep(...)
-    let s:callbacks.on_stdout = function('s:OnOut_c')
-    let s:grepCmd = split(&grepprg) + [expandcmd(join(a:000, ' '))]
-    let grepjob = jobstart(s:grepCmd, s:callbacks)
+    let s:callbacks.on_stdout = function('s:on_out_c')
+    let s:grep_cmd = split(&grepprg) + [expandcmd(join(a:000, ' '))]
+    let grep_job = jobstart(s:grep_cmd, s:callbacks)
   endfunction
 
   function! bettergrep#LGrep(...)
-    let s:callbacks.on_stdout = function('s:OnOut_l')
-    let s:grepCmd = split(&grepprg) + [expandcmd(join(a:000, ' '))]
-    let grepjob = jobstart(s:grepCmd, s:callbacks)
+    let s:callbacks.on_stdout = function('s:on_out_l')
+    let s:grep_cmd = split(&grepprg) + [expandcmd(join(a:000, ' '))]
+    let grep_job = jobstart(s:grep_cmd, s:callbacks)
   endfunction
 
 else
