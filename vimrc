@@ -35,7 +35,7 @@ set timeoutlen=500
 set formatoptions-=cro                      " stop newline continuation of comments
 " }}}
 " vim cache {{{
-let viminfoparams = "%,<800,'10,/50,:100,h,f0,n"
+let viminfoparams = "<800,'10,/50,:100,h,f0,n"
 if has('nvim')
 	execute 'set viminfo='.viminfoparams.'~/.cache/nviminfo'
 else
