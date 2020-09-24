@@ -68,12 +68,40 @@ Plug 'tpope/vim-apathy' " path for C/C++, python, sh, xdg, scheme and others
 if has('nvim')
   Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 endif
+if exists('g:started_by_firenvim')
+  set laststatus=0
+let g:dont_write = v:false
+function! My_Write(timer) abort
+        let g:dont_write = v:false
+        write
+endfunction
+
+function! Delay_My_Write() abort
+        if g:dont_write
+                return
+        end
+        let g:dont_write = v:true
+        call timer_start(1000, 'My_Write')
+endfunction
+
+augroup firenvim
+  autocmd!
+  au TextChanged * ++nested call Delay_My_Write()
+  au TextChangedI * ++nested call Delay_My_Write()
+  au BufEnter github.com_*.txt set filetype=markdown
+  au BufEnter gitlab.com_*.txt set filetype=markdown
+  au BufEnter gitlab.umich.edu_*.txt set filetype=markdown
+augroup END
+endif
+
 " }}}
 " Highlight copying/yanks {{{
-Plug 'machakann/vim-highlightedyank'
-let g:highlightedyank_highlight_duration = 500
-if !exists('##TextYankPost')
-  map y <Plug>(highlightedyank)
+if !has("nvim-0.5")
+  Plug 'machakann/vim-highlightedyank'
+  let g:highlightedyank_highlight_duration = 200
+  if !exists('##TextYankPost')
+    map y <Plug>(highlightedyank)
+  endif
 endif
 " }}}
 " Autocomplete {{{
@@ -227,24 +255,26 @@ nnoremap X D
 " }}}
 " File Explorer {{{
 " Fine netrw does suck
+if !exists('g:started_by_firenvim')
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeVCS', 'NERDTreeToggle', 'NERDTree'] }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': ['NERDTreeVCS', 'NERDTreeToggle', 'NERDTree'] }
 Plug 'ryanoasis/vim-devicons'
-augroup NerdTreeCustom
-    autocmd!
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeVCS | endif
-    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
-augroup END
-map <C-N> :NERDTreeToggle<CR>
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeRespectWildIgnore = 1
-let NERDTreeChDirMode = 1
-let g:plug_window = 'noautocmd vertical topleft new'
+  augroup NerdTreeCustom
+      autocmd!
+      autocmd StdinReadPre * let s:std_in=1
+      autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeVCS | endif
+      autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+      autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+  augroup END
+  map <C-N> :NERDTreeToggle<CR>
+  let NERDTreeAutoDeleteBuffer = 1
+  let NERDTreeMinimalUI = 1
+  let NERDTreeDirArrows = 1
+  let NERDTreeRespectWildIgnore = 1
+  let NERDTreeChDirMode = 1
+  let g:plug_window = 'noautocmd vertical topleft new'
+endif
 " }}}
 " Fuzzy File Finder {{{
 
