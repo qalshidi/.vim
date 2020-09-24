@@ -64,12 +64,18 @@ Plug 'tpope/vim-repeat' " have . work on plugins
 Plug 'tpope/vim-unimpaired' " more mappings with ] and [
 Plug 'tpope/vim-apathy' " path for C/C++, python, sh, xdg, scheme and others
 " }}}
-" Highlight copying/yanks
+" Firefox neovim {{{
+if has('nvim')
+  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+endif
+" }}}
+" Highlight copying/yanks {{{
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = 500
 if !exists('##TextYankPost')
   map y <Plug>(highlightedyank)
 endif
+" }}}
 " Autocomplete {{{
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
 let g:coc_config_home = "$HOME/.vim"
@@ -117,7 +123,7 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
-nnoremap <Leader>rn <Plug>(coc-rename)
+nmap <F2> <Plug>(coc-rename)
 " Formatting selected code.
 xmap <Leader>f  <Plug>(coc-format-selected)
 nmap <Leader>f  <Plug>(coc-format-selected)
