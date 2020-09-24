@@ -33,6 +33,14 @@ set fileencoding=utf-8
 set clipboard=unnamed,unnamedplus
 set timeoutlen=500
 set formatoptions-=cro                      " stop newline continuation of comments
+
+if has('folding')
+  if has('windows')
+    " set fillchars=vert:┃
+    set fillchars+=fold:·
+  endif
+endif
+
 let mapleader = ","
 let maplocalleader = "<Space>"
 
