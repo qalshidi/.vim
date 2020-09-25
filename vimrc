@@ -20,6 +20,10 @@ set updatetime=300                          " Having longer updatetime (default 
 runtime macros/matchit.vim
 set shortmess+=c
 set tags=./tags;,tags;
+set timeoutlen=500
+set formatoptions-=cro                      " stop newline continuation of comments
+set clipboard=unnamed,unnamedplus
+
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
@@ -28,11 +32,11 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+" UTF stuff
+set noemoji                                 " Render emoji better
 set encoding=utf-8
 set fileencoding=utf-8
-set clipboard=unnamed,unnamedplus
-set timeoutlen=500
-set formatoptions-=cro                      " stop newline continuation of comments
 
 if has('folding')
   if has('windows')
