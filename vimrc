@@ -23,6 +23,8 @@ set tags=./tags;,tags;
 set timeoutlen=500
 set formatoptions-=cro                      " stop newline continuation of comments
 set clipboard=unnamed,unnamedplus
+set scrolloff=2
+set colorcolumn=+1
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -65,7 +67,7 @@ let $RC = "$HOME/.vim/vimrc"
 
 "install node
 if !executable('npm')
-  silent !curl -sL install-node.now.sh/lts \| PREFIX=~/.local bash /dev/stdin --yes
+  silent !curl -sL install-node.now.sh/lts | PREFIX=~/.local bash /dev/stdin --yes
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -78,6 +80,40 @@ Plug 'tpope/vim-speeddating'      " better date functionality
 Plug 'tpope/vim-repeat'           " have . work on plugins
 Plug 'tpope/vim-unimpaired'       " more mappings with ] and [
 Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and others
+" }}}
+" Writing {{{
+
+Plug 'junegunn/goyo.vim'
+
+function! s:goyo_enter()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  set signcolumn=no
+endfunction
+
+function! s:goyo_leave()
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  set showmode
+  set showcmd
+  set scrolloff=2
+  if has("patch-8.1.1564")
+    set signcolumn=number
+  else
+    set signcolumn=yes
+  endif
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
 " }}}
 " Firefox neovim {{{
 if has('nvim')
@@ -334,4 +370,4 @@ let g:airline#extensions#tabline#enabled = 1
 
 " }}}
 
-" vim: foldmethod=marker
+" vim: foldmethod=marker sts=2 et sw=2
