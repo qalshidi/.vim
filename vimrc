@@ -54,9 +54,9 @@ let maplocalleader = "<Space>"
 " vim cache {{{
 let viminfoparams = "<800,'10,/50,:100,h,f0,n"
 if has('nvim')
-	execute 'set viminfo='.viminfoparams.'~/.cache/nviminfo'
+  execute 'set viminfo='.viminfoparams.'~/.cache/nviminfo'
 else
-	execute 'set viminfo='.viminfoparams.'~/.cache/viminfo'
+  execute 'set viminfo='.viminfoparams.'~/.cache/viminfo'
 endif
 " }}}
 " Env variables {{{
@@ -356,7 +356,7 @@ call plug#end()
 set background=dark
 " solarized colorscheme is beautiful
 if (v:version > 704) || has('nvim')
-	set termguicolors " Enable true color support.
+  set termguicolors " Enable true color support.
 endif
 let g:neosolarized_italic = 1
 "tmux stuff

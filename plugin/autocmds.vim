@@ -1,3 +1,9 @@
+" My autocmds
+if exists('g:loaded_my_autocmds')
+  finish
+endif
+let g:loaded_my_autocmds = 1
+
 if has('autocmd')
   augroup MyAutocmds
     autocmd!
@@ -8,15 +14,10 @@ if has('autocmd')
     endif
 
     " Highlight background windows
-    if exists('+winhighlight')
-      autocmd BufEnter,FocusGained,VimEnter,WinEnter * set winhighlight=
-      autocmd FocusLost,WinLeave * set winhighlight=CursorLineNr:LineNr,EndOfBuffer:ColorColumn,IncSearch:ColorColumn,Normal:ColorColumn,NormalNC:ColorColumn,SignColumn:ColorColumn
-      if exists('+colorcolumn')
-        autocmd BufEnter,FocusGained,VimEnter,WinEnter * let &l:colorcolumn='+1'
-      endif
-    elseif exists('+colorcolumn')
-      autocmd BufEnter,FocusGained,VimEnter,WinEnter * let &l:colorcolumn='+' . join(range(0, 254), ',+')
-      autocmd FocusLost,WinLeave * if let &l:colorcolumn=join(range(1, 255), ',')
+    if exists('+colorcolumn')
+      autocmd BufEnter,FocusGained,VimEnter,WinEnter * if autocmds#should_colorcolumn() | let &l:colorcolumn='+1' | endif
+      autocmd BufEnter,FocusGained,VimEnter,WinEnter * if autocmds#should_colorcolumn() | let &l:colorcolumn='+1' | endif
+      autocmd FocusLost,WinLeave * if autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
     endif
 
   " Quick fix window automatically opens up if populated

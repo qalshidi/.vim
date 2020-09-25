@@ -33,6 +33,12 @@ noremap <silent> <C-Down> :resize -3<CR>
 noremap <silent> <C-Left> :vertical resize -3<CR>
 noremap <silent> <C-Right> :vertical resize +3<CR>
 
+" resize with alt
+noremap <silent> <A-k> :resize +3<CR>
+noremap <silent> <A-j> :resize -3<CR>
+noremap <silent> <A-h> :vertical resize -3<CR>
+noremap <silent> <A-l> :vertical resize +3<CR>
+
 " write with sudo
 cmap w!! w !sudo -A tee > /dev/null %
 
