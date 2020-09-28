@@ -9,7 +9,7 @@ filetype plugin indent on
 set splitbelow splitright                   " windows split in the intuitive direction
 set tabstop=8 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab things
 set number relativenumber                   " show relative numbers on the side
-set smartcase                               " Use smartcase by default
+set ignorecase smartcase                    " Use smartcase by default
 set noswapfile                              " swapfiles are annoying
 set dictionary+=/usr/share/dict/words       " add this dictionary
 set nowrap                                  " wrapping can be annoying
