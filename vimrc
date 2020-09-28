@@ -160,7 +160,7 @@ if !has("nvim-0.5")
 endif
 " }}}
 " LanguageServer {{{
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-texlab coc-bibtex coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
 let g:coc_config_home = "$HOME/.vim"
 inoremap <silent><expr> <Tab>
   \ pumvisible() ? "\<C-n>" :
@@ -347,7 +347,7 @@ imap <C-x><C-k> <Plug>(fzf-complete-word)
 imap <C-x><C-f> <Plug>(fzf-complete-path)
 imap <C-x><C-j> <Plug>(fzf-complete-file-ag)
 imap <C-x><C-l> <Plug>(fzf-complete-line)
-let g:fzf_preview_window = 'right:30%'
+let g:fzf_preview_window = 'right:40%'
 
 " }}}
 " Powerline {{{
