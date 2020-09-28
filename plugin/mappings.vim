@@ -58,6 +58,7 @@ nnoremap ]d ]<C-D>
 nnoremap [d [<C-D>
 
 " misc
+nnoremap <C-g> :Grep 
 nnoremap <Leader>gt :!ctags -R .<CR>
 nnoremap <silent> <Leader>h :noh<CR>
 

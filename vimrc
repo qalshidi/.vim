@@ -9,6 +9,7 @@ filetype plugin indent on
 set splitbelow splitright                   " windows split in the intuitive direction
 set tabstop=8 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab things
 set number relativenumber                   " show relative numbers on the side
+set smartcase                               " Use smartcase by default
 set noswapfile                              " swapfiles are annoying
 set dictionary+=/usr/share/dict/words       " add this dictionary
 set nowrap                                  " wrapping can be annoying
@@ -116,12 +117,15 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " }}}
 " Firefox neovim {{{
+
 if has('nvim')
   Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 endif
+
 if exists('g:started_by_firenvim')
   set laststatus=0
 let g:dont_write = v:false
+
 function! My_Write(timer) abort
       let g:dont_write = v:false
       write
@@ -305,6 +309,7 @@ nnoremap xx dd
 nnoremap X D
 " }}}
 " File Explorer {{{
+
 " Fine netrw does suck
 if !exists('g:started_by_firenvim')
 Plug 'preservim/nerdtree'
@@ -326,12 +331,13 @@ Plug 'ryanoasis/vim-devicons'
   let NERDTreeChDirMode = 1
   let g:plug_window = 'noautocmd vertical topleft new'
 endif
+
 " }}}
 " Fuzzy File Finder {{{
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-nmap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-p> :Files<CR>
 " Mapping selecting mappings
 nmap <Leader><Tab> <Plug>(fzf-maps-n)
 xmap <Leader><Tab> <Plug>(fzf-maps-x)
@@ -349,6 +355,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " }}}
 call plug#end()
+
 " }}}
 " Theme {{{
 
@@ -364,9 +371,11 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 colorscheme NeoSolarized
 " powerline
-let g:airline_theme='solarized_flood'
-let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
-let g:airline#extensions#tabline#enabled = 1
+if !exists('g:started_by_firenvim')      " Don't show in firefox
+  let g:airline_theme='solarized_flood'
+  let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
+  let g:airline#extensions#tabline#enabled = 1
+endif
 
 " }}}
 
