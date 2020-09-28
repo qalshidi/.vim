@@ -30,6 +30,8 @@ nnoremap <Leader>wh <C-w>H
 nnoremap <Leader>wj <C-w>J
 nnoremap <Leader>wk <C-w>K
 nnoremap <Leader>wl <C-w>L
+nnoremap <Leader>wx <C-w>x
+nnoremap <Leader>wr <C-w>r
 
 " resize with ctrl
 noremap <silent> <C-Up> :resize +3<CR>

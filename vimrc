@@ -271,8 +271,11 @@ nnoremap <silent><nowait> <Space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <Space>p  :<C-u>CocListResume<CR>
 " }}}
 " Cosmetics {{{
-Plug 'iCyMind/NeoSolarized' " color scheme
+Plug 'overcache/NeoSolarized' " color scheme
 Plug 'skammer/vim-css-color' " css colorscheme
+if has('signs')
+  Plug 'kshenoy/vim-signature' " show marks on signcolumn
+endif
 " }}}
 " Language Specific {{{
 
