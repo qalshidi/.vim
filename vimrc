@@ -316,16 +316,23 @@ nnoremap X D
 " File Explorer {{{
 
 if !exists('g:started_by_firenvim')
+
   Plug 'justinmk/vim-dirvish'
+
   augroup mydirvish
     autocmd!
+    " behave like netrw
     autocmd StdinReadPre * let s:std_in=1
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Dirvish | endif
     autocmd BufEnter * if isdirectory(bufname(bufnr('%'))) | Dirvish % | endif
   augroup end
+
+  let g:dirvish_mode = ':sort ,^.*[\/],'   " Folders on top
+
   if has('conceal')
     Plug 'kristijanhusak/vim-dirvish-git'
   endif
+
 endif
 
 " }}}
