@@ -315,26 +315,17 @@ nnoremap X D
 " }}}
 " File Explorer {{{
 
-" Fine netrw does suck
 if !exists('g:started_by_firenvim')
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeVCS', 'NERDTreeToggle', 'NERDTree'] }
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': ['NERDTreeVCS', 'NERDTreeToggle', 'NERDTree'] }
-Plug 'ryanoasis/vim-devicons'
-  augroup NerdTreeCustom
+  Plug 'justinmk/vim-dirvish'
+  augroup mydirvish
     autocmd!
     autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeVCS | endif
-    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
-  augroup END
-  map <C-N> :NERDTreeToggle<CR>
-  let NERDTreeAutoDeleteBuffer = 1
-  let NERDTreeMinimalUI = 1
-  let NERDTreeDirArrows = 1
-  let NERDTreeRespectWildIgnore = 1
-  let NERDTreeChDirMode = 1
-  let g:plug_window = 'noautocmd vertical topleft new'
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Dirvish | endif
+    autocmd BufEnter * if isdirectory(bufname(bufnr('%'))) | Dirvish % | endif
+  augroup end
+  if has('conceal')
+    Plug 'kristijanhusak/vim-dirvish-git'
+  endif
 endif
 
 " }}}

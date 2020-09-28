@@ -1,8 +1,9 @@
 let g:ColorColumnBufferNameBlacklist = ['fugitive']
-let g:ColorColumnFileTypeBlacklist = ['diff', 'fugitiveblame', 'qf', 'nerdtree']
+let g:ColorColumnFileTypeBlacklist = ['dirvish', 'diff', 'fugitiveblame', 'qf']
 
 function! autocmds#should_colorcolumn() abort
-  if bufname(bufnr('%')) && index(g:ColorColumnBufferNameBlacklist, split(bufname(bufnr('%')), ':')[0]) != -1
+  " TODO: Fix this block, it doesn't work as intended to find uri buffers
+  if index(g:ColorColumnBufferNameBlacklist, split(@%, ':')[0]) != -1
     return 0
   endif
   if index(g:ColorColumnBufferNameBlacklist, bufname(bufnr('%'))) != -1
