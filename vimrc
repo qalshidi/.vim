@@ -82,6 +82,11 @@ Plug 'tpope/vim-repeat'           " have . work on plugins
 Plug 'tpope/vim-unimpaired'       " more mappings with ] and [
 Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and others
 " }}}
+" tmux helpers {{{
+
+Plug 'christoomey/vim-tmux-navigator'
+
+" }}}
 " Writing {{{
 
 Plug 'junegunn/goyo.vim'
