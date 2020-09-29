@@ -1,6 +1,8 @@
 " My Vim Configuration
 " ====================
 
+scriptencoding utf-8
+
 " vim settings {{{
 set modeline                                " I want some modelines
 set path=.,,**                              " include files recursively and not have defaults
@@ -12,6 +14,7 @@ set number relativenumber                   " show relative numbers on the side
 set ignorecase smartcase                    " Use smartcase by default
 set noswapfile                              " swapfiles are annoying
 set dictionary+=/usr/share/dict/words       " add this dictionary
+
 if has('linebreak')
   set wrap
   set breakindent                           " Break after textwidth
@@ -20,6 +23,7 @@ if has('linebreak')
   let &showbreak = '↳'                      " Line break char
   set linebreak                             " wrap around &breakat
 endif
+
 set hidden                                  " Allow hide buffer without saving
 set nobackup                                " Some servers have issues with backup files, see coc.nvim#649.
 set nowritebackup
@@ -27,6 +31,8 @@ set cmdheight=2                             " Give more space for displaying mes
 set updatetime=300                          " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 runtime macros/matchit.vim
 set shortmess+=c
+set shortmess+=I                            " No splash screen
+set shortmess+=A                            " Annoying swapfile messages
 set tags=./tags;,tags;
 set timeoutlen=500
 set formatoptions-=cro                      " stop newline continuation of comments
@@ -35,6 +41,9 @@ set clipboard=unnamed,unnamedplus
 set scrolloff=2
 set colorcolumn=+1
 set lazyredraw                              " Don't redraw during macro
+set nojoinspaces                            " Don't double space on join with punctuation
+set sidescrolloff                           " Scroll a little when not wrapped
+set switchbuf=useopen                       " Jump to an opened window buffer when using qf
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -392,7 +401,7 @@ set t_8b=[48;2;%lu;%lu;%lum
 colorscheme NeoSolarized
 " powerline
 if !exists('g:started_by_firenvim')      " Don't show in firefox
-  let g:airline_theme='solarized_flood'
+  let g:airline_theme='base16_solarized'
   let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
   let g:airline#extensions#tabline#enabled = 1
 endif
