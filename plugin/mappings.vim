@@ -13,7 +13,7 @@ if has('nvim')
   tnoremap <nowait> jk <C-\><C-N>
   tnoremap <nowait> kj <C-\><C-N>
 endif
-nnoremap <CR> @@
+nnoremap \ @@
 
 " easily navigate windows
 if has('nvim')
