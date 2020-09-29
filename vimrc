@@ -12,8 +12,15 @@ set number relativenumber                   " show relative numbers on the side
 set ignorecase smartcase                    " Use smartcase by default
 set noswapfile                              " swapfiles are annoying
 set dictionary+=/usr/share/dict/words       " add this dictionary
-set nowrap                                  " wrapping can be annoying
-set hidden                                  " TextEdit might fail if hidden is not set.
+if has('linebreak')
+  set wrap
+  set breakindent                           " Break after textwidth
+  set breakindentopt=sbr                    " Show break character &showbrea
+  set breakindentopt+=shift:8               " 8 characters of shift to emphasize
+  let &showbreak = '↳'                      " Line break char
+  set linebreak                             " wrap around &breakat
+endif
+set hidden                                  " Allow hide buffer without saving
 set nobackup                                " Some servers have issues with backup files, see coc.nvim#649.
 set nowritebackup
 set cmdheight=2                             " Give more space for displaying messages.
@@ -23,9 +30,11 @@ set shortmess+=c
 set tags=./tags;,tags;
 set timeoutlen=500
 set formatoptions-=cro                      " stop newline continuation of comments
+set formatoptions+=j                        " <S-j> joins comment lines well.
 set clipboard=unnamed,unnamedplus
 set scrolloff=2
 set colorcolumn=+1
+set lazyredraw                              " Don't redraw during macro
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -36,16 +45,21 @@ else
   set signcolumn=yes
 endif
 
+if has('virtualedit')
+  set virtualedit=block               " allow cursor to move where there is no text in visual block mode
+endif
+
+set visualbell t_vb=                  " stop annoying beeping for non-error errors
+
 " UTF stuff
 set noemoji                                 " Render emoji better
 set encoding=utf-8
 set fileencoding=utf-8
 
 if has('folding')
-  if has('windows')
-    " set fillchars=vert:┃
-    set fillchars+=fold:·
-  endif
+  set fillchars+=fold:·
+  set foldmethod=indent
+  set foldlevelstart=99                      " Start unfloded
 endif
 
 let mapleader = ","
@@ -368,7 +382,7 @@ call plug#end()
 " dark background is always best
 set background=dark
 " solarized colorscheme is beautiful
-if (v:version > 704) || has('nvim')
+if has('termguicolors')
   set termguicolors " Enable true color support.
 endif
 let g:neosolarized_italic = 1
