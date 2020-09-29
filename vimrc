@@ -42,7 +42,6 @@ set scrolloff=2
 set colorcolumn=+1
 set lazyredraw                              " Don't redraw during macro
 set nojoinspaces                            " Don't double space on join with punctuation
-set sidescrolloff                           " Scroll a little when not wrapped
 set switchbuf=useopen                       " Jump to an opened window buffer when using qf
 
 " Always show the signcolumn, otherwise it would shift the text each time
@@ -104,6 +103,11 @@ Plug 'tpope/vim-speeddating'      " better date functionality
 Plug 'tpope/vim-repeat'           " have . work on plugins
 Plug 'tpope/vim-unimpaired'       " more mappings with ] and [
 Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and others
+" }}}
+" My Plugins {{{
+
+Plug 'qalshidi/vim-bettergrep'
+
 " }}}
 " tmux helpers {{{
 
