@@ -305,11 +305,13 @@ endif
 
 " }}}
 " Cosmetics {{{
+
 Plug 'overcache/NeoSolarized' " color scheme
 Plug 'skammer/vim-css-color' " css colorscheme
 if has('signs')
   Plug 'kshenoy/vim-signature' " show marks on signcolumn
 endif
+
 " }}}
 " Language Specific {{{
 
@@ -339,20 +341,20 @@ if has('nvim') || v:version >= 800
   nmap <expr> P yoink#canSwap() ? '<plug>(YoinkPostPasteSwapForward)' : '<plug>(YoinkPaste_P)'
   nmap [y <Plug>(YoinkRotateBack)
   nmap ]y <Plug>(YoinkRotateForward)
-  " s for substitute
-  nmap s <Plug>(SubversiveSubstitute)
-  nmap ss <Plug>(SubversiveSubstituteLine)
-  nmap S <Plug>(SubversiveSubstituteToEndOfLine)
-  nmap <Leader>S <Plug>(SubversiveSubstituteWordRange)
-  " x is now cut
-  nnoremap x d
-  xnoremap x d
-  nnoremap xx dd
-  nnoremap X D
 endif
 
 Plug 'svermeulen/vim-subversive'
 Plug 'svermeulen/vim-cutlass'
+" s for substitute
+nmap s <Plug>(SubversiveSubstitute)
+nmap ss <Plug>(SubversiveSubstituteLine)
+nmap S <Plug>(SubversiveSubstituteToEndOfLine)
+nmap <Leader>S <Plug>(SubversiveSubstituteWordRange)
+" x is now cut
+nnoremap x d
+xnoremap x d
+nnoremap xx dd
+nnoremap X D
 
 " }}}
 " File Explorer {{{
@@ -398,13 +400,19 @@ endif
 
 " }}}
 " Powerline {{{
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
 " }}}
 call plug#end()
 
 " }}}
 " Theme {{{
+
+"tmux stuff
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
 
 " dark background is always best
 set background=dark
@@ -412,16 +420,17 @@ set background=dark
 if has('termguicolors')
   set termguicolors " Enable true color support.
 endif
+
 let g:neosolarized_italic = 1
-"tmux stuff
-set t_8f=[38;2;%lu;%lu;%lum
-set t_8b=[48;2;%lu;%lu;%lum
 colorscheme NeoSolarized
+
 " powerline
 if !exists('g:started_by_firenvim')      " Don't show in firefox
   let g:airline_theme='base16_solarized'
   let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
   let g:airline#extensions#tabline#enabled = 1
+else
+  set laststatus=0
 endif
 
 " }}}
