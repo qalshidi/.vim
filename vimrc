@@ -90,11 +90,6 @@ let $RC = "$HOME/.vim/vimrc"
 " }}}
 " Plugins {{{
 
-"install node
-if !executable('npm')
-  silent !curl -sL install-node.now.sh/lts | PREFIX=~/.local bash /dev/stdin --yes
-endif
-
 call plug#begin('~/.vim/plugged')
 " tpope Basics {{{
 Plug 'tpope/vim-sensible'         " sensible vim settings
@@ -105,6 +100,12 @@ Plug 'tpope/vim-speeddating'      " better date functionality
 Plug 'tpope/vim-repeat'           " have . work on plugins
 Plug 'tpope/vim-unimpaired'       " more mappings with ] and [
 Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and others
+" }}}
+" rooter {{{
+
+Plug 'airblade/vim-rooter'
+let g:rooter_targets = '*'
+
 " }}}
 " My Plugins {{{
 
@@ -197,6 +198,12 @@ endif
 " LanguageServer {{{
 
 if has('nvim') || v:version >= 800
+
+  "install node
+  if !executable('npm')
+    silent !curl -sL install-node.now.sh/lts | PREFIX=~/.local bash /dev/stdin --yes
+  endif
+
   Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-texlab coc-bibtex coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
   let g:coc_config_home = "$HOME/.vim"
   inoremap <silent><expr> <Tab>
