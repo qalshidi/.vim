@@ -323,7 +323,7 @@ endif
 " Language Specific {{{
 
 " LaTeX plugin
-Plug 'lervag/vimtex', { 'for': 'latex' }
+Plug 'lervag/vimtex'
 let g:tex_flavor = 'latex'
 if has('nvim')
   let g:vimtex_compiler_progname = 'nvr'
