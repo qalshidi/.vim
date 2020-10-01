@@ -142,7 +142,7 @@ function! s:goyo_leave()
   set scrolloff=2
   if has("patch-8.1.1564")
     set signcolumn=number
-  else if has('&signcolumn')
+  elseif has('&signcolumn')
     set signcolumn=yes
   endif
 endfunction

@@ -2,7 +2,6 @@ let g:ColorColumnBufferNameBlacklist = ['fugitive']
 let g:ColorColumnFileTypeBlacklist = ['dirvish', 'diff', 'fugitiveblame', 'qf']
 
 function! autocmds#should_colorcolumn() abort
-  " TODO: Fix this block, it doesn't work as intended to find uri buffers
   if len(@%) && index(g:ColorColumnBufferNameBlacklist, split(@%, ':')[0]) != -1
     return 0
   endif
