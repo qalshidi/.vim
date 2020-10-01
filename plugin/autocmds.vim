@@ -20,9 +20,5 @@ if has('autocmd')
       autocmd FocusLost,WinLeave * if autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
     endif
 
-  " Quick fix window automatically opens up if populated
-  autocmd QuickFixCmdPost cgetexpr cwindow
-  autocmd QuickFixCmdPost lgetexpr lwindow
-
   augroup end
 endif
