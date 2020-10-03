@@ -38,7 +38,7 @@ set timeoutlen=500
 set formatoptions-=cro                      " stop newline continuation of comments
 set formatoptions+=j                        " <S-j> joins comment lines well.
 set clipboard=unnamed,unnamedplus
-set scrolloff=2
+set scrolloff=5
 set colorcolumn=+1
 set lazyredraw                              " Don't redraw during macro
 set nojoinspaces                            " Don't double space on join with punctuation
@@ -92,6 +92,7 @@ let $RC = "$HOME/.vim/vimrc"
 
 call plug#begin('~/.vim/plugged')
 " tpope Basics {{{
+
 Plug 'tpope/vim-sensible'         " sensible vim settings
 Plug 'tpope/vim-surround'         " surround command
 Plug 'tpope/vim-commentary'       " commentary command
@@ -100,6 +101,7 @@ Plug 'tpope/vim-speeddating'      " better date functionality
 Plug 'tpope/vim-repeat'           " have . work on plugins
 Plug 'tpope/vim-unimpaired'       " more mappings with ] and [
 Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and others
+
 " }}}
 " rooter {{{
 
@@ -137,9 +139,8 @@ function! s:goyo_leave()
     silent !tmux set status on
     silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
   endif
-  set showmode
   set showcmd
-  set scrolloff=2
+  set scrolloff=5
   if has("patch-8.1.1564")
     set signcolumn=number
   elseif has('&signcolumn')
@@ -406,10 +407,23 @@ if has('nvim') || v:version >= 800
 endif
 
 " }}}
+" targets.vim {{{
+
+Plug 'wellle/targets.vim'
+
+" }}}
 " Powerline {{{
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+if !exists('g:started_by_firenvim')
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  set noshowmode
+endif
+
+"}}}
+" Devicons (must be last {{{
+
+Plug 'ryanoasis/vim-devicons'
 
 " }}}
 call plug#end()
@@ -436,7 +450,9 @@ if !exists('g:started_by_firenvim')      " Don't show in firefox
   let g:airline_theme='base16_solarized'
   let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
   let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
 else
+  let g:airline_disable_statusline = 1
   set laststatus=0
 endif
 
