@@ -76,6 +76,10 @@ endif
 let mapleader = ","
 let maplocalleader = "<Space>"
 
+" Global variables
+
+let g:markdown_fenced_languages = ['python', 'vim', 'c', 'cpp', 'sh', 'html', 'xml', 'ruby', 'go', 'css', 'julia']
+
 " }}}
 " vim cache {{{
 let viminfoparams = "<800,'10,/50,:100,h,f0,n"

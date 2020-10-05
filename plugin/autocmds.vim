@@ -26,5 +26,15 @@ if has('autocmd')
       autocmd CmdlineLeave /,\? :set nohlsearch
     endif
 
+    " Skeletons
+    autocmd BufNewFile  *.py    0r ~/.vim/snippets/file.py | normal Gi
+    autocmd BufNewFile  *.fish  0r ~/.vim/snippets/file.fish | normal Gi
+    autocmd BufNewFile  *.sh    0r ~/.vim/snippets/file.sh | normal Gi
+
+    autocmd VimEnter * if isdirectory('./.git') | let g:bettergrepprg = 'git grep -n --column' | endif
+    if exists('##DirChanged')
+      autocmd DirChanged * if isdirectory('./.git') | let g:bettergrepprg = 'git grep -n --column' | endif
+    endif
+
   augroup end
 endif
