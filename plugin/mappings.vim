@@ -74,6 +74,13 @@ nnoremap [d [<C-D>
 nnoremap <Leader>gt :!ctags -R .<CR>
 nnoremap <Leader>h :Helptags<CR>
 
+" writing
+inoremap (        ()<Left>
+inoremap '        ''<Left>
+inoremap "        ""<Left>
+inoremap {<Space> {<Space><Space>}<Left><Left>
+inoremap {<CR> {<CR>}<Esc>O
+
 " editing
 nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
 nnoremap <Leader>R *N:set hlsearch<CR>:silent! argdo! s///g<Left><Left>
