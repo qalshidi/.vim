@@ -46,6 +46,12 @@ noremap <silent> <A-j> :resize -3<CR>
 noremap <silent> <A-h> :vertical resize -3<CR>
 noremap <silent> <A-l> :vertical resize +3<CR>
 
+" highlighting
+nnoremap <silent> n n:set hlsearch<CR>
+nnoremap <silent> N N:set hlsearch<CR>
+nnoremap <silent> * *N:set hlsearch<CR>
+nnoremap <silent> <Leader><Space> :nohlsearch<CR>
+
 " write with sudo
 cmap w!! w !sudo -A tee > /dev/null %
 
@@ -67,7 +73,10 @@ nnoremap [d [<C-D>
 " misc
 nnoremap <C-g> :Grep 
 nnoremap <Leader>gt :!ctags -R .<CR>
-nnoremap <silent> <Leader>h :noh<CR>
+
+" editing
+nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
+nnoremap <Leader>R *N:set hlsearch<CR>:silent! argdo! s///g<Left><Left>
 
 " Snippets
 nnoremap <Leader>spyfile :-1read ~/.vim/snippets/file.py<CR>GddggjA

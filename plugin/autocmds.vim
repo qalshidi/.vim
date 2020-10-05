@@ -20,5 +20,11 @@ if has('autocmd')
       autocmd FocusLost,WinLeave * if autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
     endif
 
+    " Turn off highlighting after movement
+    if exists('##CmdLineEnter')
+      autocmd CmdlineEnter /,\? :set hlsearch
+      autocmd CmdlineLeave /,\? :set nohlsearch
+    endif
+
   augroup end
 endif

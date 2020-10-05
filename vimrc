@@ -43,6 +43,7 @@ set colorcolumn=+1
 set lazyredraw                              " Don't redraw during macro
 set nojoinspaces                            " Don't double space on join with punctuation
 set switchbuf=useopen                       " Jump to an opened window buffer when using qf
+set nohlsearch                                " Using autocmds for this
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -253,7 +254,7 @@ if has('nvim') || v:version >= 800
   " Formatting selected code.
   xmap <Leader>f  <Plug>(coc-format-selected)
   nmap <Leader>f  <Plug>(coc-format-selected)
-  augroup mygroup
+  augroup MyCocGroup
     autocmd!
     " Setup formatexpr specified filetype(s).
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
