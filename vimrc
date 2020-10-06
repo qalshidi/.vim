@@ -50,7 +50,7 @@ set nohlsearch                                " Using autocmds for this
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
-elseif has('&signcolumn')
+elseif exists('&signcolumn')
   set signcolumn=yes
 endif
 
@@ -148,7 +148,7 @@ function! s:goyo_leave()
   set scrolloff=5
   if has("patch-8.1.1564")
     set signcolumn=number
-  elseif has('&signcolumn')
+  elseif exists('&signcolumn')
     set signcolumn=yes
   endif
 endfunction
@@ -319,8 +319,10 @@ endif
 " }}}
 " Cosmetics {{{
 
-Plug 'overcache/NeoSolarized' " color scheme
+" Plug 'overcache/NeoSolarized' " color scheme
 Plug 'skammer/vim-css-color' " css colorscheme
+Plug 'rafi/awesome-vim-colorschemes', {'on': 'colorscheme'}
+Plug 'lifepillar/vim-solarized8'
 if has('signs')
   Plug 'kshenoy/vim-signature' " show marks on signcolumn
 endif
@@ -440,15 +442,15 @@ call plug#end()
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 
-" dark background is always best
-set background=dark
 " solarized colorscheme is beautiful
 if has('termguicolors')
   set termguicolors " Enable true color support.
+else
+  set t_Co=256
 endif
 
-let g:neosolarized_italic = 1
-colorscheme NeoSolarized
+set background=dark
+colorscheme solarized8
 
 " powerline
 if !exists('g:started_by_firenvim')      " Don't show in firefox
@@ -462,5 +464,7 @@ else
 endif
 
 " }}}
+
+if strlen(glob("$HOME/.vim/vimrc-extend")) | source ~/.vim/vimrc-extend | endif
 
 " vim: foldmethod=marker sts=2 et sw=2

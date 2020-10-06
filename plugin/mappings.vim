@@ -81,6 +81,11 @@ inoremap "        ""<Left>
 inoremap {<Space> {<Space><Space>}<Left><Left>
 inoremap {<CR>    {<CR>}<Esc>O
 inoremap {        {}<Left>
+inoremap [        []<Left>
+inoremap \{       \{\}<Left><Left>
+inoremap \[       \[\]<Left><Left>
+inoremap \"       \"\"<Left><Left>
+inoremap \'       \'\'<Left><Left>
 
 " editing
 nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
