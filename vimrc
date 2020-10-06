@@ -323,6 +323,7 @@ endif
 Plug 'skammer/vim-css-color' " css colorscheme
 Plug 'rafi/awesome-vim-colorschemes', {'on': 'colorscheme'}
 Plug 'lifepillar/vim-solarized8'
+let g:solarized_extra_hi_groups = 1
 if has('signs')
   Plug 'kshenoy/vim-signature' " show marks on signcolumn
 endif
