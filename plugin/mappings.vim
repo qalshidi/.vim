@@ -1,8 +1,8 @@
 " Mappings
-if exists('g:LoadedCustomMappings')
+if exists('g:loaded_custom_mappings')
   finish
 endif
-let g:LoadedCustomMappings = 1
+let g:loaded_custom_mappings = 1
 
 " More torelable defaults
 nnoremap Y y$
@@ -79,7 +79,8 @@ inoremap (        ()<Left>
 inoremap '        ''<Left>
 inoremap "        ""<Left>
 inoremap {<Space> {<Space><Space>}<Left><Left>
-inoremap {<CR> {<CR>}<Esc>O
+inoremap {<CR>    {<CR>}<Esc>O
+inoremap {        {}<Left>
 
 " editing
 nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>

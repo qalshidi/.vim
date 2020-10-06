@@ -78,7 +78,7 @@ let maplocalleader = "<Space>"
 
 " Global variables
 
-let g:markdown_fenced_languages = ['python', 'vim', 'c', 'cpp', 'sh', 'html', 'xml', 'ruby', 'go', 'css', 'julia']
+let g:markdown_fenced_languages = ['python', 'vim', 'c', 'cpp', 'sh', 'html', 'xml', 'ruby', 'go', 'css', 'haskell']
 
 " }}}
 " vim cache {{{

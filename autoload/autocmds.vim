@@ -1,14 +1,14 @@
-let g:ColorColumnBufferNameBlacklist = ['fugitive']
-let g:ColorColumnFileTypeBlacklist = ['dirvish', 'diff', 'fugitiveblame', 'qf']
+let g:colorcolumn_blocklist_bufname = ['fugitive']
+let g:colorcolumn_blocklist_filetype = ['dirvish', 'diff', 'fugitiveblame', 'qf']
 
 function! autocmds#should_colorcolumn() abort
-  if len(@%) && index(g:ColorColumnBufferNameBlacklist, split(@%, ':')[0]) != -1
+  if len(@%) && index(g:colorcolumn_blocklist_bufname, split(@%, ':')[0]) != -1
     return 0
   endif
-  if index(g:ColorColumnBufferNameBlacklist, bufname(bufnr('%'))) != -1
+  if index(g:colorcolumn_blocklist_bufname, bufname(bufnr('%'))) != -1
     return 0
   endif
-  if index(g:ColorColumnFileTypeBlacklist, &filetype) != -1
+  if index(g:colorcolumn_blocklist_filetype, &filetype) != -1
     return 0
   endif
   return &buflisted
