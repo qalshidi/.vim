@@ -5,14 +5,14 @@ scriptencoding utf-8
 
 " vim settings {{{
 set modeline                                " I want some modelines
-set path=.,,**                              " include files recursively and not have defaults
+set path=.,,src/**,config/**                " include files recursively and not have defaults
 syntax enable
 filetype plugin indent on
 set splitbelow splitright                   " windows split in the intuitive direction
 set tabstop=8 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab things
+set autoread                                " Read file if changed outside of vim
 set number relativenumber                   " show relative numbers on the side
 set ignorecase smartcase                    " Use smartcase by default
-set noswapfile                              " swapfiles are annoying
 set dictionary+=/usr/share/dict/words       " add this dictionary
 
 if has('linebreak')
@@ -25,8 +25,6 @@ if has('linebreak')
 endif
 
 set hidden                                  " Allow hide buffer without saving
-set nobackup                                " Some servers have issues with backup files, see coc.nvim#649.
-set nowritebackup
 set cmdheight=2                             " Give more space for displaying messages.
 set updatetime=300                          " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 runtime macros/matchit.vim
@@ -34,7 +32,7 @@ set shortmess+=c
 set shortmess+=I                            " No splash screen
 set shortmess+=A                            " Annoying swapfile messages
 set tags=./tags;,tags;
-set timeoutlen=500
+set timeoutlen=300
 set formatoptions-=cro                      " stop newline continuation of comments
 set formatoptions+=j                        " <S-j> joins comment lines well.
 set clipboard=unnamed,unnamedplus
@@ -44,6 +42,7 @@ set lazyredraw                              " Don't redraw during macro
 set nojoinspaces                            " Don't double space on join with punctuation
 set switchbuf=useopen                       " Jump to an opened window buffer when using qf
 set nohlsearch                                " Using autocmds for this
+set wildmenu
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -79,6 +78,23 @@ let maplocalleader = "<Space>"
 " Global variables
 
 let g:markdown_fenced_languages = ['python', 'vim', 'c', 'cpp', 'sh', 'html', 'xml', 'ruby', 'go', 'css', 'haskell']
+
+" create directory if needed
+if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
+  call mkdir($HOME.'/.vim/files')
+endif
+
+" backup files
+set backup
+set backupdir   =$HOME/.vim/files/backup/
+set backupext   =-vimbackup
+set backupskip  =
+" swap files
+set directory   =$HOME/.vim/files/swap//
+set updatecount =100
+" undo files
+set undofile
+set undodir     =$HOME/.vim/files/undo/
 
 " }}}
 " vim cache {{{
@@ -165,29 +181,29 @@ endif
 
 if exists('g:started_by_firenvim')
   set laststatus=0
-let g:dont_write = v:false
+  let g:dont_write = v:false
 
-function! My_Write(timer) abort
-      let g:dont_write = v:false
-      write
-endfunction
+  function! My_Write(timer) abort
+        let g:dont_write = v:false
+        write
+  endfunction
 
-function! Delay_My_Write() abort
-      if g:dont_write
-              return
-      end
-      let g:dont_write = v:true
-      call timer_start(1000, 'My_Write')
-endfunction
+  function! Delay_My_Write() abort
+        if g:dont_write
+                return
+        end
+        let g:dont_write = v:true
+        call timer_start(1000, 'My_Write')
+  endfunction
 
-augroup firenvim
-  autocmd!
-  au TextChanged * ++nested call Delay_My_Write()
-  au TextChangedI * ++nested call Delay_My_Write()
-  au BufEnter github.com_*.txt set filetype=markdown
-  au BufEnter gitlab.com_*.txt set filetype=markdown
-  au BufEnter gitlab.umich.edu_*.txt set filetype=markdown
-augroup END
+  augroup firenvim
+    autocmd!
+    au TextChanged * call Delay_My_Write()
+    au TextChangedI * call Delay_My_Write()
+    au BufEnter github.com_*.txt ++nested set filetype=markdown
+    au BufEnter gitlab.com_*.txt ++nested set filetype=markdown
+    au BufEnter gitlab.umich.edu_*.txt ++nested set filetype=markdown
+  augroup END
 endif
 
 " }}}
@@ -203,7 +219,38 @@ endif
 " }}}
 " LanguageServer {{{
 
-if has('nvim') || v:version >= 800
+" NeoVim 0.5 {{{
+if has('nvim-0.5')
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'nvim-lua/diagnostic-nvim'
+  let g:diagnostic_enable_virtual_text = 1
+  nnoremap <silent> <Leader>gd <cmd>lua vim.lsp.buf.declaration()<CR>
+  " nnoremap <silent> <C-]>      <cmd>lua vim.lsp.buf.definition()<CR>
+  nnoremap <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
+  nnoremap <silent> <C-s>      <cmd>lua vim.lsp.buf.signature_help()<CR>
+  inoremap <silent> <C-s>      <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <silent> 1gD        <cmd>lua vim.lsp.buf.type_definition()<CR>
+  nnoremap <silent> gr         <cmd>lua vim.lsp.buf.references()<CR>
+  nnoremap <silent> <leader>r  <cmd>lua vim.lsp.buf.rename()<CR>
+  nnoremap <silent> <leader>f  <cmd>lua vim.lsp.buf.formatting()<CR>
+  nnoremap <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
+  nnoremap <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+  nnoremap <silent> ge         <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+  nnoremap <silent> ga         <cmd>lua vim.lsp.buf.code_action()<CR>
+  " Set completeopt to have a better completion experience
+  set completeopt=menuone,noinsert,noselect
+  " Avoid showing message extra message when using completion
+  set shortmess+=c
+  nnoremap ]d <cmd>NextDiagnostic<CR>
+  nnoremap [d <cmd>PrevDiagnostic<CR>
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" }}}
+" {{{ Conqueror of Completion
+elseif v:version >= 800 && !has('nvim-0.5')
 
   "install node
   if !executable('npm')
@@ -264,7 +311,7 @@ if has('nvim') || v:version >= 800
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
     " Update signature help on jump placeholder.
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  augroup end
+  augroup END
   " Applying codeAction to the selected region.
   " Example: `<Leader>aap` for current paragraph
   xmap <Leader>a  <Plug>(coc-codeaction-selected)
@@ -314,13 +361,16 @@ if has('nvim') || v:version >= 800
   nnoremap <silent><nowait> <Space>k  :<C-u>CocPrev<CR>
   " Resume latest coc list.
   nnoremap <silent><nowait> <Space>p  :<C-u>CocListResume<CR>
+
 endif
+" }}}
+
 
 " }}}
 " Cosmetics {{{
 
 " Plug 'overcache/NeoSolarized' " color scheme
-Plug 'skammer/vim-css-color' " css colorscheme
+Plug 'ap/vim-css-color' " css colorscheme
 Plug 'rafi/awesome-vim-colorschemes', {'on': 'colorscheme'}
 Plug 'lifepillar/vim-solarized8'
 let g:solarized_extra_hi_groups = 1
@@ -429,9 +479,14 @@ if !exists('g:started_by_firenvim')
 endif
 
 "}}}
+" Buffer stuff {{{
+
+" "Plug 'qpkorr/vim-bufkill'
+
+" }}}
 " Devicons (must be last {{{
 
-Plug 'ryanoasis/vim-devicons'
+" "Plug 'ryanoasis/vim-devicons'
 
 " }}}
 call plug#end()
@@ -465,6 +520,12 @@ else
 endif
 
 " }}}
+
+" {{{
+if has('nvim-0.5')
+  lua local lsp_config = require('lsp-config')
+endif
+" }}}"
 
 if strlen(glob("$HOME/.vim/vimrc-extend")) | source ~/.vim/vimrc-extend | endif
 

@@ -36,5 +36,16 @@ if has('autocmd')
       autocmd DirChanged * if isdirectory('./.git') | let g:bettergrepprg = 'git grep -n --column' | endif
     endif
 
+  " Automatically add file marks
+  autocmd BufLeave *.{c,cpp} mark C
+  autocmd BufLeave *.h       mark H
+  autocmd BufLeave *.md      mark M
+  autocmd BufLeave *.py      mark P
+  autocmd BufLeave *.in      mark I
+
+  " Set cursor line only in normal mode
+  autocmd InsertLeave,WinEnter * set cursorline
+  autocmd InsertEnter,WinLeave * set nocursorline
+
   augroup end
 endif
