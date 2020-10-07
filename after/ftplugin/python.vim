@@ -12,6 +12,7 @@ setlocal encoding=utf-8
 setlocal wildignore=*/__pycache__/*,*.pyc
 setlocal foldmethod=indent
 setlocal define=^\s*\\(def\\\\|class\\)
+set path+=test/**
 let python_highlight_all=1
 
 setlocal include=^\\s*\\(from\\\|import\\)\\s*\\.*\\zs\\(\\S\\+\\s\\{-}\\)*\\ze\\($\\\|\ as\\)

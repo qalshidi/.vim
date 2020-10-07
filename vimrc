@@ -41,8 +41,13 @@ set colorcolumn=+1
 set lazyredraw                              " Don't redraw during macro
 set nojoinspaces                            " Don't double space on join with punctuation
 set switchbuf=useopen                       " Jump to an opened window buffer when using qf
-set nohlsearch                                " Using autocmds for this
-set wildmenu
+
+if exists('&inccomand')
+  set inccommand=nosplit                    " Show modifications of commands
+endif
+
+set nohlsearch                              " Using autocmds for this
+set wildmenu                                " Tab menu
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -124,8 +129,9 @@ Plug 'tpope/vim-unimpaired'       " more mappings with ] and [
 Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and others
 
 " }}}
-" rooter {{{
+" Project stuff {{{
 
+Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 let g:rooter_targets = '*'
 
@@ -416,9 +422,9 @@ if !exists('g:started_by_firenvim')
   augroup mydirvish
     autocmd!
     " behave like netrw
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Dirvish | endif
-    autocmd BufEnter * if isdirectory(bufname(bufnr('%'))) | Dirvish % | endif
+    autocmd StdinReadPre * ++nested let s:std_in=1
+    autocmd VimEnter * ++nested if argc() == 0 && !exists("s:std_in") | Dirvish | endif
+    autocmd BufEnter * ++nested if isdirectory(bufname(bufnr('%'))) | Dirvish % | endif
   augroup end
 
   let g:dirvish_mode = ':sort ,^.*[\/],'   " Folders on top
