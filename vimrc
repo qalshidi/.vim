@@ -5,6 +5,7 @@ scriptencoding utf-8
 
 " vim settings {{{
 set modeline                                " I want some modelines
+set exrc secure                             " Project specific vimrc's
 set path=.,,src/**,config/**                " include files recursively and not have defaults
 syntax enable
 filetype plugin indent on

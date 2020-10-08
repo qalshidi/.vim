@@ -56,9 +56,9 @@ nnoremap <silent> <Leader><Space> :nohlsearch<CR>
 cmap w!! w !sudo -A tee > /dev/null %
 
 " TAB in normal mode will move to text buffer
-nnoremap <Tab> :bnext<CR>
+nnoremap <silent> <Tab> :bnext<CR>
 " SHIFT-TAB will go back
-nnoremap <S-Tab> :bprevious<CR>
+nnoremap <silent> <S-Tab> :bprevious<CR>
 
 " jumps
 nnoremap ]j <C-I>
@@ -77,8 +77,6 @@ nnoremap <Leader>h :Helptags<CR>
 " writing
 inoremap (        ()<Left>
 inoremap (<BS>    (<BS>
-inoremap '        ''<Left>
-inoremap '<BS>    '<BS>
 inoremap "        ""<Left>
 inoremap "<BS>    "<BS>
 inoremap {<Space> {<Space><Space>}<Left><Left>
