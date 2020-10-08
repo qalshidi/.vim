@@ -32,7 +32,7 @@ set shortmess+=c
 set shortmess+=I                            " No splash screen
 set shortmess+=A                            " Annoying swapfile messages
 set tags=./tags;,tags;
-set timeoutlen=300
+set timeoutlen=500
 set formatoptions-=cro                      " stop newline continuation of comments
 set formatoptions+=j                        " <S-j> joins comment lines well.
 set clipboard=unnamed,unnamedplus
@@ -427,9 +427,9 @@ if !exists('g:started_by_firenvim')
   augroup mydirvish
     autocmd!
     " behave like netrw
-    autocmd StdinReadPre * ++nested let s:std_in=1
-    autocmd VimEnter * ++nested if argc() == 0 && !exists("s:std_in") | Dirvish | endif
-    autocmd BufEnter * ++nested if isdirectory(bufname(bufnr('%'))) | Dirvish % | endif
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Dirvish | endif
+    autocmd BufEnter * if isdirectory(bufname(bufnr('%'))) | Dirvish % | endif
   augroup end
 
   let g:dirvish_mode = ':sort ,^.*[\/],'   " Folders on top

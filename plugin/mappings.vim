@@ -76,16 +76,25 @@ nnoremap <Leader>h :Helptags<CR>
 
 " writing
 inoremap (        ()<Left>
+inoremap (<BS>    (<BS>
 inoremap '        ''<Left>
+inoremap '<BS>    '<BS>
 inoremap "        ""<Left>
+inoremap "<BS>    "<BS>
 inoremap {<Space> {<Space><Space>}<Left><Left>
+inoremap {<BS>    {<BS>
 inoremap {<CR>    {<CR>}<Esc>O
 inoremap {        {}<Left>
+inoremap [<BS>    [<BS>
 inoremap [        []<Left>
 inoremap \{       \{\}<Left><Left>
+inoremap \{<BS>   \{<BS>
 inoremap \[       \[\]<Left><Left>
+inoremap \[<BS>   \[<BS>
 inoremap \"       \"\"<Left><Left>
+inoremap \"<BS>   \"<BS>
 inoremap \'       \'\'<Left><Left>
+inoremap \'<BS>   \'<BS>
 
 " editing
 nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
