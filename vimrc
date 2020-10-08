@@ -136,7 +136,6 @@ Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and 
 " }}}
 " Project stuff {{{
 
-Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 let g:rooter_targets = '*'
 
@@ -235,6 +234,7 @@ if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-lua/diagnostic-nvim'
+  Plug 'airblade/vim-gitgutter'
   let g:diagnostic_enable_virtual_text = 1
   " Set completeopt to have a better completion experience
   set completeopt=menuone,noinsert,noselect
