@@ -87,6 +87,7 @@ let g:markdown_fenced_languages = ['python', 'vim', 'c', 'cpp', 'sh', 'html', 'x
 " create directory if needed
 if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
   call mkdir($HOME.'/.vim/files')
+  call mkdir($HOME.'/.vim/files/backup')
 endif
 
 " backup files
@@ -103,16 +104,20 @@ set undodir     =$HOME/.vim/files/undo/
 
 " }}}
 " vim cache {{{
+
 let viminfoparams = "<800,'10,/50,:100,h,f0,n"
 if has('nvim')
   execute 'set viminfo='.viminfoparams.'~/.cache/nviminfo'
 else
   execute 'set viminfo='.viminfoparams.'~/.cache/viminfo'
 endif
+
 " }}}
 " Env variables {{{
+
 let $RTP = split(&runtimepath, ',')[0]
 let $RC = "$HOME/.vim/vimrc"
+
 " }}}
 " Plugins {{{
 
@@ -510,11 +515,12 @@ else
 endif
 
 " }}}
+" {{{ Lua
 
-" {{{
 if has('nvim-0.5')
   lua local lsp_config = require('lsp-config')
 endif
+
 " }}}"
 
 if strlen(glob("$HOME/.vim/vimrc-extend")) | source ~/.vim/vimrc-extend | endif
