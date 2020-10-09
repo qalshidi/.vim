@@ -281,8 +281,8 @@ elseif v:version >= 800
   endif
   " Use `[g` and `]g` to navigate diagnostics
   " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+  nmap <silent> [d <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]d <Plug>(coc-diagnostic-next)
   " GoTo code navigation.
   nmap <silent> <Leader>gd <Plug>(coc-definition)
   nmap <silent> <Leader>gy <Plug>(coc-type-definition)

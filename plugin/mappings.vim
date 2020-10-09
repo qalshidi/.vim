@@ -1,5 +1,5 @@
 " Mappings
-if exists('g:loaded_custom_mappings')
+if get(g:, 'loaded_custom_mappings', 0)
   finish
 endif
 let g:loaded_custom_mappings = 1
@@ -75,8 +75,8 @@ nnoremap [j <C-O>
 nnoremap ]i ]<C-I>
 nnoremap [i [<C-I>
 " definition jump
-nnoremap ]d ]<C-D>
-nnoremap [d [<C-D>
+nnoremap ]D ]<C-D>
+nnoremap [D [<C-D>
 
 " misc
 nnoremap <Leader>gt :!ctags -R .<CR>
