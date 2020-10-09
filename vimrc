@@ -279,7 +279,6 @@ elseif v:version >= 800
   else
     inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
   endif
-  " Use `[g` and `]g` to navigate diagnostics
   " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
   nmap <silent> [d <Plug>(coc-diagnostic-prev)
   nmap <silent> ]d <Plug>(coc-diagnostic-next)
@@ -300,7 +299,7 @@ elseif v:version >= 800
   " Highlight the symbol and its references when holding the cursor.
   autocmd CursorHold * silent call CocActionAsync('highlight')
   " Symbol renaming.
-  nmap <F2> <Plug>(coc-rename)
+  nmap <F2>       <Plug>(coc-rename)
   " Formatting selected code.
   xmap <Leader>f  <Plug>(coc-format-selected)
   nmap <Leader>f  <Plug>(coc-format-selected)
