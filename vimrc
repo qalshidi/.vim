@@ -183,6 +183,9 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
+Plug 'jiangmiao/auto-pairs'
+let g:completion_confirm_key = ""    " For <CR> to work properly
+
 " }}}
 " Firefox neovim {{{
 
@@ -246,7 +249,7 @@ if has('nvim-0.5')
 
 " }}}
 " {{{ Conqueror of Completion
-elseif v:version >= 800 && !has('nvim-0.5')
+elseif v:version >= 800
 
   "install node
   if !executable('npm')
@@ -502,7 +505,7 @@ else
 endif
 
 set background=dark
-colorscheme solarized8
+colorscheme solarized8_flat
 
 " powerline
 if !exists('g:started_by_firenvim')      " Don't show in firefox

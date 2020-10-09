@@ -9,20 +9,28 @@ nnoremap Y y$
 " Escape key is inconvenient
 inoremap <nowait> jk <Esc>
 inoremap <nowait> kj <Esc>
-if has('nvim')
+if exists(':tnoremap')
   tnoremap <nowait> jk <C-\><C-N>
   tnoremap <nowait> kj <C-\><C-N>
 endif
 nnoremap \ @@
 
 " easily navigate windows
-if has('nvim')
-  tnoremap <C-h> <C-\><C-N><C-w>h
-  tnoremap <C-j> <C-\><C-N><C-w>j
-  tnoremap <C-k> <C-\><C-N><C-w>k
-  tnoremap <C-l> <C-\><C-N><C-w>l
-  tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+if exists(':tnoremap')
+  if has('nvim')
+    tnoremap <C-h> <C-\><C-N><C-w>h
+    tnoremap <C-j> <C-\><C-N><C-w>j
+    tnoremap <C-k> <C-\><C-N><C-w>k
+    tnoremap <C-l> <C-\><C-N><C-w>l
+    tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+  else
+    tnoremap <C-h> <C-w>h
+    tnoremap <C-j> <C-w>j
+    tnoremap <C-k> <C-w>k
+    tnoremap <C-l> <C-w>l
+  endif
 endif
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -35,9 +43,9 @@ nnoremap <Leader>wx <C-w>x
 nnoremap <Leader>wr <C-w>r
 
 " resize with ctrl
-noremap <silent> <C-Up> :resize +3<CR>
-noremap <silent> <C-Down> :resize -3<CR>
-noremap <silent> <C-Left> :vertical resize -3<CR>
+noremap <silent> <C-Up>    :resize +3<CR>
+noremap <silent> <C-Down>  :resize -3<CR>
+noremap <silent> <C-Left>  :vertical resize -3<CR>
 noremap <silent> <C-Right> :vertical resize +3<CR>
 
 " resize with alt
@@ -74,27 +82,11 @@ nnoremap [d [<C-D>
 nnoremap <Leader>gt :!ctags -R .<CR>
 nnoremap <Leader>h :Helptags<CR>
 
-" writing
-inoremap (        ()<Left>
-inoremap (<BS>    (<BS>
-inoremap "        ""<Left>
-inoremap "<BS>    "<BS>
-inoremap {<Space> {<Space><Space>}<Left><Left>
-inoremap {<BS>    {<BS>
-inoremap {<CR>    {<CR>}<Esc>O
-inoremap {        {}<Left>
-inoremap [<BS>    [<BS>
-inoremap [        []<Left>
-inoremap \{       \{\}<Left><Left>
-inoremap \{<BS>   \{<BS>
-inoremap \[       \[\]<Left><Left>
-inoremap \[<BS>   \[<BS>
-inoremap \"       \"\"<Left><Left>
-inoremap \"<BS>   \"<BS>
-inoremap \'       \'\'<Left><Left>
-inoremap \'<BS>   \'<BS>
-
 " editing
+" For <CR> to work properly
+if exists('*complete_info')
+  imap <expr> <CR>  pumvisible() ? complete_info()["selected"] != "-1" ? "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"
+endif
 nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
 nnoremap <Leader>R *N:set hlsearch<CR>:silent! argdo! s///g<Left><Left>
 
