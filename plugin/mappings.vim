@@ -84,7 +84,7 @@ nnoremap <Leader>h :Helptags<CR>
 
 " editing
 " For <CR> to work properly
-if exists('*complete_info')
+if exists('*complete_info') && has('nvim')
   imap <expr> <CR>  pumvisible() ? complete_info()["selected"] != "-1" ? "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"
 endif
 nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
