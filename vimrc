@@ -89,19 +89,28 @@ let g:markdown_fenced_languages = ['python', 'vim', 'c', 'cpp', 'sh', 'html', 'x
 if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
   call mkdir($HOME.'/.vim/files')
   call mkdir($HOME.'/.vim/files/backup')
+  call mkdir($HOME.'/.vim/files/undo')
+  call mkdir($HOME.'/.vim/files/sudo')
+  call mkdir($HOME.'/.vim/files/sudo/undo')
 endif
 
 " backup files
-set backup
-set backupdir   =$HOME/.vim/files/backup/
-set backupext   =-vimbackup
-set backupskip  =
-" swap files
-set directory   =$HOME/.vim/files/swap//
-set updatecount =100
-" undo files
-set undofile
-set undodir     =$HOME/.vim/files/undo/
+if !exists("$SUDO_USER")
+  set backup
+  set backupdir   =$HOME/.vim/files/backup/
+  set backupext   =-vimbackup
+  set backupskip  =
+  " swap files
+  set directory   =$HOME/.vim/files/swap//,/tmp/vim/swap//
+  set updatecount =100
+  " undo files
+  set undofile
+  set undodir     =$HOME/.vim/files/undo/
+else
+  set nobackup
+  set noswapfile
+  set undodir     =$HOME/.vim/files/sudo/undo/
+endif
 
 " }}}
 " vim cache {{{
