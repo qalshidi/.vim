@@ -31,3 +31,5 @@ function! PyInclude(fname) abort
     return substitute(l, '\.', '/', 'g') . '.py'
 endfunction
 setlocal includeexpr=PyInclude(v:fname)
+
+call g:ApplyLspMappings()
