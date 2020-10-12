@@ -34,8 +34,8 @@ set shortmess+=I                            " No splash screen
 set shortmess+=A                            " Annoying swapfile messages
 set tags=./tags;,tags;
 set timeoutlen=500
-set formatoptions-=cro                      " stop newline continuation of comments
-set formatoptions+=j                        " <S-j> joins comment lines well.
+set formatoptions-=ro                      " stop newline continuation of comments
+set formatoptions+=j                       " J joins comment lines well.
 set clipboard=unnamed,unnamedplus
 set scrolloff=5
 set colorcolumn=+1
@@ -376,11 +376,14 @@ endif
 " }}}
 " Cosmetics {{{
 
-" Plug 'overcache/NeoSolarized' " color scheme
+if has('nvim') || v:version >= 800
+  Plug 'lifepillar/vim-solarized8'
+  let g:solarized_extra_hi_groups = 1
+else
+  Plug 'overcache/NeoSolarized' " color scheme
+endif
 Plug 'ap/vim-css-color' " css colorscheme
 Plug 'rafi/awesome-vim-colorschemes', {'on': 'colorscheme'}
-Plug 'lifepillar/vim-solarized8'
-let g:solarized_extra_hi_groups = 1
 if has('signs')
   Plug 'kshenoy/vim-signature' " show marks on signcolumn
 endif
@@ -488,12 +491,12 @@ endif
 "}}}
 " Buffer stuff {{{
 
-" "Plug 'qpkorr/vim-bufkill'
+Plug 'qpkorr/vim-bufkill'
 
 " }}}
 " Devicons (must be last {{{
 
-" "Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 " }}}
 call plug#end()
@@ -513,7 +516,12 @@ else
 endif
 
 set background=dark
-colorscheme solarized8_flat
+
+if has('nvim') || v:version >= 800
+  colorscheme solarized8_flat
+else
+  colorscheme NeoSolarized
+endif
 
 " powerline
 if !exists('g:started_by_firenvim')      " Don't show in firefox
