@@ -23,14 +23,15 @@ if has('autocmd')
     " Turn off highlighting after movement
     if exists('##CmdLineEnter')
       autocmd CmdlineEnter /,\? :set hlsearch
-      autocmd CmdlineLeave /,\? :set nohlsearch
     endif
+    autocmd CursorHold * ++nested :set nohlsearch
 
     " Skeletons
     autocmd BufNewFile  *.py    0r ~/.vim/snippets/file.py | normal Gi
     autocmd BufNewFile  *.fish  0r ~/.vim/snippets/file.fish | normal Gi
     autocmd BufNewFile  *.sh    0r ~/.vim/snippets/file.sh | normal Gi
 
+    " use git grep if in git directory
     autocmd VimEnter * if isdirectory('./.git') | let g:bettergrepprg = 'git grep -n --column' | endif
     if exists('##DirChanged')
       autocmd DirChanged * if isdirectory('./.git') | let g:bettergrepprg = 'git grep -n --column' | endif

@@ -512,7 +512,7 @@ set t_8b=[48;2;%lu;%lu;%lum
 if has('termguicolors')
   set termguicolors " Enable true color support.
 else
-  set t_Co=256
+  set t_Co=16
 endif
 
 set background=dark
