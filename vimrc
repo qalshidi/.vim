@@ -517,7 +517,7 @@ endif
 
 set background=dark
 
-if has('nvim') || v:version >= 800
+if has('nvim') || v:version >= 704
   colorscheme solarized8_flat
 else
   colorscheme NeoSolarized
