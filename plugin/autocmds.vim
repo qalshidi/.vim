@@ -10,7 +10,7 @@ if has('autocmd')
 
     " Flash highlighted text
     if exists('##TextYankPost') && has('nvim-0.5')
-      au TextYankPost * silent! lua vim.highlight.on_yank {timeout=200, on_visual=false}
+      au TextYankPost * ++nested silent! lua vim.highlight.on_yank {timeout=200, on_visual=false}
     endif
 
     " Highlight background windows
@@ -24,7 +24,7 @@ if has('autocmd')
     if exists('##CmdLineEnter')
       autocmd CmdlineEnter /,\? :set hlsearch
     endif
-    autocmd CursorHold * ++nested :set nohlsearch
+    autocmd CursorMoved * ++nested :set nohlsearch
 
     " Skeletons
     autocmd BufNewFile  *.py    0r ~/.vim/snippets/file.py | normal Gi
