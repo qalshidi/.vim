@@ -83,7 +83,18 @@ let maplocalleader = "<Space>"
 
 " Global variables
 
-let g:markdown_fenced_languages = ['python', 'vim', 'c', 'cpp', 'sh', 'html', 'xml', 'ruby', 'go', 'css', 'haskell']
+let g:markdown_fenced_languages = [
+  \ 'python',
+  \ 'vim',
+  \ 'c',
+  \ 'cpp',
+  \ 'sh',
+  \ 'html',
+  \ 'xml',
+  \ 'css',
+  \ 'haskell',
+  \ 'help',
+  \ ]
 
 " create directory if needed
 if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
@@ -189,8 +200,8 @@ function! s:goyo_leave()
   endif
 endfunction
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+autocmd! User GoyoEnter ++nested call <SID>goyo_enter()
+autocmd! User GoyoLeave ++nested call <SID>goyo_leave()
 
 Plug 'jiangmiao/auto-pairs'
 let g:completion_confirm_key = ""    " For <CR> to work properly

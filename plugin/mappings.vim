@@ -91,10 +91,8 @@ nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
 nnoremap <Leader>R *N:set hlsearch<CR>:silent! argdo! s///g<Left><Left>
 
 " Snippets
-nnoremap <Leader>spyfile :-1read ~/.vim/snippets/file.py<CR>GddggjA
-nnoremap <Leader>spydef :-1read ~/.vim/snippets/def.py<CR>wi
-nnoremap <Leader>spyclass :-1read ~/.vim/snippets/class.py<CR>wi
-nnoremap <Leader>sshebang O#!/usr/bin/env bash<CR># 
+inoremap ;def :-1read ~/.vim/snippets/def.py<CR>wi
+inoremap ;class :-1read ~/.vim/snippets/class.py<CR>wi
 
 " LSP
 function g:ApplyLspMappings() abort
