@@ -81,6 +81,8 @@ endif
 let mapleader = ","
 let maplocalleader = "<Space>"
 
+highlight CursorLineNr cterm=bold gui=bold ctermfg=2 guifg=#859900
+
 " Global variables
 
 let g:markdown_fenced_languages = [
@@ -200,8 +202,11 @@ function! s:goyo_leave()
   endif
 endfunction
 
-autocmd! User GoyoEnter ++nested call <SID>goyo_enter()
-autocmd! User GoyoLeave ++nested call <SID>goyo_leave()
+augroup my_goyo
+  autocmd!
+  autocmd! User GoyoEnter ++nested call <SID>goyo_enter()
+  autocmd! User GoyoLeave ++nested call <SID>goyo_leave()
+augroup END
 
 Plug 'jiangmiao/auto-pairs'
 let g:completion_confirm_key = ""    " For <CR> to work properly
@@ -413,6 +418,7 @@ Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
 Plug 'ledger/vim-ledger', { 'for': 'ledger' } " Ledger
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' } " Haskell
 Plug 'dag/vim-fish', { 'for': 'fish' } " Fish
+Plug 'dbeniamine/todo.txt-vim'
 
 "}}}
 " Clipboard {{{

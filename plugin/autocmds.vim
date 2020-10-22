@@ -20,6 +20,12 @@ if has('autocmd')
       autocmd FocusLost,WinLeave * if autocmds#should_colorcolumn() | let &l:colorcolumn=join(range(1, 255), ',') | endif
     endif
 
+    " Highlight Line Number
+    if exists(':highlight')
+      autocmd InsertEnter * hi CursorLineNr cterm=bold gui=bold ctermfg=4 guifg=#268bd2
+      autocmd InsertLeave * hi CursorLineNr cterm=bold gui=bold ctermfg=2 guifg=#859900
+    endif
+
     " Turn off highlighting after movement
     if exists('##CmdLineEnter')
       autocmd CmdlineEnter /,\? :set hlsearch
@@ -27,22 +33,38 @@ if has('autocmd')
     autocmd CursorMoved * ++nested :set nohlsearch
 
     " Skeletons
-    autocmd BufNewFile  *.py    0r ~/.vim/snippets/file.py | normal Gi
+    autocmd BufNewFile  *.py    0r ~/.vim/snippets/file.py   | normal Gi
     autocmd BufNewFile  *.fish  0r ~/.vim/snippets/file.fish | normal Gi
-    autocmd BufNewFile  *.sh    0r ~/.vim/snippets/file.sh | normal Gi
+    autocmd BufNewFile  *.sh    0r ~/.vim/snippets/file.sh   | normal Gi
+    autocmd BufNewFile  *.vim   0r ~/.vim/snippets/file.vim  | normal gg$"%pGi
 
-    " use git grep if in git directory
-    autocmd VimEnter * if isdirectory('./.git') | let g:bettergrepprg = 'git grep -n --column' | endif
+    " decide on grepprg
+    function! s:grepprg() abort
+      if isdirectory('./.git')
+        return 'git grep -n --column'
+      else
+        if executable('rg')
+          return 'rg --vimgrep'
+        else
+          return &greppg
+        endif
+      endif
+    endfunction
+
+    " change grepprg on change directory
+    autocmd VimEnter * let g:bettergrepprg = <SID>grepprg()
     if exists('##DirChanged')
-      autocmd DirChanged * if isdirectory('./.git') | let g:bettergrepprg = 'git grep -n --column' | endif
+      autocmd DirChanged * let g:bettergrepprg = <SID>grepprg()
     endif
 
   " Automatically add file marks
   autocmd BufLeave *.{c,cpp} mark C
   autocmd BufLeave *.h       mark H
   autocmd BufLeave *.md      mark M
+  autocmd BufLeave *.txt     mark T
   autocmd BufLeave *.py      mark P
   autocmd BufLeave *.in      mark I
+  autocmd BufLeave *.vim     mark V
 
   " Set cursor line only in normal mode
   autocmd InsertLeave,WinEnter * set cursorline

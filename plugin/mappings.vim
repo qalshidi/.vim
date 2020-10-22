@@ -91,8 +91,9 @@ nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
 nnoremap <Leader>R *N:set hlsearch<CR>:silent! argdo! s///g<Left><Left>
 
 " Snippets
-inoremap ;def :-1read ~/.vim/snippets/def.py<CR>wi
-inoremap ;class :-1read ~/.vim/snippets/class.py<CR>wi
+inoremap        ;def   <Esc>:-1read ~/.vim/snippets/def.py<CR>wi
+inoremap        ;class <Esc>:-1read ~/.vim/snippets/class.py<CR>wi
+inoremap <expr> ;date  system("date '+%Y-%m-%d'")
 
 " LSP
 function g:ApplyLspMappings() abort
