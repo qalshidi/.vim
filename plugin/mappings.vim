@@ -91,28 +91,23 @@ nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
 nnoremap <Leader>R *N:set hlsearch<CR>:silent! argdo! s///g<Left><Left>
 
 " Snippets
-inoremap        ;def   <Esc>:-1read ~/.vim/snippets/def.py<CR>wi
-inoremap        ;class <Esc>:-1read ~/.vim/snippets/class.py<CR>wi
-inoremap <expr> ;date  system("date '+%Y-%m-%d'")
+inoreabbrev <expr> ;d strftime("%Y-%m-%d")
 
 " LSP
-function g:ApplyLspMappings() abort
-  if has('nvim-0.5')
-    nnoremap <buffer> <silent> gd         <cmd>lua vim.lsp.buf.declaration()<CR>
-    nnoremap <buffer> <silent> gD         <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <buffer> <silent> K          <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <buffer> <silent> gD         <cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap <buffer> <silent> <C-s>      <cmd>lua vim.lsp.buf.signature_help()<CR>
-    inoremap <buffer> <silent> <C-s>      <cmd>lua vim.lsp.buf.signature_help()<CR>
-    nnoremap <buffer> <silent> 1gD        <cmd>lua vim.lsp.buf.type_definition()<CR>
-    nnoremap <buffer> <silent> gr         <cmd>lua vim.lsp.buf.references()<CR>
-    nnoremap <buffer> <silent> <F2>       <cmd>lua vim.lsp.buf.rename()<CR>
-    nnoremap <buffer> <silent> <leader>f  <cmd>lua vim.lsp.buf.formatting()<CR>
-    nnoremap <buffer> <silent> g0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
-    nnoremap <buffer> <silent> gW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-    nnoremap <buffer> <silent> ge         <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
-    nnoremap <buffer> <silent> ga         <cmd>lua vim.lsp.buf.code_action()<CR>
-    inoremap <buffer> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <buffer> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  endif
-endfunction
+if has('nvim-0.5')
+  nnoremap <buffer> <silent> <Leader>ld         <cmd>lua vim.lsp.buf.declaration()<CR>
+  nnoremap <buffer> <silent> <Leader>lD         <cmd>lua vim.lsp.buf.definition()<CR>
+  nnoremap <buffer> <silent> <Leader>ll         <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap <buffer> <silent> <Leader>li         <cmd>lua vim.lsp.buf.implementation()<CR>
+  nnoremap <buffer> <silent> <C-s>              <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <buffer> <silent> <Leader>lt         <cmd>lua vim.lsp.buf.type_definition()<CR>
+  nnoremap <buffer> <silent> <Leader>lr         <cmd>lua vim.lsp.buf.references()<CR>
+  nnoremap <buffer> <silent> <F2>               <cmd>lua vim.lsp.buf.rename()<CR>
+  nnoremap <buffer> <silent> <Leader>f          <cmd>lua vim.lsp.buf.formatting()<CR>
+  nnoremap <buffer> <silent> <Leader>l0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
+  nnoremap <buffer> <silent> <Leader>lW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+  nnoremap <buffer> <silent> <Leader>le         <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+  nnoremap <buffer> <silent> <Leader>la         <cmd>lua vim.lsp.buf.code_action()<CR>
+  inoremap <buffer> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <buffer> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+endif

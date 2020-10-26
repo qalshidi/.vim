@@ -78,10 +78,8 @@ if has('folding')
   set foldlevelstart=99                      " Start unfloded
 endif
 
-let mapleader = ","
-let maplocalleader = "<Space>"
-
-highlight CursorLineNr cterm=bold gui=bold ctermfg=2 guifg=#859900
+let mapleader = "<Space>"
+let maplocalleader = ","
 
 " Global variables
 
@@ -539,6 +537,8 @@ if has('nvim') || v:version >= 704
 else
   colorscheme NeoSolarized
 endif
+
+highlight CursorLineNr cterm=bold gui=bold ctermfg=2 guifg=#859900
 
 " powerline
 if !exists('g:started_by_firenvim')      " Don't show in firefox

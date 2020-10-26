@@ -32,4 +32,6 @@ function! PyInclude(fname) abort
 endfunction
 setlocal includeexpr=PyInclude(v:fname)
 
-call g:ApplyLspMappings()
+" Snippets
+inoremap <buffer> ;def   <Esc>:0read ~/.vim/snippets/def.py<CR>wi
+inoremap <buffer> ;class <Esc>:0read ~/.vim/snippets/class.py<CR>wi

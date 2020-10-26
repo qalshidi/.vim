@@ -9,13 +9,20 @@ local custom_attach = function()
     print("LSP Attached.")
 end
 
+if not nvim_lsp.vimls.install_info().is_installed then
+    nvim_lsp.vimls.install()
+end
 nvim_lsp.vimls.setup{ on_attach = custom_attach }
+
+if not nvim_lsp.bashls.install_info().is_installed then
+    nvim_lsp.bashls.install()
+end
 nvim_lsp.bashls.setup{ on_attach = custom_attach }
 
 if vim.fn.executable("haskell-language-server-wrapper") then
     nvim_lsp.hls.setup{ on_attach = custom_attach }
 else
-    vim.fn.jobstart("ghcup upgrad && ghcup install hls")
+    vim.fn.jobstart("ghcup upgrade && ghcup install hls")
 end
 
 if vim.fn.executable("pyls") then
