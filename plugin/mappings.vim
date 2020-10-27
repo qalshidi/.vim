@@ -80,7 +80,8 @@ nnoremap [D [<C-D>
 
 " misc
 nnoremap <Leader>gt :!ctags -R .<CR>
-nnoremap <Leader>h :Helptags<CR>
+
+" Fuzzy finding
 
 " editing
 " For <CR> to work properly
@@ -108,6 +109,6 @@ if has('nvim-0.5')
   nnoremap <buffer> <silent> <Leader>lW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
   nnoremap <buffer> <silent> <Leader>le         <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
   nnoremap <buffer> <silent> <Leader>la         <cmd>lua vim.lsp.buf.code_action()<CR>
-  inoremap <buffer> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <buffer> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <buffer> <expr>   <Tab>              pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <buffer> <expr>   <S-Tab>            pumvisible() ? "\<C-p>" : "\<S-Tab>"
 endif

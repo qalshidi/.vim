@@ -78,7 +78,7 @@ if has('folding')
   set foldlevelstart=99                      " Start unfloded
 endif
 
-let mapleader = "<Space>"
+let mapleader = "\<Space>"
 let maplocalleader = ","
 
 " Global variables
@@ -473,21 +473,12 @@ endif
 " }}}
 " Fuzzy File Finder {{{
 
-if has('nvim') || v:version >= 800
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  nnoremap <silent> <C-p> :Files<CR>
-  " Mapping selecting mappings
-  nmap <Leader><Tab> <Plug>(fzf-maps-n)
-  xmap <Leader><Tab> <Plug>(fzf-maps-x)
-  omap <Leader><Tab> <Plug>(fzf-maps-o)
-  " Insert mode completion
-  imap <C-x><C-k> <Plug>(fzf-complete-word)
-  imap <C-x><C-f> <Plug>(fzf-complete-path)
-  imap <C-x><C-j> <Plug>(fzf-complete-file-ag)
-  imap <C-x><C-l> <Plug>(fzf-complete-line)
-  let g:fzf_preview_window = 'right:40%'
+if has('patch-8.1.2114') || has('nvim-0.4.2')
+  Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+  nnoremap <C-p>     <Cmd>Clap files<CR>
+  nnoremap <Leader>h <Cmd>Clap help_tags<CR>
 endif
+
 
 " }}}
 " targets.vim {{{
