@@ -33,5 +33,5 @@ endfunction
 setlocal includeexpr=PyInclude(v:fname)
 
 " Snippets
-inoremap <buffer> ;def   <Esc>:0read ~/.vim/snippets/def.py<CR>wi
-inoremap <buffer> ;class <Esc>:0read ~/.vim/snippets/class.py<CR>wi
+inoremap <buffer> ;def   <Esc>:read ~/.vim/snippets/def.py<CR>wi
+inoremap <buffer> ;class <Esc>:read ~/.vim/snippets/class.py<CR>wi
