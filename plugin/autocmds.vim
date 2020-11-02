@@ -22,8 +22,8 @@ if has('autocmd')
 
     " Highlight Line Number
     if exists(':highlight')
-      autocmd InsertEnter * hi CursorLineNr cterm=bold gui=bold ctermfg=4 guifg=#268bd2
-      autocmd InsertLeave * hi CursorLineNr cterm=bold gui=bold ctermfg=2 guifg=#859900
+      autocmd InsertEnter * highlight! link CursorLineNr Identifier
+      autocmd InsertLeave * highlight! link CursorLineNr Statement
     endif
 
     " Turn off highlighting after movement
