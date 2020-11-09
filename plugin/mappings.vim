@@ -85,8 +85,8 @@ nnoremap <Leader>gt :!ctags -R .<CR>
 
 " editing
 " For <CR> to work properly
-if exists('*complete_info') && has('nvim')
-  imap <expr> <CR>  pumvisible() ? complete_info()["selected"] != "-1" ? "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"
+if exists('*complete_info') && has('nvim-0.5')
+  inoremap <expr> <CR>  pumvisible() ? complete_info()["selected"] != "-1" ? "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"
 endif
 nnoremap <Leader>r *N:set hlsearch<CR>:%s///g<Left><Left>
 nnoremap <Leader>R *N:set hlsearch<CR>:silent! argdo! s///g<Left><Left>
