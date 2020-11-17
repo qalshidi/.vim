@@ -153,6 +153,7 @@ Plug 'tpope/vim-speeddating'      " better date functionality
 Plug 'tpope/vim-repeat'           " have . work on plugins
 Plug 'tpope/vim-unimpaired'       " more mappings with ] and [
 Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and others
+Plug 'tpope/vim-eunuch'           " file manipulation
 
 " }}}
 " Project stuff {{{
@@ -412,11 +413,10 @@ if has('nvim')
   let g:vimtex_compiler_progname = 'nvr'
 end
 
-Plug 'ledger/vim-ledger', { 'for': 'ledger' } " Ledger
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' } " Haskell
-Plug 'dag/vim-fish', { 'for': 'fish' } " Fish
 Plug 'dbeniamine/todo.txt-vim'
 Plug 'sheerun/vim-polyglot'             " Syntax enhancements
+let g:Todo_txt_prefix_creation_date=1
 
 "}}}
 " Clipboard {{{
@@ -529,7 +529,8 @@ else
   colorscheme NeoSolarized
 endif
 
-highlight CursorLineNr cterm=bold gui=bold ctermfg=2 guifg=#859900
+" Initial settings
+highlight! link CursorLineNr Statement
 
 " powerline
 if !exists('g:started_by_firenvim')      " Don't show in firefox
