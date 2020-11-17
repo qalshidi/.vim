@@ -412,11 +412,11 @@ if has('nvim')
   let g:vimtex_compiler_progname = 'nvr'
 end
 
-Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
 Plug 'ledger/vim-ledger', { 'for': 'ledger' } " Ledger
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' } " Haskell
 Plug 'dag/vim-fish', { 'for': 'fish' } " Fish
 Plug 'dbeniamine/todo.txt-vim'
+Plug 'sheerun/vim-polyglot'             " Syntax enhancements
 
 "}}}
 " Clipboard {{{
