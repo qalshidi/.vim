@@ -9,11 +9,8 @@ set exrc secure                             " Project specific vimrc's
 set path=.,,src/**,config/**                " include files recursively and not have defaults
 syntax enable
 filetype plugin indent on
-set splitbelow splitright                   " windows split in the intuitive direction
 set tabstop=8 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab things
-set autoread                                " Read file if changed outside of vim
 set number relativenumber                   " show relative numbers on the side
-set ignorecase smartcase                    " Use smartcase by default
 set dictionary+=/usr/share/dict/words       " add this dictionary
 
 if has('linebreak')
@@ -25,30 +22,28 @@ if has('linebreak')
   set linebreak                             " wrap around &breakat
 endif
 
-set hidden                                  " Allow hide buffer without saving
 set cmdheight=2                             " Give more space for displaying messages.
 set updatetime=300                          " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-runtime macros/matchit.vim
 set shortmess+=c
 set shortmess+=I                            " No splash screen
 set shortmess+=A                            " Annoying swapfile messages
-set tags=./tags;,tags;
 set timeoutlen=500
 set formatoptions-=ro                      " stop newline continuation of comments
 set formatoptions+=j                       " J joins comment lines well.
-set clipboard=unnamed,unnamedplus
-set scrolloff=5
+
+if !exists('$SSH_TTY')                     " Use clipboard if not on ssh
+  set clipboard=unnamed,unnamedplus
+endif
+
 set colorcolumn=+1
 set lazyredraw                              " Don't redraw during macro
 set nojoinspaces                            " Don't double space on join with punctuation
-set switchbuf=useopen                       " Jump to an opened window buffer when using qf
 
-if exists('&inccomand')
+if exists('&inccommand')
   set inccommand=nosplit                    " Show modifications of commands
 endif
 
 set nohlsearch                              " Using autocmds for this
-set wildmenu                                " Tab menu
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -62,8 +57,6 @@ endif
 if has('virtualedit')
   set virtualedit=block               " allow cursor to move where there is no text in visual block mode
 endif
-
-set visualbell t_vb=                  " stop annoying beeping for non-error errors
 
 " UTF stuff
 if has('&noemoji')
@@ -96,31 +89,11 @@ let g:markdown_fenced_languages = [
   \ 'help',
   \ ]
 
-" create directory if needed
-if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
-  call mkdir($HOME.'/.vim/files')
-  call mkdir($HOME.'/.vim/files/backup')
-  call mkdir($HOME.'/.vim/files/undo')
-  call mkdir($HOME.'/.vim/files/sudo')
-  call mkdir($HOME.'/.vim/files/sudo/undo')
-endif
-
 " backup files
-if !exists("$SUDO_USER")
-  set backup
-  set backupdir   =$HOME/.vim/files/backup/
-  set backupext   =-vimbackup
-  set backupskip  =
-  " swap files
-  set directory   =$HOME/.vim/files/swap//,/tmp/vim/swap//
-  set updatecount =100
-  " undo files
-  set undofile
-  set undodir     =$HOME/.vim/files/undo/
-else
+if exists("$SUDO_USER")
   set nobackup
   set noswapfile
-  set undodir     =$HOME/.vim/files/sudo/undo/
+  set undodir     =/tmp/vim/sudo
 endif
 
 " }}}
@@ -145,7 +118,8 @@ let $RC = "$HOME/.vim/vimrc"
 call plug#begin('~/.vim/plugged')
 " tpope Basics {{{
 
-Plug 'tpope/vim-sensible'         " sensible vim settings
+" Plug 'tpope/vim-sensible'         " sensible vim settings
+Plug 'sheerun/vimrc'              " vim-sensible plus extra
 Plug 'tpope/vim-surround'         " surround command
 Plug 'tpope/vim-commentary'       " commentary command
 Plug 'tpope/vim-fugitive'         " git functionality
@@ -286,7 +260,7 @@ elseif v:version >= 800
     \ pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<Tab>" :
     \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 
   function! s:check_back_space() abort
     let col = col('.') - 1

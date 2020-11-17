@@ -4,8 +4,6 @@ if get(g:, 'loaded_custom_mappings', 0)
 endif
 let g:loaded_custom_mappings = 1
 
-" More torelable defaults
-nnoremap Y y$
 " Escape key is inconvenient
 inoremap <nowait> jk <Esc>
 inoremap <nowait> kj <Esc>
@@ -109,6 +107,6 @@ if has('nvim-0.5')
   nnoremap <buffer> <silent> <Leader>lW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
   nnoremap <buffer> <silent> <Leader>le         <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
   nnoremap <buffer> <silent> <Leader>la         <cmd>lua vim.lsp.buf.code_action()<CR>
-  inoremap <buffer> <expr>   <Tab>              pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <buffer> <expr>   <S-Tab>            pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap          <expr>   <Tab>              pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap          <expr>   <S-Tab>            pumvisible() ? "\<C-p>" : "\<S-Tab>"
 endif

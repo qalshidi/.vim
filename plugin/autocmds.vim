@@ -70,5 +70,5 @@ if has('autocmd')
   autocmd InsertLeave,WinEnter * set cursorline
   autocmd InsertEnter,WinLeave * set nocursorline
 
-  augroup end
+  augroup END
 endif
