@@ -455,9 +455,10 @@ endif
 
 
 " }}}
-" targets.vim {{{
+" Editing {{{
 
-Plug 'wellle/targets.vim'
+Plug 'wellle/targets.vim'      " Extra text objects
+Plug 'rhysd/clever-f.vim'      " Better f key behavior
 
 " }}}
 " Powerline {{{
@@ -528,4 +529,4 @@ endif
 
 if strlen(glob("$HOME/.vim/vimrc-extend")) | source ~/.vim/vimrc-extend | endif
 
-" vim: foldmethod=marker sts=2 et sw=2
+" vim: foldmethod=marker sts=2 et sw=2 foldnestmax=0
