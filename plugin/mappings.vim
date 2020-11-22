@@ -4,12 +4,18 @@ if get(g:, 'loaded_custom_mappings', 0)
 endif
 let g:loaded_custom_mappings = 1
 
+if !has('nvim')       " For shannon
+  inoremap jk <Esc>
+  inoremap kj <Esc>
+endif
+
 " Escape key is inconvenient
-inoremap <nowait> jk <Esc>
-inoremap <nowait> kj <Esc>
 if exists(':tnoremap')
-  tnoremap <nowait> jk <C-\><C-N>
-  tnoremap <nowait> kj <C-\><C-N>
+  tnoremap <nowait> <C-[> <C-\><C-N>
+  if !has('nvim')
+    tnoremap <nowait> jk <C-\><C-N>
+    tnoremap <nowait> kj <C-\><C-N>
+  endif
 endif
 nnoremap \ @@
 
@@ -94,19 +100,22 @@ inoreabbrev <expr> ;d strftime("%Y-%m-%d")
 
 " LSP
 if has('nvim-0.5')
-  nnoremap <buffer> <silent> <Leader>ld         <cmd>lua vim.lsp.buf.declaration()<CR>
-  nnoremap <buffer> <silent> <Leader>lD         <cmd>lua vim.lsp.buf.definition()<CR>
-  nnoremap <buffer> <silent> <Leader>ll         <cmd>lua vim.lsp.buf.hover()<CR>
-  nnoremap <buffer> <silent> <Leader>li         <cmd>lua vim.lsp.buf.implementation()<CR>
-  nnoremap <buffer> <silent> <C-s>              <cmd>lua vim.lsp.buf.signature_help()<CR>
-  nnoremap <buffer> <silent> <Leader>lt         <cmd>lua vim.lsp.buf.type_definition()<CR>
-  nnoremap <buffer> <silent> <Leader>lr         <cmd>lua vim.lsp.buf.references()<CR>
-  nnoremap <buffer> <silent> <F2>               <cmd>lua vim.lsp.buf.rename()<CR>
-  nnoremap <buffer> <silent> <Leader>f          <cmd>lua vim.lsp.buf.formatting()<CR>
-  nnoremap <buffer> <silent> <Leader>l0         <cmd>lua vim.lsp.buf.document_symbol()<CR>
-  nnoremap <buffer> <silent> <Leader>lW         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-  nnoremap <buffer> <silent> <Leader>le         <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
-  nnoremap <buffer> <silent> <Leader>la         <cmd>lua vim.lsp.buf.code_action()<CR>
-  inoremap          <expr>   <Tab>              pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap          <expr>   <S-Tab>            pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  nnoremap <silent> <Leader>ld   <cmd>lua vim.lsp.buf.declaration()<CR>
+  nnoremap <silent> <Leader>lD   <cmd>lua vim.lsp.buf.definition()<CR>
+  nnoremap <silent> <Leader>ll   <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap <silent> <Leader>li   <cmd>lua vim.lsp.buf.implementation()<CR>
+  nnoremap <silent> <C-s>        <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <silent> <Leader>lt   <cmd>lua vim.lsp.buf.type_definition()<CR>
+  nnoremap <silent> <Leader>lr   <cmd>lua vim.lsp.buf.references()<CR>
+  nnoremap <silent> <F2>         <cmd>lua vim.lsp.buf.rename()<CR>
+  nnoremap <silent> <Leader>f    <cmd>lua vim.lsp.buf.formatting()<CR>
+  nnoremap <silent> <Leader>l0   <cmd>lua vim.lsp.buf.document_symbol()<CR>
+  nnoremap <silent> <Leader>lW   <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+  nnoremap <silent> <Leader>le   <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+  nnoremap <silent> <Leader>la   <cmd>lua vim.lsp.buf.code_action()<CR>
+  nnoremap <silent> <Leader>dn   <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+  nnoremap <silent> <Leader>dN   <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+  nnoremap <silent> <Leader>dd   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+  inoremap <expr>   <Tab>        pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr>   <S-Tab>      pumvisible() ? "\<C-p>" : "\<S-Tab>"
 endif
