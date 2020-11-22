@@ -72,7 +72,7 @@ if has('folding')
 endif
 
 let mapleader = "\<Space>"
-let maplocalleader = ","
+let maplocalleader = "\<Bslash>"
 
 " Global variables
 
@@ -181,9 +181,6 @@ augroup my_goyo
   autocmd! User GoyoLeave ++nested call <SID>goyo_leave()
 augroup END
 
-Plug 'jiangmiao/auto-pairs'
-let g:completion_confirm_key = ""    " For <CR> to work properly
-
 " }}}
 " Firefox neovim {{{
 
@@ -235,7 +232,6 @@ endif
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
-  Plug 'nvim-lua/diagnostic-nvim'
   Plug 'airblade/vim-gitgutter'
   let g:diagnostic_enable_virtual_text = 1
   " Set completeopt to have a better completion experience
@@ -387,7 +383,7 @@ if has('nvim')
   let g:vimtex_compiler_progname = 'nvr'
 end
 
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' } " Haskell
+Plug 'ledger/vim-ledger'
 Plug 'dbeniamine/todo.txt-vim'
 Plug 'sheerun/vim-polyglot'             " Syntax enhancements
 let g:Todo_txt_prefix_creation_date=1
