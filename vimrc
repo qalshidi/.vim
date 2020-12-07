@@ -12,6 +12,7 @@ filetype plugin indent on
 set tabstop=8 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab things
 set number relativenumber                   " show relative numbers on the side
 set dictionary+=/usr/share/dict/words       " add this dictionary
+set textwidth=80
 
 if has('linebreak')
   set wrap
