@@ -250,6 +250,7 @@ if has('nvim-0.5')
 " {{{ Conqueror of Completion
 elseif v:version >= 800
 
+  let g:coc_disable_startup_warning = 1
   "install node
   if !executable('npm')
     silent !curl -sL install-node.now.sh/lts | PREFIX=~/.local bash /dev/stdin --yes
