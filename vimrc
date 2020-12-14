@@ -44,6 +44,12 @@ if exists('&inccommand')
   set inccommand=nosplit                    " Show modifications of commands
 endif
 
+if executable('rg')
+  let &grepprg = "rg --vimgrep "
+else
+  let &grepprg = "grep -n "
+endif
+
 set nohlsearch                              " Using autocmds for this
 
 " Always show the signcolumn, otherwise it would shift the text each time

@@ -41,13 +41,13 @@ if has('autocmd')
     " decide on grepprg
     function! s:grepprg() abort
       if isdirectory('./.git')
-        return 'git grep -n --column'
-      else
-        if executable('rg')
-          return 'rg --vimgrep'
+        if executable('git')
+          return 'git grep -n --column'
         else
-          return &greppg
+          return &grepprg
         endif
+      else
+        return &grepprg
       endif
     endfunction
 
