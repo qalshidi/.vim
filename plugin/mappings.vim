@@ -59,9 +59,13 @@ noremap <silent> <A-h> :vertical resize -3<CR>
 noremap <silent> <A-l> :vertical resize +3<CR>
 
 " highlighting
-nnoremap <silent> n n:set hlsearch<CR>
-nnoremap <silent> N N:set hlsearch<CR>
 nnoremap <silent> * *N:set hlsearch<CR>
+nnoremap <silent> i :nohlsearch<CR>i
+nnoremap <silent> I :nohlsearch<CR>I
+nnoremap <silent> o :nohlsearch<CR>o
+nnoremap <silent> O :nohlsearch<CR>O
+nnoremap <silent> a :nohlsearch<CR>a
+nnoremap <silent> A :nohlsearch<CR>A
 nnoremap <silent> <Leader><Space> :nohlsearch<CR>
 
 " write with sudo

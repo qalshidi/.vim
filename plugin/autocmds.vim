@@ -26,12 +26,6 @@ if has('autocmd')
       autocmd InsertLeave * highlight! link CursorLineNr Statement
     endif
 
-    " Turn off highlighting after movement
-    if exists('##CmdLineEnter')
-      autocmd CmdlineEnter /,\? :set hlsearch
-    endif
-    autocmd CursorMoved * ++nested :set nohlsearch
-
     " Skeletons
     autocmd BufNewFile  *.py    0r ~/.vim/snippets/file.py   | normal Gi
     autocmd BufNewFile  *.fish  0r ~/.vim/snippets/file.fish | normal Gi
