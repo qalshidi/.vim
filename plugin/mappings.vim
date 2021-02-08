@@ -120,6 +120,6 @@ if has('nvim-0.5')
   nnoremap <silent> <Leader>dn   <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
   nnoremap <silent> <Leader>dN   <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
   nnoremap <silent> <Leader>dd   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-  inoremap <expr>   <Tab>        pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr>   <S-Tab>      pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  imap <expr>   <Tab>        pumvisible() ? "\<C-n>" : "\<Tab>"
+  imap <expr>   <S-Tab>      pumvisible() ? "\<C-p>" : "\<S-Tab>"
 endif

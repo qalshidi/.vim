@@ -6,7 +6,7 @@ scriptencoding utf-8
 " vim settings {{{
 set modeline                                " I want some modelines
 set exrc secure                             " Project specific vimrc's
-set path=.,,src/**,config/**                " include files recursively and not have defaults
+set path=.,,src/**,config/**,cfg/**         " include files recursively and not have defaults
 syntax enable
 filetype plugin indent on
 set tabstop=8 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent " tab things
@@ -140,6 +140,14 @@ Plug 'tpope/vim-eunuch'           " file manipulation
 Plug 'airblade/vim-rooter'
 let g:rooter_targets = '*'
 
+" Snippets
+Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger=""
+let g:UltiSnipsEditSplit="vertical"
+let g:completion_enable_snippet = 'UltiSnips'
+
 " }}}
 " My Plugins {{{
 
@@ -237,6 +245,8 @@ endif
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
+  Plug 'alexaandru/nvim-lspupdate'
+  let g:lspupdate_commands = {'pip': 'pip install --user -U %s'}
   Plug 'airblade/vim-gitgutter'
   let g:diagnostic_enable_virtual_text = 1
   " Set completeopt to have a better completion experience
@@ -256,7 +266,7 @@ elseif v:version >= 800
     silent !curl -sL install-node.now.sh/lts | PREFIX=~/.local bash /dev/stdin --yes
   endif
 
-  Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-texlab coc-bibtex coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-prettier' }
+  Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-marketplace coc-texlab coc-bibtex coc-python coc-vimlsp coc-git coc-fish coc-sh coc-html coc-json coc-snippets coc-prettier' }
   let g:coc_config_home = "$HOME/.vim"
   inoremap <silent><expr> <Tab>
     \ pumvisible() ? "\<C-n>" :
