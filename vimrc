@@ -4,7 +4,6 @@
 scriptencoding utf-8
 
 " vim settings {{{
-set modeline                                " I want some modelines
 set exrc secure                             " Project specific vimrc's
 set path=.,,src/**,config/**,cfg/**         " include files recursively and not have defaults
 syntax enable
@@ -123,7 +122,6 @@ let $RC = "$HOME/.vim/vimrc"
 call plug#begin('~/.vim/plugged')
 " tpope Basics {{{
 
-" Plug 'tpope/vim-sensible'         " sensible vim settings
 Plug 'sheerun/vimrc'              " vim-sensible plus extra
 Plug 'tpope/vim-surround'         " surround command
 Plug 'tpope/vim-commentary'       " commentary command
@@ -164,10 +162,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/goyo.vim'
 
 function! s:goyo_enter()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  endif
   set noshowmode
   set noshowcmd
   set scrolloff=999
@@ -175,10 +169,6 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  endif
   set showcmd
   set scrolloff=5
   if has("patch-8.1.1564")
@@ -193,40 +183,6 @@ augroup my_goyo
   autocmd! User GoyoEnter ++nested call <SID>goyo_enter()
   autocmd! User GoyoLeave ++nested call <SID>goyo_leave()
 augroup END
-
-" }}}
-" Firefox neovim {{{
-
-if has('nvim')
-  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-endif
-
-if exists('g:started_by_firenvim')
-  set laststatus=0
-  let g:dont_write = v:false
-
-  function! My_Write(timer) abort
-        let g:dont_write = v:false
-        write
-  endfunction
-
-  function! Delay_My_Write() abort
-        if g:dont_write
-                return
-        end
-        let g:dont_write = v:true
-        call timer_start(1000, 'My_Write')
-  endfunction
-
-  augroup firenvim
-    autocmd!
-    au TextChanged * call Delay_My_Write()
-    au TextChangedI * call Delay_My_Write()
-    au BufEnter github.com_*.txt ++nested set filetype=markdown
-    au BufEnter gitlab.com_*.txt ++nested set filetype=markdown
-    au BufEnter gitlab.umich.edu_*.txt ++nested set filetype=markdown
-  augroup END
-endif
 
 " }}}
 " Highlight copying/yanks {{{
@@ -436,24 +392,20 @@ nnoremap X D
 " }}}
 " File Explorer {{{
 
-if !exists('g:started_by_firenvim')
+Plug 'justinmk/vim-dirvish'
 
-  Plug 'justinmk/vim-dirvish'
-
-  augroup mydirvish
-    autocmd!
-    " behave like netrw
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Dirvish | endif
-    autocmd BufEnter * if isdirectory(bufname(bufnr('%'))) | Dirvish % | endif
-  augroup end
+augroup mydirvish
+  autocmd!
+  " behave like netrw
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Dirvish | endif
+  autocmd BufEnter * if isdirectory(bufname(bufnr('%'))) | Dirvish % | endif
+augroup end
 
   let g:dirvish_mode = ':sort ,^.*[\/],'   " Folders on top
 
-  if has('conceal')
-    Plug 'kristijanhusak/vim-dirvish-git'
-  endif
-
+if has('conceal')
+  Plug 'kristijanhusak/vim-dirvish-git'
 endif
 
 " }}}
@@ -475,11 +427,8 @@ Plug 'rhysd/clever-f.vim'      " Better f key behavior
 " }}}
 " Powerline {{{
 
-if !exists('g:started_by_firenvim')
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  set noshowmode
-endif
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 "}}}
 " Buffer stuff {{{
@@ -520,15 +469,10 @@ endif
 highlight! link CursorLineNr Statement
 
 " powerline
-if !exists('g:started_by_firenvim')      " Don't show in firefox
-  let g:airline_theme='base16_solarized'
-  let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline_powerline_fonts = 1
-else
-  let g:airline_disable_statusline = 1
-  set laststatus=0
-endif
+let g:airline_theme='base16_solarized'
+let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 " }}}
 " {{{ Lua
