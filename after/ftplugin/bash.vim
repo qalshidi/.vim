@@ -1,4 +1,1 @@
-set textwidth=80
-set expandtab
-set shiftwidth=2
-set softtabstop=2
+setlocal textwidth=80 expandtab shiftwidth=2 softtabstop=2
