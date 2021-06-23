@@ -211,6 +211,8 @@ if has('nvim-0.5')
   set shortmess+=c
   nnoremap ]d <cmd>NextDiagnostic<CR>
   nnoremap [d <cmd>PrevDiagnostic<CR>
+  " Tree-sitter
+  Plug 'nvim-treesitter/nvim-treesitter'
 
 " }}}
 " {{{ Conqueror of Completion
@@ -479,6 +481,7 @@ let g:airline_powerline_fonts = 1
 
 if has('nvim-0.5')
   lua local lsp_config = require('lsp-config')
+  lua local treesitter_config = require('treesitter-config')
 endif
 
 " }}}"
