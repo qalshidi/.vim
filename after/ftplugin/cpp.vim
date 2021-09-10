@@ -6,3 +6,4 @@
 " Version:     0.1
 
 setlocal textwidth=80
+set path+=include/**,share/include/**,/usr/include/**,/usr/local/include/**,/opt/local/include/**
