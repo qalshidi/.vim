@@ -4,6 +4,7 @@
 scriptencoding utf-8
 
 " vim settings {{{
+set shell=/bin/bash                         " Avoid using fish for stuff
 set exrc secure                             " Project specific vimrc's
 set path=.,,src/**,config/**,cfg/**         " include files recursively and not have defaults
 syntax enable
