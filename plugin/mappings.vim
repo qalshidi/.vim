@@ -8,6 +8,8 @@ if !has('nvim')       " For shannon
   inoremap jk <Esc>
   inoremap kj <Esc>
 endif
+" For block visual to work with <C-c>
+inoremap <C-c> <C-[>
 
 " Escape key is inconvenient
 if exists(':tnoremap')
