@@ -1,6 +1,5 @@
 " My Vim Configuration
 " ====================
-
 scriptencoding utf-8
 
 " vim settings {{{
@@ -143,7 +142,7 @@ let g:rooter_targets = '*'
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger=""
+let g:UltiSnipsExpandTrigger="<C-s>"
 let g:UltiSnipsEditSplit="vertical"
 let g:completion_enable_snippet = 'UltiSnips'
 
@@ -156,34 +155,6 @@ Plug 'qalshidi/vim-bettergrep'
 " tmux helpers {{{
 
 Plug 'christoomey/vim-tmux-navigator'
-
-" }}}
-" Writing {{{
-
-Plug 'junegunn/goyo.vim'
-
-function! s:goyo_enter()
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
-  set signcolumn=no
-endfunction
-
-function! s:goyo_leave()
-  set showcmd
-  set scrolloff=5
-  if has("patch-8.1.1564")
-    set signcolumn=number
-  elseif exists('&signcolumn')
-    set signcolumn=yes
-  endif
-endfunction
-
-augroup my_goyo
-  autocmd!
-  autocmd! User GoyoEnter ++nested call <SID>goyo_enter()
-  autocmd! User GoyoLeave ++nested call <SID>goyo_leave()
-augroup END
 
 " }}}
 " Highlight copying/yanks {{{
@@ -471,7 +442,7 @@ endif
 " Initial settings
 highlight! link CursorLineNr Statement
 
-" powerline
+" podid_vimrcwerline
 let g:airline_theme='base16_solarized'
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
 let g:airline#extensions#tabline#enabled = 1

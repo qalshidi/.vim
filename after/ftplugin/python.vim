@@ -5,9 +5,16 @@
 setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent
 setlocal fileformat=unix
 setlocal colorcolumn=80
+
+" :make settings
 if executable('pylint')
     compiler pylint
+elseif executable('python3')
+    setlocal makeprg=python3\ -m\ pylint\ %
+elseif executable('python')
+    setlocal makeprg=python\ -m\ pylint\ %
 endif
+
 setlocal encoding=utf-8
 setlocal wildignore=*/__pycache__/*,*.pyc
 setlocal foldmethod=indent
