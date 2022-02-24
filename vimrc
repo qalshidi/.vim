@@ -385,12 +385,11 @@ endif
 " }}}
 " Fuzzy File Finder {{{
 
-if has('patch-8.1.2114') || has('nvim-0.4.2')
-  Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
-  nnoremap <C-p>     <Cmd>Clap files<CR>
-  nnoremap <Leader>h <Cmd>Clap help_tags<CR>
+if has('nvim-0.6')
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 endif
-
 
 " }}}
 " Editing {{{
@@ -412,7 +411,11 @@ Plug 'qpkorr/vim-bufkill'
 " }}}
 " Devicons (must be last {{{
 
-Plug 'ryanoasis/vim-devicons'
+if has('nvim')
+  Plug 'kyazdani42/nvim-web-devicons'
+else
+  Plug 'ryanoasis/vim-devicons'
+endif
 
 " }}}
 call plug#end()
@@ -451,9 +454,10 @@ let g:airline_powerline_fonts = 1
 " }}}
 " {{{ Lua
 
-if has('nvim-0.5')
+if has('nvim-0.6')
   lua local lsp_config = require('lsp-config')
   lua local treesitter_config = require('treesitter-config')
+  lua require('telescope').load_extension('fzf')
 endif
 
 " }}}"

@@ -91,8 +91,6 @@ nnoremap [D [<C-D>
 " misc
 nnoremap <Leader>gt :!ctags -R .<CR>
 
-" Fuzzy finding
-
 " editing
 " For <CR> to work properly
 if exists('*complete_info') && has('nvim-0.5')
@@ -114,7 +112,7 @@ if has('nvim-0.5')
   nnoremap <silent> <Leader>lt   <cmd>lua vim.lsp.buf.type_definition()<CR>
   nnoremap <silent> <Leader>lr   <cmd>lua vim.lsp.buf.references()<CR>
   nnoremap <silent> <F2>         <cmd>lua vim.lsp.buf.rename()<CR>
-  nnoremap <silent> <Leader>f    <cmd>lua vim.lsp.buf.formatting()<CR>
+  nnoremap <silent> <Leader>lf    <cmd>lua vim.lsp.buf.formatting()<CR>
   nnoremap <silent> <Leader>l0   <cmd>lua vim.lsp.buf.document_symbol()<CR>
   nnoremap <silent> <Leader>lW   <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
   nnoremap <silent> <Leader>le   <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
@@ -124,4 +122,13 @@ if has('nvim-0.5')
   nnoremap <silent> <Leader>dd   <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
   imap <expr>   <Tab>        pumvisible() ? "\<C-n>" : "\<Tab>"
   imap <expr>   <S-Tab>      pumvisible() ? "\<C-p>" : "\<S-Tab>"
+endif
+
+" Telescope
+if has('nvim-0.6')
+  nnoremap <leader>ff <cmd>Telescope find_files<cr>
+  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  nnoremap <leader>fb <cmd>Telescope buffers<cr>
+  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  nnoremap <leader>fs <cmd>Telescope grep_string<cr>
 endif
