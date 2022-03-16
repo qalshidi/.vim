@@ -13,7 +13,7 @@ set number relativenumber                   " show relative numbers on the side
 set dictionary+=/usr/share/dict/words       " add this dictionary
 set textwidth=80
 
-if has('linebreak')
+if has('linebreak') && has('breakindent')
   set wrap
   set breakindent                           " Break after textwidth
   set breakindentopt=sbr                    " Show break character &showbrea
