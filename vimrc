@@ -400,8 +400,13 @@ Plug 'rhysd/clever-f.vim'      " Better f key behavior
 " }}}
 " Powerline {{{
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+if has('nvim-0.5')
+  Plug 'nvim-lualine/lualine.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
+else
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+endif
 
 "}}}
 " Buffer stuff {{{
@@ -445,11 +450,13 @@ endif
 " Initial settings
 highlight! link CursorLineNr Statement
 
-" podid_vimrcwerline
-let g:airline_theme='base16_solarized'
-let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+" powerline
+if !has('nvim-0.5')
+  let g:airline_theme='base16_solarized'
+  let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " \uE0A3" . '%{col(".")}'])
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
+endif
 
 " }}}
 " {{{ Lua
@@ -458,6 +465,7 @@ if has('nvim-0.6')
   lua local lsp_config = require('lsp-config')
   lua local treesitter_config = require('treesitter-config')
   lua require('telescope').load_extension('fzf')
+  lua local lualine_config = require('lualine-config')
 endif
 
 " }}}"
