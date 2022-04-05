@@ -402,7 +402,6 @@ Plug 'rhysd/clever-f.vim'      " Better f key behavior
 
 if has('nvim-0.5')
   Plug 'nvim-lualine/lualine.nvim'
-  Plug 'kyazdani42/nvim-web-devicons'
 else
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
