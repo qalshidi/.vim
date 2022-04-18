@@ -173,7 +173,7 @@ endif
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
-  Plug 'alexaandru/nvim-lspupdate'
+  Plug 'williamboman/nvim-lsp-installer'
   let g:lspupdate_commands = {'pip': 'pip install --user -U %s'}
   Plug 'airblade/vim-gitgutter'
   let g:diagnostic_enable_virtual_text = 1

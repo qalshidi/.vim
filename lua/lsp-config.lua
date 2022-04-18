@@ -1,3 +1,6 @@
+-- LSP
+--
+
 local lspconf = require("lspconfig")
 local nvim_completion = require("completion")
 
@@ -24,6 +27,20 @@ for _, server in ipairs(servers) do
     }
 end
 
+-- INSTALLER
+--
+
+local lsp_installer = require("nvim-lsp-installer")
+
+lsp_installer.settings({
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
+        }
+    }
+})
 -- lspconf.sumneko_lua.setup {
 -- cmd = { vim.fn.stdpath("cache") .. "/lspconf/sumneko_lua/lua-language-server/bin/Linux/lua-language-server", "-E", vim.fn.stdpath("cache") .. "/lspconf/sumneko_lua/lua-language-server/main.lua" },
 -- on_attach = custom_attach,
