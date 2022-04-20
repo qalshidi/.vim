@@ -423,6 +423,9 @@ endif
 
 " }}}
 call plug#end()
+if !isdirectory($HOME . '/.vim/plugged')
+  PlugInstall!
+endif
 
 " }}}
 " Theme {{{
