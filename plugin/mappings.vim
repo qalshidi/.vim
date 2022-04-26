@@ -108,7 +108,7 @@ if has('nvim-0.5')
   nnoremap <silent> <Leader>lD   <cmd>lua vim.lsp.buf.definition()<CR>
   nnoremap <silent> <Leader>ll   <cmd>lua vim.lsp.buf.hover()<CR>
   nnoremap <silent> <Leader>li   <cmd>lua vim.lsp.buf.implementation()<CR>
-  nnoremap <silent> <C-s>        <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <silent> <Leader>ls   <cmd>lua vim.lsp.buf.signature_help()<CR>
   nnoremap <silent> <Leader>lt   <cmd>lua vim.lsp.buf.type_definition()<CR>
   nnoremap <silent> <Leader>lr   <cmd>lua vim.lsp.buf.references()<CR>
   nnoremap <silent> <F2>         <cmd>lua vim.lsp.buf.rename()<CR>
