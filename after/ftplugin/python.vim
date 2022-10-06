@@ -7,13 +7,8 @@ setlocal fileformat=unix
 setlocal colorcolumn=80
 
 " :make settings
-if executable('pylint')
-    compiler pylint
-elseif executable('python3')
-    setlocal makeprg=python3\ -m\ pylint\ %
-elseif executable('python')
-    setlocal makeprg=python\ -m\ pylint\ %
-endif
+setlocal makeprg=python3\ -m\ pylint\ --reports=n\ --output-format=parseable\ %:p
+setlocal errorformat=%f:%l:\ %m
 
 setlocal encoding=utf-8
 setlocal wildignore=*/__pycache__/*,*.pyc

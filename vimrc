@@ -152,6 +152,13 @@ let g:completion_enable_snippet = 'UltiSnips'
 Plug 'qalshidi/vim-bettergrep'
 
 " }}}
+
+" Optimizations {{{
+if has('nvim-0.7')
+  Plug 'lewis6991/impatient.nvim'
+endif
+" }}}
+
 " tmux helpers {{{
 
 Plug 'christoomey/vim-tmux-navigator'
@@ -172,9 +179,16 @@ endif
 " NeoVim 0.5 {{{
 if has('nvim-0.5')
   Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-lua/completion-nvim'
   Plug 'williamboman/nvim-lsp-installer'
   let g:lspupdate_commands = {'pip': 'pip install --user -U %s'}
+  " completion
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
   Plug 'airblade/vim-gitgutter'
   let g:diagnostic_enable_virtual_text = 1
   " Set completeopt to have a better completion experience
@@ -323,11 +337,10 @@ endif
 " Language Specific {{{
 
 " LaTeX plugin
-let g:tex_flavor = 'latex'
 Plug 'lervag/vimtex', { 'for': ['latex', 'tex', 'plaintex'] }
-if has('nvim')
-  let g:vimtex_compiler_progname = 'nvr'
-end
+Plug 'peterbjorgensen/sved', { 'for': ['latex', 'tex', 'plaintex'] }
+let g:vimtex_view_general_viewer = 'evince'
+nmap <F4> :call SVED_Sync()<CR>
 
 Plug 'ledger/vim-ledger'
 Plug 'dbeniamine/todo.txt-vim'
@@ -463,6 +476,9 @@ endif
 " }}}
 " {{{ Lua
 
+if has('nvim-0.7')
+  lua require('impatient')
+endif
 if has('nvim-0.6')
   lua local lsp_config = require('lsp-config')
   lua local treesitter_config = require('treesitter-config')

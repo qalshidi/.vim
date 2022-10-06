@@ -74,9 +74,22 @@ nnoremap <silent> <Leader><Space> :nohlsearch<CR>
 cmap w!! w !sudo -A tee > /dev/null %
 
 " TAB in normal mode will move to text buffer
-nnoremap <silent> <Tab> :bnext<CR>
+function s:bnext_writable() abort
+  bnext
+  if &buftype != ''
+    call s:bnext_writable()
+  endif
+endfunction
 " SHIFT-TAB will go back
-nnoremap <silent> <S-Tab> :bprevious<CR>
+function s:bprev_writable() abort
+  bprev
+  if &buftype != ''
+    call s:bprev_writable()
+  endif
+endfunction
+
+nnoremap <silent> <Tab> :call <SID>bnext_writable()<CR>
+nnoremap <silent> <S-Tab> :call <SID>bprev_writable()<CR>
 
 " jumps
 nnoremap ]j <C-I>
