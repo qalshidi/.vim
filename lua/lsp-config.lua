@@ -2,6 +2,7 @@
 --
 
 local lspconf = require("lspconfig")
+local configs = require("lspconfig.configs")
 local cmp = require'cmp'
 
 local custom_attach = function(client, bufnr)
