@@ -363,6 +363,18 @@ if has('nvim') || v:version >= 800
   let g:yoinkSyncSystemClipboardOnFocus = 0
   let g:yoinkIncludeDeleteOperations = 1
   let g:ctrlp_map = ''
+  let g:clipboard = {
+        \   'name': 'xsel_override',
+        \   'copy': {
+        \      '+': 'xsel --input --clipboard',
+        \      '*': 'xsel --input --primary',
+        \    },
+        \   'paste': {
+        \      '+': 'xsel --output --clipboard',
+        \      '*': 'xsel --output --primary',
+        \   },
+        \   'cache_enabled': 1,
+        \ }
   nmap <expr> p yoink#canSwap() ? '<plug>(YoinkPostPasteSwapBack)' : '<plug>(YoinkPaste_p)'
   nmap <expr> P yoink#canSwap() ? '<plug>(YoinkPostPasteSwapForward)' : '<plug>(YoinkPaste_P)'
   nmap [y <Plug>(YoinkRotateBack)
