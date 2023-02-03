@@ -133,6 +133,12 @@ Plug 'tpope/vim-apathy'           " path for C/C++, python, sh, xdg, scheme and 
 Plug 'tpope/vim-eunuch'           " file manipulation
 
 " }}}
+" Notes {{{
+
+" Obsidian integration
+Plug 'epwalsh/obsidian.nvim'
+
+" }}}
 " Project stuff {{{
 
 Plug 'airblade/vim-rooter'
@@ -503,6 +509,7 @@ if has('nvim-0.6')
   lua require('telescope').load_extension('fzf')
   lua local lualine_config = require('lualine-config')
   lua local iron_config = require('iron-config')
+  lua local iron_config = require('obsidian-config')
 endif
 
 " }}}"
