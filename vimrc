@@ -159,12 +159,6 @@ Plug 'qalshidi/vim-bettergrep'
 
 " }}}
 
-" Optimizations {{{
-if has('nvim-0.7')
-  Plug 'lewis6991/impatient.nvim'
-endif
-" }}}
-
 " tmux helpers {{{
 
 Plug 'christoomey/vim-tmux-navigator'
@@ -500,8 +494,8 @@ endif
 " }}}
 " {{{ Lua
 
-if has('nvim-0.7')
-  lua require('impatient')
+if has('nvim-0.9')
+  lua vim.loader.enable()
 endif
 if has('nvim-0.6')
   lua local lsp_config = require('lsp-config')
