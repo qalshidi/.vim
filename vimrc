@@ -198,7 +198,7 @@ if has('nvim-0.5')
   nnoremap ]d <cmd>NextDiagnostic<CR>
   nnoremap [d <cmd>PrevDiagnostic<CR>
   " Tree-sitter
-  Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " }}}
 " {{{ Conqueror of Completion
@@ -347,12 +347,6 @@ Plug 'dbeniamine/todo.txt-vim'
 Plug 'sheerun/vim-polyglot'             " Syntax enhancements
 let g:Todo_txt_prefix_creation_date=1
 
-" REPL
-
-if has('nvim-0.6')
-  Plug 'hkupty/iron.nvim'
-endif
-
 "}}}
 " Clipboard {{{
 
@@ -418,7 +412,7 @@ endif
 
 if has('nvim-0.6')
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
   Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 endif
 
@@ -502,8 +496,7 @@ if has('nvim-0.6')
   lua local treesitter_config = require('treesitter-config')
   lua require('telescope').load_extension('fzf')
   lua local lualine_config = require('lualine-config')
-  lua local iron_config = require('iron-config')
-  lua local iron_config = require('obsidian-config')
+  lua local obsidian_config = require('obsidian-config')
 endif
 
 " }}}"
