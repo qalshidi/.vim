@@ -135,10 +135,6 @@ Plug 'tpope/vim-eunuch'           " file manipulation
 " }}}
 " Notes {{{
 
-" Obsidian integration
-Plug 'epwalsh/obsidian.nvim'
-
-" }}}
 " Project stuff {{{
 
 Plug 'airblade/vim-rooter'
@@ -496,7 +492,6 @@ if has('nvim-0.6')
   lua local treesitter_config = require('treesitter-config')
   lua require('telescope').load_extension('fzf')
   lua local lualine_config = require('lualine-config')
-  lua local obsidian_config = require('obsidian-config')
 endif
 
 " }}}"
